@@ -55,10 +55,18 @@ void main() {
         }
       });
 
-      test('$name never exceeds 0 dB, so it cannot clip', () {
-        for (final db in deliveredResponseDb(preset)) {
-          expect(db, lessThanOrEqualTo(0.01), reason: 'would clip');
-        }
+      test('$name asks for headroom, but not the worst case', () {
+        // Between nothing and the true peak. Nothing was the original bug —
+        // ten boosts stacking with no room, clipping loud masters. The peak
+        // was yesterday's overcorrection, costing 7-12 dB on every track and
+        // reported by a listener as the volume being broken.
+        final preamp = eqPreampDb(preset);
+        expect(preamp, greaterThan(1.0), reason: 'a boosted curve needs room');
+        expect(
+          preamp,
+          lessThan(6.0),
+          reason: 'not the pathological worst case',
+        );
       });
     }
 
@@ -75,23 +83,27 @@ void main() {
   });
 
   group('filter strings', () {
-    test('shelves at the ends, peaking in between, preamp in front', () {
+    test('shelves at the ends, peaking in between, and nothing else', () {
       final f = buildEqFilters(trebleBoost);
-      // Pinned exactly: mpv rejects `lavfi-volume=...` at runtime, which
-      // no amount of Dart-side checking would have revealed.
-      // Preamp is a sub-audible high shelf, not `volume` — mpv rejects every
-      // route to ffmpeg's volume filter from here, and a rejected filter kills
-      // the whole chain and with it playback.
-      expect(f.first, startsWith('lavfi-treble=f=5:'));
-      expect(f.first, contains('g=-'));
-      expect(f[1], startsWith('lavfi-bass=f=31:'));
+      // The preamp is not a filter — it goes to mpv's `volume-gain` property,
+      // so the chain is exactly ten bands and nothing else. Pinned because a
+      // filter mpv rejects takes the whole chain, and playback, with it.
+      expect(f, hasLength(10));
+      expect(f.first, startsWith('lavfi-bass=f=31:'));
       expect(f.last, startsWith('lavfi-treble=f=16000:'));
       expect(f.where((s) => s.startsWith('lavfi-equalizer=')), hasLength(8));
     });
 
     test('a cut-only curve needs no preamp', () {
-      final gains = List<double>.filled(10, -3.0);
-      expect(buildEqFilters(gains).any((s) => s.contains('volume=')), isFalse);
+      expect(eqPreampDb(List<double>.filled(10, -3.0)), lessThan(0.01));
+    });
+
+    test('a boosted curve reports the headroom it needs', () {
+      // Load-bearing: this goes straight to `setVolumeGain`, so understating
+      // it clips and overstating it is loudness thrown away for nothing.
+      // Pink-weighted, so ~4 dB where the peak of this curve is ~12.
+      expect(eqPreampDb(trebleBoost), closeTo(4.2, 0.4));
+      expect(eqPreampDb(List<double>.filled(10, 0)), 0);
     });
   });
 }

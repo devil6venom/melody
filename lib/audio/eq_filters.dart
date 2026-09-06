@@ -26,8 +26,17 @@
 //
 //  3. **Nothing accounted for the extra level.** Ten boosts summing to +11 dB
 //     with no headroom clips the output on anything loudly mastered, which is
-//     why it went wrong on *some* songs and not others. [_preampDb] measures
-//     the true peak of the finished curve and attenuates by exactly that.
+//     why it went wrong on *some* songs and not others. [eqPreampDb] measures
+//     the true peak of the finished curve; the caller turns the output down by
+//     that much using mpv's `volume-gain` property.
+//
+// The preamp deliberately is *not* a filter. It was one — a high shelf with a
+// sub-audible corner, because ffmpeg's `volume` cannot be reached through mpv's
+// `af` (the name collides with mpv's own, so there is no `lavfi-` wrapper, and
+// the raw graph forms fail libavfilter's parser). But `mpv_audio_kit` exposes
+// `setVolumeGain`, which sets the `volume-gain` property directly, and a
+// property cannot take the filter chain down with it if it is malformed —
+// which a filter can, and twice did.
 //
 // Nothing here runs on a hot path: it is a few hundred float operations, once,
 // when the user moves a slider.
@@ -199,25 +208,68 @@ List<double> _compensate(List<double> target, int fs) {
 
 /// The loudest point of the finished curve, in dB, or 0 if it only ever cuts.
 ///
-/// Swept rather than sampled at the band centres: the peak of a graphic EQ
-/// usually sits *between* two boosted bands, which is precisely the level a
-/// centres-only check would miss.
+/// Kept as the ceiling the headroom estimate is checked against, not as the
+/// estimate itself — see [_broadbandGainDb] for why attenuating by this much
+/// is more than any real signal needs.
 double _peakBoostDb(List<double> gains, int fs) {
   final chain = _chain(gains, fs);
   var peak = 0.0;
-  // Log sweep — 200 points over the audible decades resolves the peak to well
-  // under a tenth of a dB without a thousand-point scan.
   const points = 200;
   final lo = math.log(20.0), hi = math.log(math.min(20000.0, fs / 2.0 - 1));
   for (var i = 0; i <= points; i++) {
-    final f = math.exp(lo + (hi - lo) * i / points);
-    final db = _chainDb(chain, f, fs);
+    final db = _chainDb(chain, math.exp(lo + (hi - lo) * i / points), fs);
     if (db > peak) peak = db;
   }
   return peak;
 }
 
+/// How much louder this curve makes *music*, in dB.
+///
+/// Integrated against pink noise — equal energy per octave, which is roughly
+/// how music's spectrum is actually distributed — rather than read off the
+/// single loudest point of the response.
+///
+/// This is the difference between an equaliser that works and one people
+/// report as broken, and both failures have now happened here:
+///
+///  - Attenuating by *nothing* let ten boosts stack to +11 dB with no headroom,
+///    and loud masters clipped. That was the original bug.
+///  - Attenuating by the *peak* fixed the clipping and cost 7 to 12 dB on every
+///    track, which a listener reported as the volume being broken. It assumes
+///    the music hits full scale at precisely the frequency the curve boosts
+///    most — a signal that would have to be a sine wave parked on 31 Hz.
+///
+/// Pink weighting asks the question that actually matters: given a spectrum
+/// shaped like music, how much louder does this curve make it. For Bass Boost
+/// that is about 5 dB rather than 12.
+///
+/// Still a pure gain, so the signal path stays transparent — no dynamics, no
+/// limiting, nothing added. The trade is that it is an average: a genuinely
+/// bass-heavy track on a bass-heavy preset can still touch the ceiling, where
+/// peak-based attenuation never could. A limiter would close that gap and
+/// would also be the one thing here that changes the waveform, so it is
+/// deliberately not used.
+double _broadbandGainDb(List<double> gains, int fs) {
+  final chain = _chain(gains, fs);
+  // Uniform steps in log frequency *are* the pink weighting: equal weight per
+  // octave falls out of the spacing, so no separate weighting term is needed.
+  const points = 400;
+  final lo = math.log(20.0), hi = math.log(math.min(20000.0, fs / 2.0 - 1));
+  var power = 0.0;
+  for (var i = 0; i <= points; i++) {
+    final f = math.exp(lo + (hi - lo) * i / points);
+    // Summed as power, not decibels: doubling energy is what costs headroom,
+    // and averaging dB would understate a narrow tall boost.
+    final linear = math.pow(10, _chainDb(chain, f, fs) / 20) as double;
+    power += linear * linear;
+  }
+  return 10 * (math.log(power / (points + 1)) / math.ln10);
+}
+
 /// The mpv `af` entries for [requestedGains], in order.
+///
+/// The bands only. Apply [eqPreampDb] alongside these or a boosted curve will
+/// clip.
 ///
 /// Returns an **empty list** when every band is zero. That is load-bearing:
 /// with the EQ off the audio must reach the output untouched — no filter, no
@@ -238,43 +290,6 @@ List<String> buildEqFilters(
   final gains = _compensate(requestedGains, sampleRateHz);
   final filters = <String>[];
 
-  // Attenuate first, so the boosts that follow have somewhere to go. Placed
-  // ahead of the biquads rather than after them because clipping happens
-  // inside the chain, and trimming a signal that has already clipped just
-  // makes a quieter clipped signal.
-  final preamp = _peakBoostDb(gains, sampleRateHz);
-  if (preamp > 0.01) {
-    // A high shelf with its corner below hearing, used as a flat broadband
-    // attenuator — not the obvious `volume`, for a reason worth recording.
-    //
-    // Three routes to ffmpeg's `volume` were rejected on a real device:
-    //
-    //   lavfi-volume=volume=-12dB  -> "Option af: 'lavfi-volume' isn't
-    //                                  supported." mpv auto-wraps most
-    //                                  libavfilter filters under `lavfi-` but
-    //                                  skips names colliding with its own.
-    //   lavfi=[volume=-12dB]       -> "parsing the filter graph failed" — the
-    //   lavfi=%16%volume=-12dB        value reaches libavfilter, which reads
-    //                                 `[...]` as a link label.
-    //
-    // The filter is not missing (`volume` is present in libmpv.so); mpv just
-    // will not hand it a graph from here. Rather than keep guessing at
-    // quoting, this reuses `treble`, which the EQ already proves loads.
-    //
-    // A high shelf attenuates everything above its corner, so a corner at 5 Hz
-    // attenuates the whole audible band. Measured deviation from a constant
-    // gain between 20 Hz and 20 kHz: 0.063 dB — well under the 0.5 dB the band
-    // tests demand. 10 Hz measured 0.897 dB and 20 Hz measured 6 dB at the
-    // bottom of the range, so the low corner is doing real work.
-    //
-    // Getting this wrong is not a quiet failure: mpv rejects the *entire* `af`
-    // chain, and playback stops.
-    filters.add(
-      'lavfi-treble=f=5:width_type=q:width=$_kShelfQ:'
-      'g=${(-preamp).toStringAsFixed(3)}',
-    );
-  }
-
   for (var i = 0; i < kEqFrequencies.length; i++) {
     final g = gains[i].toStringAsFixed(3);
     final f = kEqFrequencies[i];
@@ -289,6 +304,27 @@ List<String> buildEqFilters(
   return filters;
 }
 
+/// How far the output must be turned down for [requestedGains] not to clip.
+///
+/// Positive dB, 0 when the curve only ever cuts. The caller applies it with
+/// mpv's `volume-gain` property rather than a filter — see [buildEqFilters].
+///
+/// Swept rather than sampled at the band centres: the peak of a graphic EQ
+/// usually sits *between* two boosted bands, which is precisely the level a
+/// centres-only check would miss.
+double eqPreampDb(
+  List<double> requestedGains, {
+  int sampleRateHz = kDefaultSampleRateHz,
+}) {
+  if (!requestedGains.any((g) => g.abs() > 0.001)) return 0;
+  final gains = _compensate(requestedGains, sampleRateHz);
+  // Never above the true peak: that is the most any signal could possibly
+  // need, so an estimate exceeding it would only be throwing level away.
+  return math
+      .max(0.0, _broadbandGainDb(gains, sampleRateHz))
+      .clamp(0.0, _peakBoostDb(gains, sampleRateHz));
+}
+
 /// Response of the built chain at each band centre — what the listener gets.
 /// Exposed for tests and for anyone checking the claim above by measurement.
 List<double> deliveredResponseDb(
@@ -300,9 +336,11 @@ List<double> deliveredResponseDb(
   }
   final gains = _compensate(requestedGains, sampleRateHz);
   final chain = _chain(gains, sampleRateHz);
-  final preamp = _peakBoostDb(gains, sampleRateHz);
+  final preamp = eqPreampDb(requestedGains, sampleRateHz: sampleRateHz);
+  // Minus the preamp, because that is what the listener hears once the caller
+  // has applied it — even though it is no longer part of this filter list.
   return [
     for (final f in kEqFrequencies)
-      _chainDb(chain, f.toDouble(), sampleRateHz) - math.max(0.0, preamp),
+      _chainDb(chain, f.toDouble(), sampleRateHz) - preamp,
   ];
 }

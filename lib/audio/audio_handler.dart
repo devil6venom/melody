@@ -1112,6 +1112,14 @@ class SunohAudioHandler {
     );
     // Also empty when every band sits at zero — an untouched EQ costs nothing.
     final filters = enabled ? buildEqFilters(gains) : const <String>[];
+
+    // Headroom for the boosts, applied as mpv's `volume-gain` property rather
+    // than as another filter. Two reasons: a bad filter takes the whole `af`
+    // chain and playback with it, where a property cannot; and mpv keeps the
+    // pipeline in float, so a +12 dB peak inside the biquads is not clipped on
+    // the way through — it is only the final conversion that matters, and this
+    // sits before it.
+    await _player.setVolumeGain(enabled ? -eqPreampDb(gains) : 0);
     await _player.updateAudioEffects(
       (e) => e.copyWith(
         custom: filters,
