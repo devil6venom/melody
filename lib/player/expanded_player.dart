@@ -270,171 +270,180 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
     // would shift the cover / title / transport). The Column reserves a
     // SizedBox of the strip's intrinsic height so the transport stays
     // anchored at the same y as before.
-    return Stack(
-      children: [
-        Column(
-          children: [
-            const Spacer(flex: 2),
-            _StaticCover(
-              id: track.id,
-              url: s.currentApiSong?.artwork,
-              playing: s.isPlaying,
-              accent: accent,
-            ),
-            const SizedBox(height: 24),
-            // Title block sized to its content, with the change animated so a
-            // 2-line title or a hi-res tag appearing does not snap the cover
-            // and transport to a new position. A fixed minimum used to do that
-            // job, but it reserved the tallest possible block for every track
-            // and left a hole under anything shorter.
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: AnimatedSize(
-                duration: const Duration(milliseconds: 220),
-                curve: Curves.easeOutCubic,
-                alignment: Alignment.topCenter,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: _titleBlockHeight,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              track.title,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: SunohType.heading(
-                                fontSize: 26,
-                                color: c.fg,
-                                height: 1.1,
-                                letterSpacing: -0.3,
+    return LayoutBuilder(
+      builder: (context, constraints) => Stack(
+        children: [
+          Column(
+            children: [
+              const Spacer(flex: 2),
+              _StaticCover(
+                id: track.id,
+                url: s.currentApiSong?.artwork,
+                playing: s.isPlaying,
+                accent: accent,
+                // The height this column really has. Asking `MediaQuery` here
+                // returns the *screen*, and an ancestor `SafeArea` has already
+                // spent the status bar and the navigation bar out of it — so on
+                // a phone with three-button navigation the cover was sized
+                // against about 70 logical pixels that were never available, and
+                // the transport still landed on the icon strip.
+                available: constraints.maxHeight,
+              ),
+              const SizedBox(height: 24),
+              // Title block sized to its content, with the change animated so a
+              // 2-line title or a hi-res tag appearing does not snap the cover
+              // and transport to a new position. A fixed minimum used to do that
+              // job, but it reserved the tallest possible block for every track
+              // and left a hole under anything shorter.
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AnimatedSize(
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOutCubic,
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minHeight: _titleBlockHeight,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                track.title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: SunohType.heading(
+                                  fontSize: 26,
+                                  color: c.fg,
+                                  height: 1.1,
+                                  letterSpacing: -0.3,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              track.artist,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: SunohType.sans(
-                                fontSize: 13.5,
-                                color: c.fgDim,
+                              const SizedBox(height: 4),
+                              Text(
+                                track.artist,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: SunohType.sans(
+                                  fontSize: 13.5,
+                                  color: c.fgDim,
+                                ),
                               ),
-                            ),
-                            // Directly under the artist, where the rest of the
-                            // track's metadata already lives. Renders nothing
-                            // for an ordinary lossy track, so it costs no space
-                            // when there is nothing to say.
-                            const SizedBox(height: 7),
-                            QualityTag(colors: c),
-                            if (lyricLine != null) ...[
-                              const SizedBox(height: 8),
-                              _LyricsTeaser(
-                                line: lyricLine,
-                                accent: accent,
-                                onTap: () => context.openLyrics(),
-                              ),
+                              // Directly under the artist, where the rest of the
+                              // track's metadata already lives. Renders nothing
+                              // for an ordinary lossy track, so it costs no space
+                              // when there is nothing to say.
+                              const SizedBox(height: 7),
+                              QualityTag(colors: c),
+                              if (lyricLine != null) ...[
+                                const SizedBox(height: 8),
+                                _LyricsTeaser(
+                                  line: lyricLine,
+                                  accent: accent,
+                                  onTap: () => context.openLyrics(),
+                                ),
+                              ],
                             ],
-                          ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: IconBtn(
-                          icon: s.isLikedCurrentApi
-                              ? SolarIconsBold.heart
-                              : SolarIconsOutline.heart,
-                          color: s.isLikedCurrentApi ? accent : c.fgDim,
-                          size: 26,
-                          onTap: () {
-                            final item = s.currentApiSong;
-                            if (item != null) {
-                              s.toggleLikedApi(item);
-                            } else {
-                              s.toggleLike();
-                            }
-                          },
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: IconBtn(
+                            icon: s.isLikedCurrentApi
+                                ? SolarIconsBold.heart
+                                : SolarIconsOutline.heart,
+                            color: s.isLikedCurrentApi ? accent : c.fgDim,
+                            size: 26,
+                            onTap: () {
+                              final item = s.currentApiSong;
+                              if (item != null) {
+                                s.toggleLikedApi(item);
+                              } else {
+                                s.toggleLike();
+                              }
+                            },
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _progress(
+                  s,
+                  accent,
+                  c.fg,
+                  layout: (scrubber, pos, remaining) => Column(
+                    children: [
+                      scrubber,
+                      const SizedBox(height: 4),
+                      _times(c, fmt(pos), '-${fmt(remaining)}'),
                     ],
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: _progress(
-                s,
-                accent,
-                c.fg,
-                layout: (scrubber, pos, remaining) => Column(
+              const SizedBox(height: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    scrubber,
-                    const SizedBox(height: 4),
-                    _times(c, fmt(pos), '-${fmt(remaining)}'),
+                    IconBtn(
+                      icon: PhosphorIconsBold.shuffle,
+                      color: s.shuffle ? accent : c.fgMute,
+                      size: 22,
+                      onTap: s.toggleShuffle,
+                    ),
+                    IconBtn(
+                      icon: PhosphorIconsFill.skipBack,
+                      color: c.fg,
+                      size: 30,
+                      onTap: s.prev,
+                    ),
+                    _PlayButton(
+                      playing: s.isPlaying,
+                      accent: accent,
+                      onTap: s.playPause,
+                    ),
+                    IconBtn(
+                      icon: PhosphorIconsFill.skipForward,
+                      color: c.fg,
+                      size: 30,
+                      onTap: s.next,
+                    ),
+                    IconBtn(
+                      icon: s.repeat == LoopMode.one
+                          ? PhosphorIconsBold.repeatOnce
+                          : PhosphorIconsBold.repeat,
+                      color: s.repeat != LoopMode.off ? accent : c.fgMute,
+                      size: 22,
+                      onTap: s.cycleRepeat,
+                    ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 18),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconBtn(
-                    icon: PhosphorIconsBold.shuffle,
-                    color: s.shuffle ? accent : c.fgMute,
-                    size: 22,
-                    onTap: s.toggleShuffle,
-                  ),
-                  IconBtn(
-                    icon: PhosphorIconsFill.skipBack,
-                    color: c.fg,
-                    size: 30,
-                    onTap: s.prev,
-                  ),
-                  _PlayButton(
-                    playing: s.isPlaying,
-                    accent: accent,
-                    onTap: s.playPause,
-                  ),
-                  IconBtn(
-                    icon: PhosphorIconsFill.skipForward,
-                    color: c.fg,
-                    size: 30,
-                    onTap: s.next,
-                  ),
-                  IconBtn(
-                    icon: s.repeat == LoopMode.one
-                        ? PhosphorIconsBold.repeatOnce
-                        : PhosphorIconsBold.repeat,
-                    color: s.repeat != LoopMode.off ? accent : c.fgMute,
-                    size: 22,
-                    onTap: s.cycleRepeat,
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(flex: 3),
-            // Reservation for the floating strip below. Keeps the
-            // transport row anchored at the same y it had before the
-            // strip was lifted out of the column flow.
-            const SizedBox(height: _bottomBarReservedHeight),
-          ],
-        ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: _bottomBarLift,
-          child: _bottomBar(context, c),
-        ),
-      ],
+              const Spacer(flex: 3),
+              // Reservation for the floating strip below. Keeps the
+              // transport row anchored at the same y it had before the
+              // strip was lifted out of the column flow.
+              const SizedBox(height: _bottomBarReservedHeight),
+            ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: _bottomBarLift,
+            child: _bottomBar(context, c),
+          ),
+        ],
+      ),
     );
   }
 
@@ -662,11 +671,17 @@ class _StaticCover extends StatelessWidget {
     required this.url,
     required this.playing,
     required this.accent,
+    required this.available,
   });
   final String id;
   final String? url;
   final bool playing;
   final Color accent;
+
+  /// Height the player's column was actually given, already inside any
+  /// `SafeArea`. Passed in rather than read from `MediaQuery`, which reports
+  /// the whole screen and would count insets the column never had.
+  final double available;
 
   /// Widest the cover is allowed to get, and narrowest it may shrink to.
   ///
@@ -707,10 +722,11 @@ class _StaticCover extends StatelessWidget {
     //
     // Bounded by width *and* height so it cannot crowd the controls on a short
     // screen or balloon on a tall one.
-    final media = MediaQuery.of(context);
-    final usableHeight = media.size.height - media.padding.vertical;
     final coverSize = math
-        .min(media.size.width - 56, usableHeight - _columnFixedHeight)
+        .min(
+          MediaQuery.sizeOf(context).width - 56,
+          available - _columnFixedHeight,
+        )
         .clamp(_minCover, _maxCover);
 
     return SizedBox(
