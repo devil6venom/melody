@@ -12,6 +12,8 @@
 //
 // Swipe-down dismisses; Hero album art animates back into the mini player.
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -44,21 +46,22 @@ class ExpandedPlayer extends ConsumerStatefulWidget {
 /// and the quality tag all fit without forcing the cover or scrubber below to
 /// shift on track change.
 ///
-/// Measured, not guessed: a 2-line title is 58, the artist 14, the two gaps
-/// 11, and the quality tag 32 — a HI-RES wordmark of about 17 with its
-/// numbers set underneath. 115, plus slack for a font whose own line height
-/// runs taller than the test harness's.
+/// Measured, not guessed: a 2-line title is 58, the artist 14, the two gaps 11,
+/// and the quality tag 32 — a HI-RES wordmark of about 17 with its numbers set
+/// underneath. 115, plus slack for a font whose own line height runs taller
+/// than the test harness's.
 ///
-/// This was 78 — enough for the title and artist alone, which is what the
-/// block held when the number was written. The quality tag was added
-/// underneath afterwards and pushed 15 past the end, so a 2-line title clipped
-/// the tag away entirely. It is a minimum now rather than a fixed height, so
-/// the next thing added here is laid out wrong-looking instead of invisible.
+/// It is a *floor*, not the height. Held as a fixed minimum it reserved the
+/// worst case for every track: a one-line title on a track with no hi-res tag
+/// measures about 59, so the block sat two-thirds empty and left an obvious
+/// hole between the artist and the scrubber. The floor now covers only what is
+/// always present — title, artist, and the gap under them — and [AnimatedSize]
+/// takes up the difference when a tag or a second line appears.
 ///
-/// Lyric teaser (rare — synced lyrics only ship with the dummy catalog) is
-/// allowed to push layout when present rather than reserving empty space for
-/// it in the common case.
-const double _titleBlockHeight = 122;
+/// That was the reason for the fixed height in the first place: stopping the
+/// cover and transport jumping as tracks change. Animating the block does the
+/// same job without paying for it on every track that does not need the room.
+const double _titleBlockHeight = 64;
 
 class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
     with TickerProviderStateMixin {
@@ -279,78 +282,86 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
               accent: accent,
             ),
             const SizedBox(height: 24),
-            // Title block in a reserved-height container — 1-line vs 2-line
-            // titles don't cause the cover or controls below to jump on track
-            // change. Sized to comfortably fit a 2-line title + artist + a one-
-            // line lyric teaser; shorter content top-aligns inside the box.
+            // Title block sized to its content, with the change animated so a
+            // 2-line title or a hi-res tag appearing does not snap the cover
+            // and transport to a new position. A fixed minimum used to do that
+            // job, but it reserved the tallest possible block for every track
+            // and left a hole under anything shorter.
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: _titleBlockHeight),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            track.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: SunohType.heading(
-                              fontSize: 26,
-                              color: c.fg,
-                              height: 1.1,
-                              letterSpacing: -0.3,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOutCubic,
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minHeight: _titleBlockHeight,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              track.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: SunohType.heading(
+                                fontSize: 26,
+                                color: c.fg,
+                                height: 1.1,
+                                letterSpacing: -0.3,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            track.artist,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
-                              fontSize: 13.5,
-                              color: c.fgDim,
+                            const SizedBox(height: 4),
+                            Text(
+                              track.artist,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: SunohType.sans(
+                                fontSize: 13.5,
+                                color: c.fgDim,
+                              ),
                             ),
-                          ),
-                          // Directly under the artist, where the rest of the
-                          // track's metadata already lives. Renders nothing
-                          // for an ordinary lossy track, so it costs no space
-                          // when there is nothing to say.
-                          const SizedBox(height: 7),
-                          QualityTag(colors: c),
-                          if (lyricLine != null) ...[
-                            const SizedBox(height: 8),
-                            _LyricsTeaser(
-                              line: lyricLine,
-                              accent: accent,
-                              onTap: () => context.openLyrics(),
-                            ),
+                            // Directly under the artist, where the rest of the
+                            // track's metadata already lives. Renders nothing
+                            // for an ordinary lossy track, so it costs no space
+                            // when there is nothing to say.
+                            const SizedBox(height: 7),
+                            QualityTag(colors: c),
+                            if (lyricLine != null) ...[
+                              const SizedBox(height: 8),
+                              _LyricsTeaser(
+                                line: lyricLine,
+                                accent: accent,
+                                onTap: () => context.openLyrics(),
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: IconBtn(
-                        icon: s.isLikedCurrentApi
-                            ? SolarIconsBold.heart
-                            : SolarIconsOutline.heart,
-                        color: s.isLikedCurrentApi ? accent : c.fgDim,
-                        size: 26,
-                        onTap: () {
-                          final item = s.currentApiSong;
-                          if (item != null) {
-                            s.toggleLikedApi(item);
-                          } else {
-                            s.toggleLike();
-                          }
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: IconBtn(
+                          icon: s.isLikedCurrentApi
+                              ? SolarIconsBold.heart
+                              : SolarIconsOutline.heart,
+                          color: s.isLikedCurrentApi ? accent : c.fgDim,
+                          size: 26,
+                          onTap: () {
+                            final item = s.currentApiSong;
+                            if (item != null) {
+                              s.toggleLikedApi(item);
+                            } else {
+                              s.toggleLike();
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -430,7 +441,15 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
   // Strip's intrinsic height with the original padding (top 4 + bottom 12 +
   // icon's own vertical 10×2 + glyph 22 ≈ 58). Bump if the iconBtn padding
   // changes.
-  static const double _bottomBarReservedHeight = 58;
+  /// Height the column must keep clear for the floating icon strip.
+  ///
+  /// The strip is `Positioned` at [_bottomBarLift] above the bottom and is
+  /// roughly 64 high, so it really occupies about 84 — not the 58 this
+  /// reserved. The 26 it was short by never showed, because `Spacer(flex: 3)`
+  /// happened to leave slack below the transport on the phones it was written
+  /// on. Growing the cover to fit the screen consumed that slack and the strip
+  /// landed on top of the transport controls, which is how the gap was found.
+  static const double _bottomBarReservedHeight = 84;
   // Distance the strip floats above the SafeArea bottom inset. Increasing
   // this lifts ONLY the strip — the column reservation above keeps every
   // other element pinned.
@@ -649,10 +668,51 @@ class _StaticCover extends StatelessWidget {
   final bool playing;
   final Color accent;
 
-  static const double coverSize = 336;
+  /// Widest the cover is allowed to get, and narrowest it may shrink to.
+  ///
+  /// The ceiling is only an absurdity guard for a very large screen; the real
+  /// limit is [_heightShare], which is proportional and so keeps the same
+  /// balance everywhere. Set too low it becomes the binding constraint on
+  /// exactly the wide-logical-screen phones this is meant to fix — at 380 a
+  /// 540 dp screen got a cover spanning 70% of its width where a stock phone
+  /// gets 85%, which still read as marooned.
+  static const double _maxCover = 480;
+  static const double _minCover = 180;
+
+  /// Everything in the column other than the cover, measured.
+  ///
+  /// Gap 24, title block up to 127, gap 20, scrubber and times 60, gap 18,
+  /// transport 72, and 84 kept clear for the icon strip — plus a little so the
+  /// Spacers are never squeezed to nothing and the layout does not read as
+  /// bolted to the edges.
+  ///
+  /// Subtracted rather than expressed as a fraction of screen height. A
+  /// fraction is fine until the remainder stops being enough: at 0.42 the
+  /// cover kept growing on short screens until the transport was pushed into
+  /// the icon strip. What the cover can have is whatever is left, which is a
+  /// thing that can be measured rather than guessed.
+  static const double _columnFixedHeight = 421;
 
   @override
   Widget build(BuildContext context) {
+    // Sized against the screen rather than fixed at 336 logical pixels.
+    //
+    // That constant was tuned on one phone and silently assumed every other
+    // device reported a similar number of logical pixels. It does not: DPI is
+    // a user setting on Android, and lowering it — or picking a smaller
+    // "display size" — hands the app a much wider logical screen. The cover
+    // stayed 336 while everything around it grew, the `Spacer(flex: 2)` and
+    // `Spacer(flex: 3)` either side swallowed the difference, and the player
+    // came out as a small square marooned in empty space.
+    //
+    // Bounded by width *and* height so it cannot crowd the controls on a short
+    // screen or balloon on a tall one.
+    final media = MediaQuery.of(context);
+    final usableHeight = media.size.height - media.padding.vertical;
+    final coverSize = math
+        .min(media.size.width - 56, usableHeight - _columnFixedHeight)
+        .clamp(_minCover, _maxCover);
+
     return SizedBox(
       width: coverSize,
       height: coverSize,
