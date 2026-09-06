@@ -321,9 +321,20 @@ class SunohAudioHandler {
         _logAudioFormat();
       }),
     );
+    // Bitrate is the only part of the format line mpv reports separately from
+    // the params, and it is the only figure a lossy stream has that means
+    // anything — AAC has no bit depth worth printing.
+    _subs.add(
+      _player.stream.audioBitrate.listen((bps) {
+        if (bps == _bitrateBps) return;
+        _bitrateBps = bps;
+        formatRevision.value++;
+      }),
+    );
     _subs.add(
       _player.stream.audioOutParams.listen((p) {
         _output = p;
+        formatRevision.value++;
         _logAudioFormat();
       }),
     );
@@ -586,8 +597,24 @@ class SunohAudioHandler {
   final ValueNotifier<AudioParams?> decodedNotifier =
       ValueNotifier<AudioParams?>(null);
 
+  /// Bumped whenever anything the format line is built from changes.
+  ///
+  /// Output params and bitrate arrive on their own streams and are not part of
+  /// [decodedNotifier]'s value, so a widget watching only that would keep
+  /// showing the decoder's answer after the device had resampled it, or a
+  /// blank bitrate after mpv worked one out. A counter rather than a value
+  /// because there is nothing to carry — it only says "look again".
+  final ValueNotifier<int> formatRevision = ValueNotifier<int>(0);
+
   /// What mpv opened: the decoder's own view of the file.
   AudioParams? get decodedParams => _decoded;
+
+  double? _bitrateBps;
+
+  /// Measured bitrate of the audio stream in bits per second, or null before
+  /// mpv has enough of the file to say. Meaningful for lossy codecs; for FLAC
+  /// it varies per passage and says less than the bit depth does.
+  double? get bitrateBps => _bitrateBps;
 
   /// What the audio device was actually configured for.
   ///
@@ -1132,6 +1159,7 @@ class SunohAudioHandler {
   Future<void> dispose() async {
     _urlRefresh.dispose();
     decodedNotifier.dispose();
+    formatRevision.dispose();
     _stallRetry?.cancel();
     for (final s in _subs) {
       await s.cancel();

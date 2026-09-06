@@ -83,12 +83,13 @@ class MiniPlayer extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          // Compact form: a HI-RES mark and nothing else. The
-                          // mini player has one line to spare and no room to
-                          // explain itself, so the full label and the
-                          // fallback copy stay in the expanded player.
+                          // Compact form: the mark plus a shortened format —
+                          // `HI-RES 24/96`, or `AAC 256k` on a lossy stream.
+                          // Flexible so a long artist name and a long format
+                          // line share the row rather than one clipping the
+                          // other.
                           const SizedBox(width: 8),
-                          QualityTag(colors: c, compact: true),
+                          Flexible(child: QualityTag(colors: c, compact: true)),
                         ],
                       ),
                     ],

@@ -82,14 +82,29 @@ class _QualityTagState extends ConsumerState<QualityTag> {
     return ListenableBuilder(
       listenable: listenable,
       builder: (context, _) {
-        final label = s.currentQualityLabel;
+        final format = widget.compact
+            ? s.currentFormatLabelCompact
+            : s.currentFormatLabel;
         final lookup = s.losslessLookup;
 
         // Found beats everything: if mpv says the audio is lossless, the
         // lookup's own opinion is history.
-        if (label != null) {
+        if (format != null && s.currentIsLossless) {
           return _HiResMark(
-            label: label,
+            label: format,
+            colors: widget.colors,
+            compact: widget.compact,
+          );
+        }
+
+        // Every other stream still says what it is. Showing nothing here used
+        // to be deliberate — "am I getting what I turned on" answered by
+        // silence — but from the listening end a YouTube track with no line at
+        // all is indistinguishable from a broken tag, and the codec and rate
+        // are worth knowing whatever they are.
+        if (format != null) {
+          return _FormatLine(
+            text: format,
             colors: widget.colors,
             compact: widget.compact,
           );
@@ -125,6 +140,36 @@ class _QualityTagState extends ConsumerState<QualityTag> {
 }
 
 enum _Tone { busy, quiet }
+
+/// The plain format line, for streams with no hi-res claim to make.
+///
+/// No chip and no border — a lossy stream is the ordinary case, and dressing
+/// it up would make "AAC" look like an award. Just the facts, in the same
+/// monospace the numbers under the hi-res mark use so the two read as one
+/// family.
+class _FormatLine extends StatelessWidget {
+  const _FormatLine({
+    required this.text,
+    required this.colors,
+    required this.compact,
+  });
+
+  final String text;
+  final SunohColors colors;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) => Text(
+    text,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+    style: SunohType.mono(
+      fontSize: compact ? 9 : 10,
+      fontWeight: FontWeight.w600,
+      color: colors.fgMute,
+    ),
+  );
+}
 
 /// The hi-res badge: a wordmark, with what is actually being decoded set
 /// underneath it.
@@ -187,9 +232,31 @@ class _HiResMark extends StatelessWidget {
     );
 
     // The mini player's tag rides on the artist's own line, beside it. There
-    // is no second line down there for the numbers, and the wordmark alone is
-    // the whole message that fits.
-    if (compact) return wordmark;
+    // is no second line down there, so the numbers sit next to the wordmark in
+    // their shortened form rather than under it — `HI-RES 24/96`.
+    if (compact) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          wordmark,
+          if (label.isNotEmpty) ...[
+            const SizedBox(width: 5),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: SunohType.mono(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w600,
+                  color: c.fgMute,
+                ),
+              ),
+            ),
+          ],
+        ],
+      );
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,

@@ -13,6 +13,7 @@ import '../api/sunoh_api.dart';
 import '../audio/audio_repo.dart';
 import '../audio/eq_presets.dart';
 import '../audio/settings_store.dart';
+import '../audio/stream_format.dart';
 import '../cast/cast_service.dart';
 import '../data/catalog.dart';
 import '../data/models.dart';
@@ -1657,6 +1658,45 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
         : '${name.toUpperCase()} · $detail';
   }
 
+  /// What is being decoded right now, for every stream rather than only the
+  /// lossless ones.
+  ///
+  /// `FLAC · 24-bit / 96 kHz`, `AAC · 256 kbps / 44.1 kHz`, and with the
+  /// device's own rate appended when it resamples. See `audio/stream_format.dart`
+  /// for why lossy streams get a bitrate and no bit depth.
+  String? get currentFormatLabel {
+    final h = audioRepo?.handler;
+    if (h == null) return null;
+    final d = h.decodedParams;
+    return streamFormatLabel(
+      codec: d?.codecName ?? d?.codec,
+      decodedFormat: d?.format?.name,
+      sampleRateHz: d?.sampleRate,
+      outputRateHz: h.outputParams?.sampleRate,
+      bitrateBps: h.bitrateBps,
+    );
+  }
+
+  /// [currentFormatLabel] shortened for the mini player.
+  String? get currentFormatLabelCompact {
+    final h = audioRepo?.handler;
+    if (h == null) return null;
+    final d = h.decodedParams;
+    return streamFormatLabelCompact(
+      codec: d?.codecName ?? d?.codec,
+      decodedFormat: d?.format?.name,
+      sampleRateHz: d?.sampleRate,
+      outputRateHz: h.outputParams?.sampleRate,
+      bitrateBps: h.bitrateBps,
+    );
+  }
+
+  /// Whether the audio currently decoding is a lossless codec.
+  bool get currentIsLossless {
+    final d = audioRepo?.handler.decodedParams;
+    return isLosslessCodec(d?.codecName ?? d?.codec);
+  }
+
   /// Everything the quality tag is derived from, as one thing to listen to.
   ///
   /// Two independent sources change at different moments — mpv announcing the
@@ -1667,7 +1707,11 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
     final repo = audioRepo;
     if (repo == null) return null;
     final lookup = repo.resolver.lossless?.status;
-    return Listenable.merge([repo.handler.decodedNotifier, ?lookup]);
+    return Listenable.merge([
+      repo.handler.decodedNotifier,
+      repo.handler.formatRevision,
+      ?lookup,
+    ]);
   }
 
   /// Where the hi-res lookup for the current track has got to, or null when it
