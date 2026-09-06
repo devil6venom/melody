@@ -76,6 +76,21 @@ android {
                 storeFile = file(keystoreProperties["storeFile"] as String)
                 storePassword = keystoreProperties["storePassword"] as String
             }
+            // Sign with v2 and v3 explicitly.
+            //
+            // The build was producing a v2-only APK. That installs fine and is
+            // not insecure, but v3 has been the norm since Android 9 and an
+            // APK missing it looks less like a normal release to anything
+            // inspecting the signing block — which matters when heuristic
+            // scanners are already suspicious of a sideloaded music player
+            // that ships a JS engine.
+            //
+            // v1 stays off deliberately: it is JAR signing for Android 6 and
+            // below, and minSdk is 24. Enabling it would add a signature this
+            // app has no consumer for and slow verification.
+            enableV1Signing = false
+            enableV2Signing = true
+            enableV3Signing = true
         }
     }
 
