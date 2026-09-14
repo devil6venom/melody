@@ -96,7 +96,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
                   const SizedBox(width: 6),
                   Text(
                     'Import from Spotify',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 22,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -109,7 +109,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 18),
               child: Text(
                 'Paste a public Spotify playlist URL. We’ll find the best Saavn match for each track and save it as a new playlist in your library.',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   color: c.fgMute,
                   height: 1.4,
@@ -152,13 +152,13 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
                         keyboardType: TextInputType.url,
                         autocorrect: false,
                         enableSuggestions: false,
-                        style: SunohType.sans(fontSize: 14, color: c.fg),
+                        style: MelodyType.sans(fontSize: 14, color: c.fg),
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                           border: InputBorder.none,
                           hintText: 'https://open.spotify.com/playlist/…',
-                          hintStyle: SunohType.sans(
+                          hintStyle: MelodyType.sans(
                             fontSize: 14,
                             color: c.fgMute,
                           ),
@@ -180,7 +180,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
                             ),
                             label: Text(
                               'Paste',
-                              style: SunohType.sans(
+                              style: MelodyType.sans(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w500,
                                 color: c.fg,
@@ -207,7 +207,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
                               ),
                               label: Text(
                                 'Clear',
-                                style: SunohType.sans(
+                                style: MelodyType.sans(
                                   fontSize: 12.5,
                                   fontWeight: FontWeight.w500,
                                   color: c.fgDim,
@@ -251,7 +251,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
                     ),
                     child: Text(
                       inFlight ? 'Import in progress…' : 'Import',
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 15,
                         color: Colors.white,
                         letterSpacing: -0.1,
@@ -275,7 +275,7 @@ class _SpotifyImportScreenState extends ConsumerState<SpotifyImportScreen> {
 
 class _TipsBlock extends StatelessWidget {
   const _TipsBlock({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -289,7 +289,7 @@ class _TipsBlock extends StatelessWidget {
       children: [
         Text(
           'TIPS',
-          style: SunohType.mono(
+          style: MelodyType.mono(
             fontSize: 9,
             color: c.fgMute,
             letterSpacing: 1.4,
@@ -317,7 +317,7 @@ class _TipsBlock extends StatelessWidget {
                 Expanded(
                   child: Text(
                     t,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 12,
                       color: c.fgMute,
                       height: 1.45,
@@ -335,5 +335,5 @@ class _TipsBlock extends StatelessWidget {
 /// Forgiving eyebrow style accessor — the existing `eyebrow()` builder
 /// renders a Text widget, but here we want just the style for use inside
 /// a Row that has its own widgets.
-TextStyle eyebrowStyle(SunohColors c, {Color? accent}) =>
-    SunohType.mono(fontSize: 9, color: accent ?? c.fgMute, letterSpacing: 1.4);
+TextStyle eyebrowStyle(MelodyColors c, {Color? accent}) =>
+    MelodyType.mono(fontSize: 9, color: accent ?? c.fgMute, letterSpacing: 1.4);

@@ -170,7 +170,7 @@ class _DevicePickerSheet extends ConsumerWidget {
                               : 'Pick a nearby speaker',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.heading(
+                          style: MelodyType.heading(
                             fontSize: 18,
                             color: c.fg,
                             letterSpacing: -0.3,
@@ -287,7 +287,7 @@ class _DiscoveryList extends ConsumerWidget {
 class _ScanningState extends StatefulWidget {
   const _ScanningState({required this.accent, required this.colors});
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   State<_ScanningState> createState() => _ScanningStateState();
@@ -345,7 +345,7 @@ class _ScanningStateState extends State<_ScanningState>
           const SizedBox(height: 16),
           Text(
             'Looking for devices',
-            style: SunohType.heading(
+            style: MelodyType.heading(
               fontSize: 16,
               color: c.fg,
               letterSpacing: -0.2,
@@ -355,7 +355,7 @@ class _ScanningStateState extends State<_ScanningState>
           Text(
             'Make sure your speaker is powered on and the phone is on the same Wi-Fi network.',
             textAlign: TextAlign.center,
-            style: SunohType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
+            style: MelodyType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
           ),
         ],
       ),
@@ -373,7 +373,7 @@ class _DeviceRow extends StatelessWidget {
   });
   final GoogleCastDevice device;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -421,7 +421,7 @@ class _DeviceRow extends StatelessWidget {
                     device.friendlyName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: c.fg,
@@ -434,7 +434,7 @@ class _DeviceRow extends StatelessWidget {
                       model,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 11.5,
                         color: c.fgMute,
                         letterSpacing: 0,
@@ -478,7 +478,7 @@ class _ConnectedView extends StatelessWidget {
   final String? deviceName;
   final FeedItem? song;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -502,7 +502,7 @@ class _ConnectedView extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: song!.id,
                     imageUrl: song!.artwork,
                     size: 44,
@@ -526,7 +526,7 @@ class _ConnectedView extends StatelessWidget {
                           song!.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: c.fg,
@@ -539,7 +539,7 @@ class _ConnectedView extends StatelessWidget {
                             song!.displaySubtitle!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 12,
                               color: c.fgMute,
                             ),
@@ -566,7 +566,7 @@ class _ConnectedView extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     'Play something from Melody. and it’ll come out of your speaker.',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13,
                       color: c.fgMute,
                       height: 1.4,
@@ -595,7 +595,7 @@ class _ConnectedView extends StatelessWidget {
                   const SizedBox(width: 10),
                   Text(
                     'Stop casting',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -607,7 +607,7 @@ class _ConnectedView extends StatelessWidget {
                       deviceName!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                 ],
               ),

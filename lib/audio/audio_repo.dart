@@ -110,7 +110,7 @@ class AudioRepo {
     unawaited(persistAll());
   }
 
-  final SunohAudioHandler handler;
+  final MelodyAudioHandler handler;
   final StreamResolver resolver;
   final PlaybackStateStore store;
   final SettingsStore settings;
@@ -141,7 +141,7 @@ class AudioRepo {
   /// saved seek target before mpv has loaded the file.
   bool _restoreInProgress = false;
 
-  SunohAudioServiceBridge? _bridge;
+  MelodyAudioServiceBridge? _bridge;
 
   /// Durations already pushed to the OS, keyed by song id. Guards against
   /// re-announcing on mpv's repeated duration events while buffering.
@@ -151,9 +151,9 @@ class AudioRepo {
   /// state directly into the OS notification (otherwise the bridge
   /// keeps mirroring mpv's muted-paused state while casting). Null
   /// when audio_service init failed.
-  SunohAudioServiceBridge? get bridge => _bridge;
+  MelodyAudioServiceBridge? get bridge => _bridge;
 
-  void attachBridge(SunohAudioServiceBridge bridge) {
+  void attachBridge(MelodyAudioServiceBridge bridge) {
     debugPrint('[audio] bridge attached — OS integration live');
     _bridge = bridge;
 

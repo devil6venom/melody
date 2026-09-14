@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Declares sunoh. as an Android Auto media app.
+  Declares Melody. as an Android Auto media app.
 
   Android Auto reads this file (pointed at by the
   `com.google.android.gms.car.application` meta-data in AndroidManifest.xml)
@@ -8,7 +8,7 @@
   BOTH the meta-data and this `<uses name="media"/>` entry the app is invisible
   to the head unit even though its MediaBrowserService is exported and running.
 
-  `media` is the only capability claimed. sunoh. draws no car UI of its own —
+  `media` is the only capability claimed. Melody. draws no car UI of its own —
   Android Auto renders the browse tree and the now-playing screen from the
   MediaSession, which is what keeps it driver-distraction compliant for free.
 -->

@@ -60,7 +60,7 @@ void main() {
     plays = [];
     tree = AutoBrowseTree(
       library: library,
-      api: SunohApi(offlineDio()),
+      api: MelodyApi(offlineDio()),
       playQueue: (songs, index, {sourceLabel}) async {
         plays.add(_PlayCall(songs, index, sourceLabel));
       },
@@ -168,7 +168,7 @@ void main() {
     test('resolves COLD, without its parent being browsed first', () async {
       final cold = AutoBrowseTree(
         library: library,
-        api: SunohApi(offlineDio()),
+        api: MelodyApi(offlineDio()),
         playQueue: (songs, index, {sourceLabel}) async {
           plays.add(_PlayCall(songs, index, sourceLabel));
         },

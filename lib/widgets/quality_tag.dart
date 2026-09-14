@@ -36,7 +36,7 @@ const Duration _kMissLinger = Duration(seconds: 6);
 class QualityTag extends ConsumerStatefulWidget {
   const QualityTag({super.key, required this.colors, this.compact = false});
 
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// The mini player's variant: shorter copy, smaller type, no spinner.
   final bool compact;
@@ -155,7 +155,7 @@ class _FormatLine extends StatelessWidget {
   });
 
   final String text;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool compact;
 
   @override
@@ -163,7 +163,7 @@ class _FormatLine extends StatelessWidget {
     text,
     maxLines: 1,
     overflow: TextOverflow.ellipsis,
-    style: SunohType.mono(
+    style: MelodyType.mono(
       fontSize: compact ? 9 : 10,
       fontWeight: FontWeight.w600,
       color: colors.fgMute,
@@ -193,7 +193,7 @@ class _HiResMark extends StatelessWidget {
   });
 
   final String label;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool compact;
 
   @override
@@ -219,7 +219,7 @@ class _HiResMark extends StatelessWidget {
         ),
         child: Text(
           'HI-RES',
-          style: SunohType.mono(
+          style: MelodyType.mono(
             fontSize: compact ? 7.5 : 9,
             fontWeight: FontWeight.w700,
             color: c.fg,
@@ -246,7 +246,7 @@ class _HiResMark extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.mono(
+                style: MelodyType.mono(
                   fontSize: 9,
                   fontWeight: FontWeight.w600,
                   color: c.fgMute,
@@ -268,7 +268,7 @@ class _HiResMark extends StatelessWidget {
           label,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.mono(
+          style: MelodyType.mono(
             fontSize: 10,
             fontWeight: FontWeight.w600,
             color: c.fgDim,
@@ -289,7 +289,7 @@ class _Chip extends StatelessWidget {
   });
 
   final String text;
-  final SunohColors colors;
+  final MelodyColors colors;
   final _Tone tone;
   final bool compact;
   final bool spinner;
@@ -324,7 +324,7 @@ class _Chip extends StatelessWidget {
             text,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: SunohType.mono(
+            style: MelodyType.mono(
               fontSize: compact ? 8.5 : 10,
               fontWeight: FontWeight.w600,
               color: fg,

@@ -508,7 +508,7 @@ class LocalMediaChannel {
       source: kLocalSource,
       url: path,
       // Album art is a cached file on disk, not a URL. `ApiImage.link` is
-      // just a string to everything downstream, and `SunohArt` renders a
+      // just a string to everything downstream, and `MelodyArt` renders a
       // path with Image.file — see its `imageUrl` handling.
       image: [
         if (artPath != null && artPath.isNotEmpty)

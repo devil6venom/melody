@@ -79,7 +79,7 @@ class AppScaffold extends ConsumerWidget {
 class _BottomBar extends StatelessWidget {
   const _BottomBar({required this.shell, required this.colors});
   final StatefulNavigationShell shell;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class _BottomBar extends StatelessWidget {
 class _Toast extends StatelessWidget {
   const _Toast({required this.message, required this.colors});
   final String message;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
@@ -167,7 +167,7 @@ class _Toast extends StatelessWidget {
           ),
           child: Text(
             message,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: const Color(0xFFFAFAFA),

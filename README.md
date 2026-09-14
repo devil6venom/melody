@@ -1,6 +1,6 @@
 <div align="center">
 
-# sunoh.
+# Melody.
 
 **A music app for Android that plays streaming and on-device music through one
 interface.**
@@ -10,34 +10,10 @@ on your phone, podcasts, and audiobooks.
 
 No ads. No analytics. No account of ours. Optional YouTube sign-in, kept on your phone.
 
-[![Release](https://img.shields.io/github/v/release/afkcodes/sunoh?style=for-the-badge&label=release&color=D97757)](https://github.com/afkcodes/sunoh/releases/latest)
-[![Total downloads](https://img.shields.io/github/downloads/afkcodes/sunoh/total?style=for-the-badge&label=downloads&color=82B07B)](https://github.com/afkcodes/sunoh/releases)
-[![Latest downloads](https://img.shields.io/github/downloads/afkcodes/sunoh/latest/total?style=for-the-badge&label=this%20release&color=7FB3D5)](https://github.com/afkcodes/sunoh/releases/latest)
-
-[![Licence](https://img.shields.io/badge/licence-GPL--3.0-A78BD1?style=for-the-badge)](LICENSE)
-[![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#download)
-[![Stars](https://img.shields.io/github/stars/afkcodes/sunoh?style=for-the-badge&color=CAA66B)](https://github.com/afkcodes/sunoh/stargazers)
-
-</div>
-
----
-
 ## Download
 
-**[Latest release](https://github.com/afkcodes/sunoh/releases/latest)** — take
+**[Latest release](https://github.com/devil6venom/melody/releases/latest)** — take
 `app-arm64-v8a-release.apk` unless your phone is 32-bit. Android 7.0+.
-
-### Obtainium (recommended)
-
-[Obtainium](https://github.com/ImranR98/Obtainium) tracks GitHub releases and
-updates the app for you. Add this URL:
-
-```
-https://github.com/afkcodes/sunoh
-```
-
-Obtainium picks the right ABI automatically. sunoh also checks for updates
-itself and can install them in-app, so either route keeps you current.
 
 ### Which APK?
 
@@ -48,23 +24,6 @@ itself and can install them in-app, so either route keeps you current.
 | `app-x86_64-release.apk` | Emulators, x86 tablets |
 
 ---
-
-## Screenshots
-
-<div align="center">
-
-| Home | Player | Search |
-|:---:|:---:|:---:|
-| <img src="docs/screenshots/home.png" width="230"> | <img src="docs/screenshots/player.png" width="230"> | <img src="docs/screenshots/search.png" width="230"> |
-
-| Library | On this device | Albums |
-|:---:|:---:|:---:|
-| <img src="docs/screenshots/library.png" width="230"> | <img src="docs/screenshots/local-songs.png" width="230"> | <img src="docs/screenshots/local-albums.png" width="230"> |
-
-</div>
-
----
-
 ## Features
 
 ### Sources
@@ -114,9 +73,9 @@ drops, and downloaded tracks are the only tier that survives it.
 
 ## Privacy
 
-sunoh has no account of its own and no user identity, and that is deliberate.
+Melody has no account of its own and no user identity, and that is deliberate.
 
-- **No sunoh account, ever.** There is nothing to register for, and no server
+- **No Melody account, ever.** There is nothing to register for, and no server
   of ours that knows who you are.
 - **YouTube sign-in is optional and local.** You can sign in to YouTube Music
   to get your own recommendations and library. It uses Google's own sign-in
@@ -136,34 +95,6 @@ sunoh has no account of its own and no user identity, and that is deliberate.
 
 <div align="center">
 
-## Support
-
-sunoh is free and always will be — if it has earned a place in your rotation,
-you can chip in here:
-
-[![Ko-fi](https://img.shields.io/badge/Support%20me%20on-Ko--fi-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/afkcodes)
-[![UPI](https://img.shields.io/badge/UPI-afkcodes@ybl-097939?style=for-the-badge&logo=googlepay&logoColor=white)](upi://pay?pa=afkcodes@ybl&pn=Sunoh&cu=INR)
-
-UPI VPA: `afkcodes@ybl` — both are also in the app under
-**Settings → Support sunoh.**
-
-</div>
-
----
-
-## Build
-
-```sh
-flutter pub get
-cp env.example.json env.json   # then fill in the endpoints
-flutter run --dart-define-from-file=env.json
-```
-
-Release builds, split per ABI:
-
-```sh
-flutter build apk --split-per-abi --release --dart-define-from-file=env.json
-```
 
 ### Endpoints
 
@@ -171,12 +102,12 @@ Every endpoint the app talks to lives in `env.json`, which is **gitignored** —
 this repository carries no base URL of its own. `env.example.json` documents
 the shape; the third-party ones (the lyrics databases, SponsorBlock,
 InnerTube) are filled in there because they are public, and the
-sunoh-specific ones are blank. `MUSIXMATCH_SECRET` is blank too: it is that
+Melody-specific ones are blank. `MUSIXMATCH_SECRET` is blank too: it is that
 service's own signing key, read from their web bundle, and this repository
 does not republish it. A build without it simply has one fewer lyrics source.
 
 A build without `env.json` still runs. The on-device library and the YouTube
-tier need nothing from sunoh-api, so they keep working; the catalog screens
+tier need nothing from Melody-api, so they keep working; the catalog screens
 render their normal error state. `scripts/release.sh` refuses to build a
 release without it.
 
@@ -203,7 +134,7 @@ new code is held to are in [`docs/ENGINEERING.md`](docs/ENGINEERING.md).
 
 | Path | |
 |---|---|
-| `lib/api/` | source clients — `ytmusic_api`, `sunoh_api`, `local_media_channel`, `sponsorblock`, `lrclib` |
+| `lib/api/` | source clients — `ytmusic_api`, `melody_api`, `local_media_channel`, `sponsorblock`, `lrclib` |
 | `lib/api/lyrics/` | the six lyrics databases, their parsers, and the race between them |
 | `lib/audio/` | playback repository, queue, downloads, Android Auto, on-device library |
 | `lib/providers/` | Riverpod providers |
@@ -223,30 +154,10 @@ uses.
 
 ---
 
-## F-Droid and IzzyOnDroid
-
-Full detail in [`docs/DISTRIBUTION.md`](docs/DISTRIBUTION.md).
-
-**[IzzyOnDroid](https://apt.izzysoft.de/fdroid/)** is the realistic next step.
-It mirrors the APKs published to GitHub Releases rather than building from
-source, so no build recipe is needed and the app keeps every feature. The
-[fastlane metadata](fastlane/metadata/android/en-US/) it reads is already in
-the repo; what remains is a request.
-
-**F-Droid's main repository** builds from source and accepts no proprietary
-dependencies. Firebase Analytics is gone, so **the Google Cast SDK behind
-Chromecast is the only one left** — and the objection is to the library being
-in the APK at all, not to whether it runs. **Removing it means the F-Droid
-build could not cast**, and there is no open replacement that current
-Chromecast firmware accepts. That trade-off is unresolved;
-`docs/DISTRIBUTION.md` lays out the options.
-
----
-
 ## Credits
 
 - [innertubex](https://github.com/MetrolistGroup/innertubex) by MetrolistGroup,
-  for the InnerTube client stack. sunoh is GPL-3.0 because it links this.
+  for the InnerTube client stack. Melody is GPL-3.0 because it links this.
 - [Metrolist](https://github.com/mostafaalagamy/Metrolist), whose approach to
   the YouTube Music home feed and PO tokens this follows.
 - [SponsorBlock](https://sponsor.ajay.app) and [LRCLIB](https://lrclib.net) for
@@ -262,12 +173,12 @@ Chromecast firmware accepts. That trade-off is unresolved;
 
 </div>
 
-sunoh is an independent, community-driven third-party audio player and client.
+Melody is an independent, community-driven third-party audio player and client.
 It is **not** affiliated with, endorsed by, or connected to Google LLC, YouTube,
 YouTube Music, Gaana, JioSaavn, Spotify, or any of their parent companies. All
 trademarks belong to their respective owners.
 
-- **No media hosting.** sunoh does not host, upload, or store copyrighted music
+- **No media hosting.** Melody does not host, upload, or store copyrighted music
   files. It is an interface: it reads audio already on your device, and streams
   from public, public-facing APIs.
 
@@ -276,7 +187,7 @@ trademarks belong to their respective owners.
   local copyright law and the terms of service of the platforms you reach
   through it.
 
-- **No guarantees.** sunoh has no ads, but it does not promise to keep
+- **No guarantees.** Melody has no ads, but it does not promise to keep
   circumventing anything. Upstream platforms change without notice, and any
   given source can stop working at any time.
 
@@ -285,7 +196,7 @@ trademarks belong to their respective owners.
   the device. On-device music never leaves the device at all. See
   [Privacy](#privacy) above.
 
-- **Copyleft.** sunoh is free software under the **GPL-3.0** — see
+- **Copyleft.** Melody is free software under the **GPL-3.0** — see
   [`LICENSE`](LICENSE). The licence does not let anyone forbid others from
   selling or redistributing copies, but any distribution must come with the
   corresponding source under the same licence. It covers the code only, and

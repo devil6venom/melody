@@ -50,7 +50,7 @@ class AudiobookCategoryScreen extends ConsumerWidget {
                   const SizedBox(width: 6),
                   Text(
                     name ?? 'Genre',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 22,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -77,7 +77,7 @@ class AudiobookCategoryScreen extends ConsumerWidget {
                     child: Text(
                       'Couldn’t load this genre.\n$e',
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                     ),
                   ),
                 ),
@@ -85,7 +85,7 @@ class AudiobookCategoryScreen extends ConsumerWidget {
                     ? Center(
                         child: Text(
                           'No books in this genre.',
-                          style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                         ),
                       )
                     : GridView.builder(
@@ -112,12 +112,12 @@ class AudiobookCategoryScreen extends ConsumerWidget {
 
 /// Two-up grid tile that lazy-loads cover + author from
 /// [audiobookDetailProvider] when it builds. While the detail fetch is
-/// in flight the painted SunohArt placeholder shows; once it resolves,
-/// the Amazon CDN cover swaps in via [SunohArt.imageUrl].
+/// in flight the painted MelodyArt placeholder shows; once it resolves,
+/// the Amazon CDN cover swaps in via [MelodyArt.imageUrl].
 class _AudiobookGridTile extends ConsumerWidget {
   const _AudiobookGridTile({required this.seed, required this.colors});
   final FeedItem seed;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -135,7 +135,7 @@ class _AudiobookGridTile extends ConsumerWidget {
             radius: 10,
             child: AspectRatio(
               aspectRatio: 1,
-              child: SunohArt(
+              child: MelodyArt(
                 id: seed.id,
                 imageUrl: cover,
                 size: 200,
@@ -148,7 +148,7 @@ class _AudiobookGridTile extends ConsumerWidget {
             seed.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: c.fg,
@@ -161,7 +161,7 @@ class _AudiobookGridTile extends ConsumerWidget {
               author!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
             ),
           ],
         ],

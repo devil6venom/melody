@@ -16,7 +16,7 @@ const Duration kLyricsTimeout = Duration(seconds: 6);
 
 /// The sources here are volunteer-run and several ask integrators to identify
 /// themselves so they can tell real traffic from a scraper.
-const String kLyricsAgent = 'sunoh/1.0 (${Env.webBase})';
+const String kLyricsAgent = 'Melody/1.1 (${Env.webBase})';
 
 /// One client for every provider, so the connection pool and DNS cache are
 /// shared across the six of them.

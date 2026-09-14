@@ -66,7 +66,7 @@ class PodcastCategoriesScreen extends ConsumerWidget {
                   const SizedBox(width: 6),
                   Text(
                     'Categories',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 24,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -79,7 +79,7 @@ class PodcastCategoriesScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 18),
               child: Text(
                 'Pick a category to discover podcasts in it.',
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ),
             Expanded(
@@ -100,7 +100,7 @@ class PodcastCategoriesScreen extends ConsumerWidget {
                     child: Text(
                       'Couldn’t load categories.\n$e',
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                     ),
                   ),
                 ),
@@ -149,7 +149,7 @@ class PodcastCategoryCard extends StatelessWidget {
     required this.accent,
   });
   final PodcastCategory category;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// Kept for API compatibility (the preview strip on the Podcasts
   /// tab passes the user accent in), but no longer used for tinting —
@@ -190,7 +190,7 @@ class PodcastCategoryCard extends StatelessWidget {
                       category.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 13.5,
                         color: Colors.white,
                         letterSpacing: -0.1,

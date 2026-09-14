@@ -1,9 +1,9 @@
 // 10-band EQ preset library — ported from the user's React Native app at
-// /home/ashish/projects/Sunoh (`src/features/equalizer/eqPresets.ts`).
+// /home/ashish/projects/Melody (`src/features/equalizer/eqPresets.ts`).
 //
 // Frequencies: 31, 63, 125, 250, 500, 1k, 2k, 4k, 8k, 16k Hz. Gains in dB,
 // range -12..+12. The RN set is more aggressive (max +10 dB on Deep Impact)
-// than the `sunoh_next` port we briefly carried; this was the user's
+// than the `melody_next` port we briefly carried; this was the user's
 // canonical curve set and they preferred it.
 
 class EqPreset {

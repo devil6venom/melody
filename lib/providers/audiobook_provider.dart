@@ -24,7 +24,7 @@ final audiobookHomeProvider = FutureProvider.autoDispose<List<HomeSection>>((
 ) async {
   final link = ref.keepAlive();
   Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-  final api = ref.watch(sunohApiProvider);
+  final api = ref.watch(melodyApiProvider);
   return api.fetchAudiobookHome();
 });
 
@@ -32,7 +32,7 @@ final audiobookCategoriesProvider =
     FutureProvider.autoDispose<List<AudiobookCategory>>((ref) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 24)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchAudiobookCategories();
     });
 
@@ -43,7 +43,7 @@ final audiobookSearchProvider = FutureProvider.autoDispose
         const Duration(minutes: 5),
       ).then((_) => link.close());
       if (query.trim().isEmpty) return const [];
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchAudiobookSearch(query);
     });
 
@@ -75,7 +75,7 @@ final audiobooksByCategoryProvider = FutureProvider.autoDispose
     .family<List<FeedItem>, AudiobookCategoryKey>((ref, key) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchAudiobooksByCategory(
         categoryId: key.id,
         page: key.page,
@@ -90,6 +90,6 @@ final audiobookDetailProvider = FutureProvider.autoDispose
     .family<AudiobookDetail?, String>((ref, slug) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 24)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchAudiobookDetail(slug);
     });

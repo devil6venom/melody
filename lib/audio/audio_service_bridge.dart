@@ -12,13 +12,13 @@ import '../cast/cast_service.dart';
 import 'audio_handler.dart';
 import 'auto_browse.dart';
 
-class SunohAudioServiceBridge extends BaseAudioHandler {
-  SunohAudioServiceBridge(this._handler, {AutoBrowseTree? browse})
+class MelodyAudioServiceBridge extends BaseAudioHandler {
+  MelodyAudioServiceBridge(this._handler, {AutoBrowseTree? browse})
     : _browse = browse {
     _wire();
   }
 
-  final SunohAudioHandler _handler;
+  final MelodyAudioHandler _handler;
 
   /// Serves the Android Auto browse tree. Null in contexts where the
   /// library layer wasn't available at init — browsing then returns empty

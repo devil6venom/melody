@@ -1,4 +1,4 @@
-// Detail screens — Album / Playlist / Artist are wired to the live sunoh-api
+// Detail screens — Album / Playlist / Artist are wired to the live Melody-api
 // (Riverpod providers). PodcastScreen stays on the dummy catalog until
 // podcast support lands in the backend (see sunoh-rn-reference memory).
 
@@ -87,7 +87,7 @@ class _HeroActions extends StatelessWidget {
     this.onAddToQueue,
     this.onRadio,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final bool liked;
   final bool isPlaying;
@@ -245,7 +245,7 @@ class _DetailHero extends ConsumerWidget {
   final String id;
   final String? imageUrl;
   final String title;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final ValueListenable<double> scrollOffset;
   final String? eyebrowText;
@@ -304,7 +304,7 @@ class _DetailHero extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Center(
-                      child: SunohArt(
+                      child: MelodyArt(
                         id: id,
                         imageUrl: imageUrl,
                         size: 320,
@@ -321,7 +321,7 @@ class _DetailHero extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 26,
                         color: c.fg,
                         height: 1.1,
@@ -335,7 +335,7 @@ class _DetailHero extends ConsumerWidget {
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(fontSize: 13, color: c.fgDim),
+                        style: MelodyType.sans(fontSize: 13, color: c.fgDim),
                       ),
                     ],
                     if ((secondary ?? '').isNotEmpty) ...[
@@ -345,7 +345,7 @@ class _DetailHero extends ConsumerWidget {
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                       ),
                     ],
                   ],
@@ -406,7 +406,7 @@ class _ApiTrackRow extends ConsumerWidget {
   });
   final int n;
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final bool showArt;
   final VoidCallback? onTap;
@@ -466,7 +466,7 @@ class _ApiTrackRow extends ConsumerWidget {
                           )
                         : Text(
                             n.toString().padLeft(2, '0'),
-                            style: SunohType.mono(
+                            style: MelodyType.mono(
                               fontSize: 11.5,
                               color: c.fgMute,
                             ),
@@ -475,7 +475,7 @@ class _ApiTrackRow extends ConsumerWidget {
                 ),
                 if (showArt) ...[
                   const SizedBox(width: 12),
-                  SunohArt(
+                  MelodyArt(
                     id: song.id,
                     imageUrl: song.artwork,
                     size: 42,
@@ -491,7 +491,7 @@ class _ApiTrackRow extends ConsumerWidget {
                         song.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: titleColor,
@@ -503,7 +503,7 @@ class _ApiTrackRow extends ConsumerWidget {
                           artistsLabel,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 12.5,
                             color: c.fgMute,
                           ),
@@ -521,7 +521,7 @@ class _ApiTrackRow extends ConsumerWidget {
                   const SizedBox(width: 8),
                   Text(
                     durationLabel,
-                    style: SunohType.mono(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.mono(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
                 IconBtn(
@@ -655,7 +655,7 @@ class _ActiveSongProgress extends StatelessWidget {
 
 class DetailLoading extends StatelessWidget {
   const DetailLoading({super.key, required this.colors, this.round = false});
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool round;
   @override
   Widget build(BuildContext context) {
@@ -696,7 +696,7 @@ class _DetailError extends StatelessWidget {
     required this.onRetry,
     required this.onBack,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String message;
   final VoidCallback onRetry;
   final VoidCallback onBack;
@@ -722,13 +722,13 @@ class _DetailError extends StatelessWidget {
                     Text(
                       "Couldn't load this.",
                       textAlign: TextAlign.center,
-                      style: SunohType.heading(fontSize: 20, color: c.fg),
+                      style: MelodyType.heading(fontSize: 20, color: c.fg),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       message,
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                     const SizedBox(height: 20),
                     GestureDetector(
@@ -745,7 +745,7 @@ class _DetailError extends StatelessWidget {
                         ),
                         child: Text(
                           'Try again',
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: c.fg,
@@ -885,7 +885,7 @@ class AlbumLikeBody extends ConsumerStatefulWidget {
     this.onRadio,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final String id;
   final String title;
 
@@ -1113,7 +1113,7 @@ class AlbumLikeBodyState extends ConsumerState<AlbumLikeBody> {
                       padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
                       child: Text(
                         _stripHtml(description!),
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 13,
                           color: c.fgDim,
                           height: 1.5,
@@ -1184,7 +1184,7 @@ class _StickyHeader extends StatelessWidget {
     this.onMenu,
   });
   final String title;
-  final SunohColors colors;
+  final MelodyColors colors;
   final ValueListenable<double> scrollOffset;
   final VoidCallback onBack;
   final VoidCallback? onMenu;
@@ -1251,7 +1251,7 @@ class _StickyHeader extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
-                                style: SunohType.heading(
+                                style: MelodyType.heading(
                                   fontSize: 15,
                                   color: c.fg,
                                   letterSpacing: -0.2,
@@ -1295,7 +1295,7 @@ class _StickyHeader extends StatelessWidget {
 class _RelatedSection extends ConsumerWidget {
   const _RelatedSection({required this.section, required this.colors});
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -1320,8 +1320,8 @@ class _RelatedSection extends ConsumerWidget {
           gap: gap,
           onTap: (item) {
             final src = item.source ?? section.source;
-            // YouTube ids are browse ids sunoh-api can't resolve. Without
-            // this, a YouTube artist's discography opened the sunoh-api
+            // YouTube ids are browse ids Melody-api can't resolve. Without
+            // this, a YouTube artist's discography opened the Melody-api
             // album screen with a browse id and rendered a placeholder
             // record — no title, "NULL, NULL", one sample track. Same
             // guard the search and see-all screens already carry.
@@ -1358,7 +1358,7 @@ class _RelatedSection extends ConsumerWidget {
           builder: (item, w) => isArtistRow
               ? Column(
                   children: [
-                    SunohArt(
+                    MelodyArt(
                       id: item.id,
                       imageUrl: item.artwork,
                       size: w - 10,
@@ -1370,7 +1370,7 @@ class _RelatedSection extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w500,
                         color: c.fg,
@@ -1382,7 +1382,7 @@ class _RelatedSection extends ConsumerWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SunohArt(
+                    MelodyArt(
                       id: item.id,
                       imageUrl: item.artwork,
                       size: w,
@@ -1393,7 +1393,7 @@ class _RelatedSection extends ConsumerWidget {
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w500,
                         color: c.fg,
@@ -1406,7 +1406,7 @@ class _RelatedSection extends ConsumerWidget {
                         item.displaySubtitle!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                       ),
                     ],
                   ],
@@ -1448,7 +1448,7 @@ class ArtistScreen extends ConsumerWidget {
 
 class _ArtistBody extends ConsumerWidget {
   const _ArtistBody({required this.colors, required this.artist});
-  final SunohColors colors;
+  final MelodyColors colors;
   final ArtistDetail artist;
 
   @override
@@ -1476,7 +1476,7 @@ class _ArtistBody extends ConsumerWidget {
             height: 400,
             child: Stack(
               children: [
-                SunohArt(
+                MelodyArt(
                   id: artist.id,
                   imageUrl: coverUrl,
                   width: double.infinity,
@@ -1538,7 +1538,7 @@ class _ArtistBody extends ConsumerWidget {
                       const SizedBox(width: 8),
                       Text(
                         'Verified artist',
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 11,
                           color: Colors.white.withValues(alpha: 0.85),
                         ),
@@ -1554,7 +1554,7 @@ class _ArtistBody extends ConsumerWidget {
                     artist.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 40,
                       color: Colors.white,
                       height: 1,
@@ -1616,7 +1616,7 @@ class _ArtistBody extends ConsumerWidget {
                         ),
                         child: Text(
                           following ? 'Following' : 'Follow',
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: following ? _contrastOn(accent) : c.fg,
@@ -1634,7 +1634,7 @@ class _ArtistBody extends ConsumerWidget {
                       size: 18,
                       width: 36,
                       height: 36,
-                      onTap: () => shareSunohLink(
+                      onTap: () => shareMelodyLink(
                         kind: 'artist',
                         id: artist.id,
                         title: artist.name,
@@ -1741,13 +1741,13 @@ class _ArtistBody extends ConsumerWidget {
               builder: (a, w) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SunohArt(id: a.id, imageUrl: a.artwork, size: w, radius: 10),
+                  MelodyArt(id: a.id, imageUrl: a.artwork, size: w, radius: 10),
                   const SizedBox(height: 8),
                   Text(
                     a.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -1791,7 +1791,7 @@ class _ArtistBody extends ConsumerWidget {
                     ),
                     child: Text(
                       artist.bio!,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 13,
                         color: c.fgDim,
                         height: 1.55,
@@ -1886,14 +1886,14 @@ class _OccasionScreenState extends ConsumerState<OccasionScreen> {
                       padding: const EdgeInsets.fromLTRB(20, 32, 20, 32),
                       child: Text(
                         'Loading…',
-                        style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                       ),
                     ),
                     error: (e, _) => Padding(
                       padding: const EdgeInsets.fromLTRB(20, 32, 20, 32),
                       child: Text(
                         'Couldn’t load “${widget.title}”.\n$e',
-                        style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                       ),
                     ),
                     data: (sections) {
@@ -1905,7 +1905,7 @@ class _OccasionScreenState extends ConsumerState<OccasionScreen> {
                           padding: const EdgeInsets.fromLTRB(20, 32, 20, 32),
                           child: Text(
                             'Nothing in this category right now.',
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 13,
                               color: c.fgMute,
                             ),

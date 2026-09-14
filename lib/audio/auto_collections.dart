@@ -28,7 +28,7 @@ class AutoCollections {
     required this.catalog,
   });
 
-  final SunohApi api;
+  final MelodyApi api;
   final LibraryStore library;
   final AutoCatalog catalog;
 

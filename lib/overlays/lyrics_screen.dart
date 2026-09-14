@@ -157,7 +157,7 @@ class _LyricsScreenState extends ConsumerState<LyricsScreen>
                             // available; fall back silently if the queue is a
                             // dummy/local entry with no shareable identity.
                             if (apiSong == null) return;
-                            shareSunohLink(
+                            shareMelodyLink(
                               kind: 'song',
                               id: apiSong.id,
                               title: apiSong.title,
@@ -174,7 +174,7 @@ class _LyricsScreenState extends ConsumerState<LyricsScreen>
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
                     child: Row(
                       children: [
-                        SunohArt(
+                        MelodyArt(
                           id: apiSong?.id ?? track.id,
                           imageUrl: apiSong?.artwork,
                           size: 44,
@@ -187,7 +187,7 @@ class _LyricsScreenState extends ConsumerState<LyricsScreen>
                             children: [
                               Text(
                                 track.title,
-                                style: SunohType.sans(
+                                style: MelodyType.sans(
                                   fontSize: 13.5,
                                   fontWeight: FontWeight.w500,
                                   color: c.fg,
@@ -196,7 +196,7 @@ class _LyricsScreenState extends ConsumerState<LyricsScreen>
                               const SizedBox(height: 1),
                               Text(
                                 track.artist,
-                                style: SunohType.sans(
+                                style: MelodyType.sans(
                                   fontSize: 12,
                                   color: c.fgMute,
                                 ),
@@ -285,7 +285,7 @@ class _LiveLyrics extends ConsumerWidget {
   });
 
   final LyricsQuery query;
-  final SunohColors colors;
+  final MelodyColors colors;
   final ScrollController controller;
   final ValueListenable<int> clock;
   final void Function(int timeMs) onSeek;
@@ -356,7 +356,7 @@ class _FadedEdges extends StatelessWidget {
     required this.child,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   /// Height of the box the sheet's gradient is painted over.

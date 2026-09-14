@@ -23,7 +23,7 @@ final searchProvider = FutureProvider.autoDispose
       Future<void>.delayed(
         const Duration(minutes: 5),
       ).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchSearch(query);
     });
 
@@ -32,7 +32,7 @@ final trendingSearchProvider = FutureProvider.autoDispose<List<HomeSection>>((
 ) async {
   final link = ref.keepAlive();
   Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-  final api = ref.watch(sunohApiProvider);
+  final api = ref.watch(melodyApiProvider);
   return api.fetchTrendingSearch();
 });
 
@@ -40,7 +40,7 @@ final occasionsProvider = FutureProvider.autoDispose
     .family<List<FeedItem>, String>((ref, provider) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchOccasions(provider: provider);
     });
 
@@ -53,6 +53,6 @@ final occasionDetailProvider = FutureProvider.autoDispose
       Future<void>.delayed(
         const Duration(minutes: 30),
       ).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchOccasionDetail(key.slug, provider: key.provider);
     });

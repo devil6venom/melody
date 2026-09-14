@@ -172,7 +172,7 @@ class _TrackMenuSheet extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(18, 6, 18, 12),
               child: Row(
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: song.id,
                     imageUrl: song.artwork,
                     size: 52,
@@ -187,7 +187,7 @@ class _TrackMenuSheet extends ConsumerWidget {
                           song.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w500,
                             color: c.fg,
@@ -200,7 +200,7 @@ class _TrackMenuSheet extends ConsumerWidget {
                             artistsLabel,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 12,
                               color: c.fgMute,
                             ),
@@ -295,7 +295,7 @@ class _TrackMenuSheet extends ConsumerWidget {
                     'name="${artist.name}" id="${artist.id}"',
                   );
                   // YouTube artist ids are channel browse ids, which
-                  // sunoh-api's artist endpoint can't resolve — they need
+                  // Melody-api's artist endpoint can't resolve — they need
                   // the YouTube artist screen.
                   if (song.source == 'youtube') {
                     if (artist.id.isNotEmpty) {
@@ -336,7 +336,7 @@ class _TrackMenuSheet extends ConsumerWidget {
               label: 'Share',
               onTap: () {
                 Navigator.of(context).pop();
-                shareSunohLink(
+                shareMelodyLink(
                   kind: 'song',
                   id: song.id,
                   title: song.title,
@@ -422,7 +422,7 @@ class _MenuRow extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   final Color? iconColor;
-  final SunohColors? colors;
+  final MelodyColors? colors;
 
   @override
   Widget build(BuildContext context) {
@@ -431,7 +431,7 @@ class _MenuRow extends StatelessWidget {
     // whole tokens object for every row.
     final c =
         colors ??
-        const SunohColors(
+        const MelodyColors(
           bg: Color(0xFF15151A),
           bgSoft: Color(0xFF15151A),
           surface: Color(0x00000000),
@@ -456,7 +456,7 @@ class _MenuRow extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(fontSize: 14, color: c.fg),
+                style: MelodyType.sans(fontSize: 14, color: c.fg),
               ),
             ),
           ],
@@ -479,7 +479,7 @@ class _MenuRow extends StatelessWidget {
 class _DownloadRow extends ConsumerWidget {
   const _DownloadRow({required this.song, required this.colors});
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

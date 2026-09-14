@@ -1,4 +1,4 @@
-// DTOs for sunoh-api responses. These mirror the backend's unified shape
+// DTOs for Melody-api responses. These mirror the backend's unified shape
 // (src/types/index.ts) — keep them in sync if the API evolves.
 
 import 'dart:convert';
@@ -727,7 +727,7 @@ class ArtistDetail {
 
 // ── Podcasts ─────────────────────────────────────────────────────────────
 //
-// The backend (`sunoh-api/src/podcast/*`) maps PodcastIndex shapes to the
+// The backend (`Melody-api/src/podcast/*`) maps PodcastIndex shapes to the
 // unified FeedItem schema — a show comes through as `type: 'podcast'`,
 // an episode as `type: 'episode'` with the audio URL pre-baked in
 // `mediaUrls[0].link`. So most code can treat them as plain FeedItems.

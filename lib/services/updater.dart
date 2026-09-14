@@ -13,7 +13,7 @@
 //      package installer can read the file URI we hand it.
 //   4. Trigger install via `open_filex` — Android pops the system
 //      installer with a "Continue" button. The first time, the user
-//      gets prompted to grant "Install unknown apps" for sunoh; after
+//      gets prompted to grant "Install unknown apps" for Melody; after
 //      that subsequent updates are one tap.
 //
 // State is exposed via a ChangeNotifier so the UpdateDialog can
@@ -200,7 +200,7 @@ class UpdaterController extends ChangeNotifier {
   Future<String> _destinationPath(String version) async {
     final dir = await getTemporaryDirectory();
     final safeVersion = version.replaceAll(RegExp(r'[^A-Za-z0-9._-]'), '_');
-    final file = File('${dir.path}/sunoh-update-v$safeVersion.apk');
+    final file = File('${dir.path}/Melody-update-v$safeVersion.apk');
     if (await file.exists()) {
       // Older session may have left a partial / completed download
       // under the same name. Delete so the new download can't pick up

@@ -58,7 +58,7 @@ Widget eyebrow(
     text.toUpperCase(),
     maxLines: maxLines,
     overflow: maxLines == null ? TextOverflow.clip : TextOverflow.ellipsis,
-    style: SunohType.mono(
+    style: MelodyType.mono(
       fontSize: size,
       color: color,
       letterSpacing: letterSpacing,
@@ -154,7 +154,7 @@ class SectionHeader extends StatelessWidget {
   });
 
   final String title;
-  final SunohColors colors;
+  final MelodyColors colors;
   final String? eyebrowText;
   final VoidCallback? onSeeAll;
   final EdgeInsets padding;
@@ -182,7 +182,7 @@ class SectionHeader extends StatelessWidget {
                 ],
                 Text(
                   title,
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 19,
                     color: colors.fg,
                     height: 1.0,
@@ -197,7 +197,7 @@ class SectionHeader extends StatelessWidget {
               onTap: onSeeAll,
               child: Text(
                 'See all →',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: colors.fgMute,

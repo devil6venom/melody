@@ -141,12 +141,12 @@ class PlaybackStateStore {
           .toList();
       if (queue.isEmpty) return null;
       // Live internet radio has been removed. A queue saved by an older
-      // build can still hold a `sunoh-radio` station, and nothing
+      // build can still hold a `melody-radio` station, and nothing
       // resolves those any more — restoring one would surface an
       // unplayable entry on first launch after the update. Drop it and
       // start clean instead.
       final isRetiredRadio = queue.every(
-        (s) => s.source == 'sunoh-radio' || s.type == 'radio_station',
+        (s) => s.source == 'melody-radio' || s.type == 'radio_station',
       );
       if (isRetiredRadio) {
         debugPrint('[playback-store] dropping retired live-radio queue');

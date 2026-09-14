@@ -97,7 +97,7 @@ class _SleepSheet extends ConsumerWidget {
                               : 'Pick a duration',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.heading(
+                          style: MelodyType.heading(
                             fontSize: 18,
                             color: c.fg,
                             letterSpacing: -0.3,
@@ -230,7 +230,7 @@ class _ArmedCard extends StatelessWidget {
   });
   final AppState state;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onCancel;
   @override
   Widget build(BuildContext context) {
@@ -278,8 +278,8 @@ class _ArmedCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: atTrackEnd
-                      ? SunohType.sans(fontSize: 13, color: c.fg, height: 1.3)
-                      : SunohType.heading(
+                      ? MelodyType.sans(fontSize: 13, color: c.fg, height: 1.3)
+                      : MelodyType.heading(
                           fontSize: 22,
                           color: c.fg,
                           letterSpacing: -0.4,
@@ -306,7 +306,7 @@ class _ArmedCard extends StatelessWidget {
                   const SizedBox(width: 6),
                   Text(
                     'Cancel',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 12.5,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -344,7 +344,7 @@ class _OptionRow extends StatelessWidget {
   final _SleepOption option;
   final bool active;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -371,7 +371,7 @@ class _OptionRow extends StatelessWidget {
                 children: [
                   Text(
                     option.label,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: active ? FontWeight.w600 : FontWeight.w400,
                       color: active ? accent : c.fg,
@@ -381,7 +381,7 @@ class _OptionRow extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       option.subtitle!,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],

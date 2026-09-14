@@ -1,6 +1,6 @@
 // On-device music — Songs / Albums / Artists.
 //
-// Tabs use the app's shared `SunohTabs`, and the three lists sit in a PageView
+// Tabs use the app's shared `MelodyTabs`, and the three lists sit in a PageView
 // so they swipe as well as tap. The tab strip and the pager drive each other:
 // a tap animates the page, a swipe settles the strip.
 //
@@ -125,7 +125,7 @@ class _LocalLibraryScreenState extends ConsumerState<LocalLibraryScreen> {
               onChanged: (_) => setState(() {}),
             ),
           if (lib.hasMusic && !_searching)
-            SunohTabs(
+            MelodyTabs(
               tabs: tabs,
               active: tabs[index],
               colors: c,
@@ -186,7 +186,7 @@ class _Header extends StatelessWidget {
     required this.onToggleSearch,
   });
   final LocalLibrary library;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool searching;
   final VoidCallback onToggleSearch;
 
@@ -212,7 +212,7 @@ class _Header extends StatelessWidget {
           Expanded(
             child: Text(
               'On this device',
-              style: SunohType.heading(
+              style: MelodyType.heading(
                 fontSize: 24,
                 color: c.fg,
                 letterSpacing: -0.4,

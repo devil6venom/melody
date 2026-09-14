@@ -13,6 +13,6 @@ final languagesProvider = FutureProvider.autoDispose<List<ApiLanguage>>((
   // Keep the response alive across nav cycles; refetch at most once a day.
   final link = ref.keepAlive();
   Future<void>.delayed(const Duration(hours: 24)).then((_) => link.close());
-  final api = ref.watch(sunohApiProvider);
+  final api = ref.watch(melodyApiProvider);
   return api.fetchLanguages();
 });

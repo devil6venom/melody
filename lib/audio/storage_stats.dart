@@ -51,7 +51,7 @@ Future<int> _hiveBoxSize() async {
   var total = 0;
   // Iterate the boxes we actually use; if a box hasn't been opened yet
   // this session, its on-disk size doesn't count toward "right now" —
-  // matches the intuitive "what is sunoh using right now" question.
+  // matches the intuitive "what is Melody using right now" question.
   for (final name in const ['playback', 'settings', 'library']) {
     try {
       if (!Hive.isBoxOpen(name)) continue;

@@ -48,7 +48,7 @@ class SectionScreen extends ConsumerWidget {
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
             child: Text(
               section.heading,
-              style: SunohType.heading(
+              style: MelodyType.heading(
                 fontSize: 30,
                 color: c.fg,
                 height: 1.05,
@@ -94,7 +94,7 @@ class SectionScreen extends ConsumerWidget {
   void _routeTap(BuildContext context, WidgetRef ref, FeedItem item) {
     final s = ref.read(appStateProvider);
     final src = item.source ?? section.source;
-    // YouTube ids are browse ids sunoh-api can't resolve.
+    // YouTube ids are browse ids Melody-api can't resolve.
     if (src == 'youtube' && item.type != 'song') {
       context.openYtItem(item);
       return;
@@ -121,7 +121,7 @@ class SectionScreen extends ConsumerWidget {
 class _CoverTile extends StatelessWidget {
   const _CoverTile({required this.item, required this.colors});
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -130,7 +130,7 @@ class _CoverTile extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: 1,
-          child: SunohArt(
+          child: MelodyArt(
             id: item.id,
             width: double.infinity,
             radius: 10,
@@ -142,7 +142,7 @@ class _CoverTile extends StatelessWidget {
           item.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.sans(
+          style: MelodyType.sans(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: c.fg,
@@ -155,7 +155,7 @@ class _CoverTile extends StatelessWidget {
             item.displaySubtitle!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: SunohType.sans(fontSize: 12, color: c.fgMute),
+            style: MelodyType.sans(fontSize: 12, color: c.fgMute),
           ),
         ],
       ],
@@ -166,7 +166,7 @@ class _CoverTile extends StatelessWidget {
 class _ArtistTile extends StatelessWidget {
   const _ArtistTile({required this.item, required this.colors});
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -174,7 +174,7 @@ class _ArtistTile extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: 1,
-          child: SunohArt(
+          child: MelodyArt(
             id: item.id,
             width: double.infinity,
             radius: 999,
@@ -187,7 +187,7 @@ class _ArtistTile extends StatelessWidget {
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.sans(
+          style: MelodyType.sans(
             fontSize: 13,
             fontWeight: FontWeight.w500,
             color: c.fg,

@@ -47,7 +47,7 @@ class LyricInterlude extends StatelessWidget {
     required this.active,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final ValueListenable<int> clock;
   final int startMs;
 
@@ -146,7 +146,7 @@ class LyricLineText extends StatelessWidget {
 
 class LyricCredit extends StatelessWidget {
   const LyricCredit({super.key, required this.colors, required this.source});
-  final SunohColors colors;
+  final MelodyColors colors;
   final LyricsSource source;
 
   @override
@@ -154,7 +154,7 @@ class LyricCredit extends StatelessWidget {
     padding: const EdgeInsets.only(top: 28),
     child: Text(
       'Lyrics from ${source.label}',
-      style: SunohType.sans(fontSize: 11.5, color: colors.fgMute),
+      style: MelodyType.sans(fontSize: 11.5, color: colors.fgMute),
     ),
   );
 }
@@ -166,7 +166,7 @@ class LyricsHint extends StatelessWidget {
     required this.label,
     this.detail,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String label;
   final String? detail;
 
@@ -179,13 +179,13 @@ class LyricsHint extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(label, style: SunohType.heading(fontSize: 22, color: c.fgDim)),
+            Text(label, style: MelodyType.heading(fontSize: 22, color: c.fgDim)),
             if (detail != null) ...[
               const SizedBox(height: 10),
               Text(
                 detail!,
                 textAlign: TextAlign.center,
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ],
           ],

@@ -106,8 +106,8 @@ Color _a(Color c, int alpha255) => c.withValues(alpha: alpha255 / 255.0);
 
 /// A square (or sized) generated cover. [radius] controls corner rounding;
 /// pass a very large value for circular (artist) art.
-class SunohArt extends StatelessWidget {
-  const SunohArt({
+class MelodyArt extends StatelessWidget {
+  const MelodyArt({
     super.key,
     required this.id,
     this.size,

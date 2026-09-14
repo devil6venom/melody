@@ -22,7 +22,7 @@ Future<bool> showYtSignOutSheet(
   BuildContext context,
   String accountName,
 ) async {
-  final result = await showSunohSheet<bool>(
+  final result = await showMelodySheet<bool>(
     context,
     builder: (_) => _SignOutSheet(accountName: accountName),
   );
@@ -36,7 +36,7 @@ class _SignOutSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = ref.watch(appStateProvider).colors;
-    return SunohSheet(
+    return MelodySheet(
       icon: SolarIconsOutline.logout,
       title: 'Sign out of YouTube Music?',
       subtitle: accountName.isEmpty ? null : accountName,
@@ -67,7 +67,7 @@ class _SignOutSheet extends ConsumerWidget {
             _Point(
               icon: SolarIconsOutline.heart,
               text:
-                  'Everything you saved in sunoh stays. Nothing on your '
+                  'Everything you saved in Melody stays. Nothing on your '
                   'YouTube account is changed.',
               colors: c,
             ),
@@ -93,7 +93,7 @@ class _Point extends StatelessWidget {
 
   final IconData icon;
   final String text;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class _Point extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: SunohType.sans(fontSize: 13, color: c.fgDim, height: 1.45),
+            style: MelodyType.sans(fontSize: 13, color: c.fgDim, height: 1.45),
           ),
         ),
       ],

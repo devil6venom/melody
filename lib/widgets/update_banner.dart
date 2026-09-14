@@ -47,7 +47,7 @@ class _UpdateRow extends ConsumerWidget {
     required this.slim,
   });
   final UpdateInfo info;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final bool slim;
 
@@ -92,7 +92,7 @@ class _UpdateRow extends ConsumerWidget {
                 children: [
                   Text(
                     'Update available · v${info.version}',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w600,
                       color: c.fg,
@@ -104,7 +104,7 @@ class _UpdateRow extends ConsumerWidget {
                       info.notes!,
                       maxLines: slim ? 1 : 3,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 12,
                         color: c.fgMute,
                         height: 1.3,
@@ -114,7 +114,7 @@ class _UpdateRow extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       'Tap to open the release on GitHub',
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                   ],
                 ],

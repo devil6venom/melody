@@ -1,18 +1,18 @@
 # Deep links
 
-sunoh. accepts two URI shapes — both arrive through the same dispatcher
+Melody. accepts two URI shapes — both arrive through the same dispatcher
 (`lib/router/deep_links.dart`):
 
 | Custom scheme                   | App Link                                |
 |---------------------------------|-----------------------------------------|
-| `sunoh://album/<id>?source=…`   | `https://sunoh.online/album/<id>?source=…`   |
-| `sunoh://playlist/<id>?source=…`| `https://sunoh.online/playlist/<id>?source=…`|
-| `sunoh://artist/<id>?source=…`  | `https://sunoh.online/artist/<id>?source=…`  |
-| `sunoh://song/<id>?source=…`    | `https://sunoh.online/song/<id>?source=…`    |
-| `sunoh://search?q=…`            | `https://sunoh.online/search?q=…`            |
-| `sunoh://share/<id>`            | `https://sunoh.online/share/<id>` (reserved) |
+| `sunoh://album/<id>?source=…`   | `https://melody.online/album/<id>?source=…`   |
+| `sunoh://playlist/<id>?source=…`| `https://melody.online/playlist/<id>?source=…`|
+| `sunoh://artist/<id>?source=…`  | `https://melody.online/artist/<id>?source=…`  |
+| `sunoh://song/<id>?source=…`    | `https://melody.online/song/<id>?source=…`    |
+| `sunoh://search?q=…`            | `https://melody.online/search?q=…`            |
+| `sunoh://share/<id>`            | `https://melody.online/share/<id>` (reserved) |
 
-`source` is the provider hint (`saavn`, `gaana`, `spotify`) — the sunoh-api
+`source` is the provider hint (`saavn`, `gaana`, `spotify`) — the Melody-api
 detail endpoints route by it. `song` resolves through `/music/song/:id` and
 auto-plays as a single-track queue.
 
@@ -22,12 +22,12 @@ The intent-filter in `AndroidManifest.xml` already has
 `android:autoVerify="true"`. For Android to skip the chooser sheet, the
 file at `assetlinks.json` in this folder must be reachable at:
 
-    https://sunoh.online/.well-known/assetlinks.json
+    https://melody.online/.well-known/assetlinks.json
 
 Served as `application/json` with a 200 status, no redirects.
 
 The fingerprint inside is the **release** keystore SHA-256 documented in
-`~/.claude/projects/-home-ashish-oss/memory/sunoh-android-signing.md`. For
+`~/.claude/projects/-home-ashish-oss/memory/melody-android-signing.md`. For
 debug builds you'd add the debug keystore's SHA-256 as another entry in
 the `sha256_cert_fingerprints` array — Play upload signing would add
 Google's signing key fingerprint, but this app isn't going to Play Store.
@@ -44,7 +44,7 @@ adb shell am start -a android.intent.action.VIEW \
 # App Link (won't open the app until assetlinks.json is live + verified,
 # but useful to verify the intent-filter matches)
 adb shell am start -a android.intent.action.VIEW \
-  -d "https://sunoh.online/song/xyz789"
+  -d "https://melody.online/song/xyz789"
 ```
 
 To inspect Android's verification state for the App Link:
@@ -53,4 +53,4 @@ To inspect Android's verification state for the App Link:
 adb shell pm get-app-links codes.afk.sunoh
 ```
 
-Look for `sunoh.online: verified`.
+Look for `melody.online: verified`.

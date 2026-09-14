@@ -38,7 +38,7 @@ const String kAutoSectionPrefix = 'sunoh:g:';
 class AutoFeeds {
   AutoFeeds({required this.api, required this.catalog, this.languages});
 
-  final SunohApi api;
+  final MelodyApi api;
   final AutoCatalog catalog;
 
   /// The user's music-language selection, so the car's Music tab matches the

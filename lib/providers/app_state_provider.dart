@@ -13,7 +13,7 @@ import 'api_providers.dart';
 
 final appStateProvider = ChangeNotifierProvider<AppState>((ref) {
   final repo = ref.watch(audioRepoProvider);
-  final api = ref.watch(sunohApiProvider);
+  final api = ref.watch(melodyApiProvider);
   return AppState(
     audioRepo: repo,
     api: api,

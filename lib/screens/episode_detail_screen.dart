@@ -37,7 +37,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
   }
 
   Future<void> _load() async {
-    final api = ref.read(sunohApiProvider);
+    final api = ref.read(melodyApiProvider);
     try {
       final ep = await api.fetchPodcastEpisode(widget.guid);
       if (!mounted) return;
@@ -45,7 +45,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
         _episode = ep;
         _loading = false;
       });
-    } on SunohApiException catch (e) {
+    } on MelodyApiException catch (e) {
       if (!mounted) return;
       setState(() {
         _error = e.message;
@@ -86,7 +86,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
     );
   }
 
-  Widget _body(SunohColors c, dynamic s) {
+  Widget _body(MelodyColors c, dynamic s) {
     if (_loading) {
       return Center(
         child: SizedBox(
@@ -103,7 +103,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
           child: Text(
             'Couldn’t load this episode.\n${_error ?? ''}',
             textAlign: TextAlign.center,
-            style: SunohType.sans(fontSize: 13, color: c.fgMute),
+            style: MelodyType.sans(fontSize: 13, color: c.fgMute),
           ),
         ),
       );
@@ -121,7 +121,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
           children: [
             squircleClip(
               radius: 10,
-              child: SunohArt(
+              child: MelodyArt(
                 id: ep.id,
                 imageUrl: ep.image.isNotEmpty ? ep.image.last.link : null,
                 size: 96,
@@ -138,14 +138,14 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
                       ep.subtitle!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                   const SizedBox(height: 4),
                   Text(
                     ep.title,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 18,
                       color: c.fg,
                       height: 1.2,
@@ -159,7 +159,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
                           (resumeSec != null && resumeSec > 30
                               ? ' · resume at ${_fmtPos(resumeSec)}'
                               : ''),
-                      style: SunohType.sans(fontSize: 12, color: c.fgDim),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgDim),
                     ),
                   ],
                 ],
@@ -204,7 +204,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
                     const SizedBox(width: 8),
                     Text(
                       resumeSec != null && resumeSec > 30 ? 'Resume' : 'Play',
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: accent.computeLuminance() > 0.55
@@ -234,7 +234,7 @@ class _EpisodeDetailScreenState extends ConsumerState<EpisodeDetailScreen> {
           const SizedBox(height: 8),
           Text(
             notes,
-            style: SunohType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
+            style: MelodyType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
           ),
         ],
       ],

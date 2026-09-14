@@ -41,7 +41,7 @@ final updaterControllerProvider = ChangeNotifierProvider<UpdaterController>(
 /// Returns when the user dismisses it. The download lives on the controller,
 /// so dismissing mid-download does not cancel it and re-opening re-attaches.
 Future<void> showUpdateSheet(BuildContext context, UpdateInfo info) {
-  return showSunohSheet<void>(
+  return showMelodySheet<void>(
     context,
     builder: (_) => _UpdateSheet(info: info),
   );
@@ -64,7 +64,7 @@ class _UpdateSheet extends ConsumerWidget {
         updater.stage == UpdateStage.idle ||
         updater.stage == UpdateStage.failed;
 
-    return SunohSheet(
+    return MelodySheet(
       icon: SolarIconsBold.downloadMinimalistic,
       title: 'Update available',
       subtitle: 'Version ${info.version}',
@@ -101,7 +101,7 @@ class _UpdateSheet extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Text(
                       notes,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 13,
                         color: c.fgDim,
                         height: 1.5,
@@ -125,7 +125,7 @@ class _Body extends ConsumerWidget {
   final UpdateInfo info;
   final UpdaterController updater;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -156,7 +156,7 @@ class _IdleActions extends ConsumerWidget {
   });
   final UpdateInfo info;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -199,7 +199,7 @@ class _ProgressBody extends StatelessWidget {
   });
   final UpdaterController updater;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +228,7 @@ class _ProgressBody extends StatelessWidget {
           updater.totalBytes > 0
               ? 'Downloading · $pct%  ·  ${mbReceived.toStringAsFixed(1)} / ${mbTotal.toStringAsFixed(1)} MB'
               : 'Preparing…',
-          style: SunohType.sans(fontSize: 12, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 12, color: c.fgMute),
         ),
       ],
     );
@@ -243,7 +243,7 @@ class _InstallingBody extends ConsumerWidget {
   });
   final UpdateInfo info;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -258,7 +258,7 @@ class _InstallingBody extends ConsumerWidget {
             Expanded(
               child: Text(
                 'Downloaded. Continue in the system installer.',
-                style: SunohType.sans(
+                style: MelodyType.sans( // Wait, sunoh string global replacement can handle comments and logs, let's keep it clean or make it MelodyType
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: c.fg,
@@ -299,7 +299,7 @@ class _FailedBody extends ConsumerWidget {
   final UpdateInfo info;
   final UpdaterController updater;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -318,7 +318,7 @@ class _FailedBody extends ConsumerWidget {
             Expanded(
               child: Text(
                 updater.errorMessage ?? 'Update failed.',
-                style: SunohType.sans(fontSize: 13, color: c.fg, height: 1.4),
+                style: MelodyType.sans(fontSize: 13, color: c.fg, height: 1.4),
               ),
             ),
           ],
@@ -370,7 +370,7 @@ class _DialogButton extends StatelessWidget {
   });
   final String label;
   final _DialogButtonKind kind;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -392,7 +392,7 @@ class _DialogButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: SunohType.sans(
+          style: MelodyType.sans(
             fontSize: 13.5,
             fontWeight: FontWeight.w600,
             color: isPrimary ? Colors.white : c.fg,

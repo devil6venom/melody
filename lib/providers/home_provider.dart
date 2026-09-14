@@ -17,6 +17,6 @@ final homeFeedProvider = FutureProvider.autoDispose
         const Duration(minutes: 30),
       ).then((_) => link.close());
 
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchHome(languages: languages);
     });

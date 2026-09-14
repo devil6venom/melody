@@ -118,7 +118,7 @@ class LyricsBody extends StatefulWidget {
     this.source,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final List<LyricLine> lines;
 
   /// False for lyrics we spread over the duration ourselves. Nothing is
@@ -267,7 +267,7 @@ class _LyricsBodyState extends State<LyricsBody> {
           }
 
           final style =
-              SunohType.heading(
+              MelodyType.heading(
                 fontSize: _lineSize(distance),
                 height: 1.3,
                 letterSpacing: -0.3,

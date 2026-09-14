@@ -1,4 +1,4 @@
-// The sunoh. catalog — fictional placeholder library content.
+// The Melody. catalog — fictional placeholder library content.
 // Ported verbatim from the design prototype's data.jsx.
 
 import 'models.dart';
@@ -269,7 +269,7 @@ const List<Playlist> kPlaylists = [
   Playlist(
     id: 'p01',
     title: 'After Hours',
-    curator: 'sunoh editorial',
+    curator: 'Melody editorial',
     tracks: 32,
     hours: '2h 14m',
     sub: 'Smoke-stained jazz, quiet basement piano, 3am rooms.',
@@ -285,7 +285,7 @@ const List<Playlist> kPlaylists = [
   Playlist(
     id: 'p03',
     title: 'On the Way Home',
-    curator: 'sunoh editorial',
+    curator: 'Melody editorial',
     tracks: 24,
     hours: '1h 32m',
     sub: 'Slow walk, headphones, last train.',
@@ -301,7 +301,7 @@ const List<Playlist> kPlaylists = [
   Playlist(
     id: 'p05',
     title: 'Threshold Hours',
-    curator: 'sunoh editorial',
+    curator: 'Melody editorial',
     tracks: 19,
     hours: '1h 18m',
     sub: 'Dawn, dusk, the seam between.',

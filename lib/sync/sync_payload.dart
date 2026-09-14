@@ -1,6 +1,6 @@
 // The document a device writes into the sync folder.
 //
-// One file per device, named `sunoh-<deviceId>.sync`, holding that device's
+// One file per device, named `melody-<deviceId>.sync`, holding that device's
 // whole syncable library plus its metadata. Devices never write each other's
 // files, which is what removes the need for locking: a merge reads every file
 // in the folder and writes only its own.

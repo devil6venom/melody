@@ -1,10 +1,10 @@
 // Hi-res lossless stream lookup.
 //
-// sunoh-api can tell us whether a Saavn/Gaana track also exists in a lossless
+// Melody-api can tell us whether a Saavn/Gaana track also exists in a lossless
 // catalog and, if so, hand back a signed CDN URL. Two things about that URL
 // shape the design here:
 //
-//   - It is served by the catalog's own CDN, not by sunoh-api, and it carries
+//   - It is served by the catalog's own CDN, not by Melody-api, and it carries
 //     its own signature so it needs no auth header. The phone streams it
 //     directly; no audio passes through our server. It also answers Range
 //     requests, so mpv seeks in it natively.

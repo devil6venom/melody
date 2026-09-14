@@ -42,7 +42,7 @@ class RecentlyPlayedScreen extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     'Recently Played',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 22,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -59,7 +59,7 @@ class RecentlyPlayedScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         'Clear',
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w500,
                           color: c.fgMute,
@@ -79,13 +79,13 @@ class RecentlyPlayedScreen extends ConsumerWidget {
                   children: [
                     Text(
                       'Nothing here yet.',
-                      style: SunohType.heading(fontSize: 18, color: c.fgDim),
+                      style: MelodyType.heading(fontSize: 18, color: c.fgDim),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Songs you play will show up here so you can jump back in.',
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
                     ),
                   ],
                 ),
@@ -138,7 +138,7 @@ class _HistoryRow extends ConsumerWidget {
     required this.onTap,
   });
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -159,7 +159,7 @@ class _HistoryRow extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
           children: [
-            SunohArt(id: song.id, imageUrl: song.artwork, size: 44, radius: 6),
+            MelodyArt(id: song.id, imageUrl: song.artwork, size: 44, radius: 6),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -169,7 +169,7 @@ class _HistoryRow extends ConsumerWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -181,7 +181,7 @@ class _HistoryRow extends ConsumerWidget {
                       artistsLabel,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],

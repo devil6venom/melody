@@ -54,7 +54,7 @@ class EqBandSlider extends StatelessWidget {
   final double min;
   final double max;
   final ValueChanged<double> onChanged;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final bool enabled;
 

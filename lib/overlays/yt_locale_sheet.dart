@@ -122,7 +122,7 @@ class _YtLocaleSheet extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
               child: Text(
                 title,
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 20,
                   color: c.fg,
                   letterSpacing: -0.2,
@@ -133,7 +133,7 @@ class _YtLocaleSheet extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
               child: Text(
                 blurb,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 12,
                   color: c.fgMute,
                   height: 1.35,
@@ -192,7 +192,7 @@ class _Option extends StatelessWidget {
   final String label;
   final String trailing;
   final bool selected;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -209,7 +209,7 @@ class _Option extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 14.5,
                   fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
                   color: selected ? accent : c.fg,
@@ -218,7 +218,7 @@ class _Option extends StatelessWidget {
             ),
             Text(
               trailing,
-              style: SunohType.mono(fontSize: 11, color: c.fgMute),
+              style: MelodyType.mono(fontSize: 11, color: c.fgMute),
             ),
             const SizedBox(width: 10),
             Opacity(

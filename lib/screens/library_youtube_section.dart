@@ -30,7 +30,7 @@ class LibraryYouTubeSection extends StatelessWidget {
   });
 
   final List<HomeSection> sections;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _Strip extends ConsumerWidget {
 
   final List<FeedItem> items;
   final String heading;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -112,7 +112,7 @@ class _Tile extends StatelessWidget {
   const _Tile({required this.item, required this.colors, required this.onTap});
 
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -132,7 +132,7 @@ class _Tile extends StatelessWidget {
           children: [
             if (round)
               ClipOval(
-                child: SunohArt(
+                child: MelodyArt(
                   id: item.id,
                   size: width,
                   radius: 0,
@@ -140,7 +140,7 @@ class _Tile extends StatelessWidget {
                 ),
               )
             else
-              SunohArt(
+              MelodyArt(
                 id: item.id,
                 size: width,
                 radius: 10,
@@ -151,7 +151,7 @@ class _Tile extends StatelessWidget {
               item.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w500,
                 color: c.fg,
@@ -162,7 +162,7 @@ class _Tile extends StatelessWidget {
                 item.subtitle!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(fontSize: 11, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 11, color: c.fgMute),
               ),
           ],
         ),

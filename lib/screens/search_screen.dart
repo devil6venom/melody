@@ -229,7 +229,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                 child: Text(
                   'Search',
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 28,
                     color: c.fg,
                     letterSpacing: -0.4,
@@ -292,7 +292,7 @@ class _SearchHeader extends SliverPersistentHeaderDelegate {
   });
 
   final double extent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final TextEditingController controller;
   final FocusNode focus;
   final bool showClear;
@@ -347,12 +347,12 @@ class _SearchHeader extends SliverPersistentHeaderDelegate {
                           onSubmitted: onSubmitted,
                           cursorColor: c.accent,
                           textInputAction: TextInputAction.search,
-                          style: SunohType.sans(fontSize: 15.5, color: c.fg),
+                          style: MelodyType.sans(fontSize: 15.5, color: c.fg),
                           decoration: InputDecoration(
                             isCollapsed: true,
                             border: InputBorder.none,
                             hintText: 'Artists, songs, podcasts, audiobooks…',
-                            hintStyle: SunohType.sans(
+                            hintStyle: MelodyType.sans(
                               fontSize: 15,
                               color: c.fgMute,
                             ),

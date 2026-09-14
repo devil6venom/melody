@@ -24,7 +24,7 @@ import 'audiobook_categories_screen.dart' show AudiobookCategoryCard;
 
 class AudiobooksTab extends ConsumerWidget {
   const AudiobooksTab({super.key, required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,7 +66,7 @@ class AudiobooksTab extends ConsumerWidget {
                       const SizedBox(width: 6),
                       Text(
                         'Browse',
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: c.fgDim,
@@ -90,7 +90,7 @@ class AudiobooksTab extends ConsumerWidget {
                 child: Center(
                   child: Text(
                     'No audiobooks yet',
-                    style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                   ),
                 ),
               );
@@ -125,7 +125,7 @@ class AudiobooksTab extends ConsumerWidget {
               child: Text(
                 'Couldn’t load audiobooks. Try again later.',
                 textAlign: TextAlign.center,
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ),
           ),
@@ -146,7 +146,7 @@ class _AudiobookSection extends StatelessWidget {
     this.featured = false,
   });
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// First section on the tab gets the featured treatment — bigger
   /// covers to anchor the page. Matches music/podcast home.
@@ -206,7 +206,7 @@ class _AudiobookSection extends StatelessWidget {
 class _AudiobookCategoryPreview extends StatelessWidget {
   const _AudiobookCategoryPreview({required this.items, required this.colors});
   final List<FeedItem> items;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +268,7 @@ class _AudiobookTile extends StatelessWidget {
     this.featured = false,
   });
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double width;
   final bool featured;
 
@@ -286,7 +286,7 @@ class _AudiobookTile extends StatelessWidget {
           children: [
             squircleClip(
               radius: featured ? 16 : 14,
-              child: SunohArt(
+              child: MelodyArt(
                 id: item.id,
                 imageUrl: item.artwork,
                 size: width,
@@ -298,7 +298,7 @@ class _AudiobookTile extends StatelessWidget {
               item.title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: featured ? 14 : 13,
                 fontWeight: FontWeight.w600,
                 color: c.fg,
@@ -311,7 +311,7 @@ class _AudiobookTile extends StatelessWidget {
                 item.subtitle!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: featured ? 12.5 : 11.5,
                   color: c.fgMute,
                   height: 1.2,

@@ -1,4 +1,4 @@
-// go_router configuration for sunoh.
+// go_router configuration for Melody.
 //
 // - A StatefulShellRoute.indexedStack drives the three bottom-nav tabs
 //   (Home / Search / Library), each with its own state-preserving navigator.
@@ -134,7 +134,7 @@ GoRouter buildRouter() {
 }
 
 // Detail routes shared by every tab branch (fresh instances per branch).
-// `?source=saavn|gaana|spotify` is read off the query string — the sunoh-api
+// `?source=saavn|gaana|spotify` is read off the query string — the Melody-api
 // album/playlist endpoints route by provider hint.
 List<RouteBase> _detailRoutes() => [
   GoRoute(
@@ -273,7 +273,7 @@ List<RouteBase> _detailRoutes() => [
   ),
   // ── YouTube Music ──────────────────────────────────────────────
   // Separate from the generic detail routes because YouTube browse ids
-  // (VLRDCLAK5uy_…, FEmusic_…) mean nothing to sunoh-api.
+  // (VLRDCLAK5uy_…, FEmusic_…) mean nothing to Melody-api.
   GoRoute(
     path: 'yt-playlist/:id',
     pageBuilder: (c, s) => _slideRight(
@@ -446,7 +446,7 @@ CustomTransitionPage<void> _playerTransition(
 }
 
 // ── Navigation helpers ───────────────────────────────────────────────────────
-extension SunohNav on BuildContext {
+extension MelodyNav on BuildContext {
   String get _branchPrefix {
     final loc = GoRouterState.of(this).matchedLocation;
     if (loc.startsWith('/search')) return '/search';

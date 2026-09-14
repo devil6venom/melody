@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Needed for streaming from the sunoh-api. -->
+    <!-- Needed for streaming from the Melody-api. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- audio_service: background playback + foreground media notification. -->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -103,7 +103,7 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="https" android:host="${sunohWebHost}"/>
+                <data android:scheme="https" android:host="${melodyWebHost}"/>
             </intent-filter>
         </activity>
         <!-- Android Auto. Points at res/xml/automotive_app_desc.xml, which
@@ -171,7 +171,7 @@
             <data android:mimeType="text/plain"/>
         </intent>
         <!-- url_launcher needs explicit query intents on Android 11+ for
-             non-https schemes. UPI for the Support sunoh. tip flow,
+             non-https schemes. UPI for the Support Melody. tip flow,
              https for the Buy Me A Coffee fallback. -->
         <intent>
             <action android:name="android.intent.action.VIEW"/>

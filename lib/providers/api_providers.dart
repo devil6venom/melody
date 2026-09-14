@@ -6,7 +6,7 @@ import '../api/client.dart';
 import '../api/sunoh_api.dart';
 
 /// Single shared Dio instance.
-final dioProvider = Provider((_) => buildSunohDio());
+final dioProvider = Provider((_) => buildMelodyDio());
 
-/// The typed sunoh-api service.
-final sunohApiProvider = Provider((ref) => SunohApi(ref.watch(dioProvider)));
+/// The typed Melody-api service.
+final melodyApiProvider = Provider((ref) => MelodyApi(ref.watch(dioProvider)));

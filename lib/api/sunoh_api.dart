@@ -1,11 +1,11 @@
-// Typed sunoh-api service. Wraps the Dio client + DTO mapping.
+// Typed Melody-api service. Wraps the Dio client + DTO mapping.
 
 import 'package:dio/dio.dart';
 
 import 'dto.dart';
 
-class SunohApi {
-  SunohApi(this._dio);
+class MelodyApi {
+  MelodyApi(this._dio);
   final Dio _dio;
 
   /// `GET /music/home` — unified merged home feed.
@@ -27,7 +27,7 @@ class SunohApi {
           : const <HomeSection>[],
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -46,7 +46,7 @@ class SunohApi {
           raw is Map ? AlbumDetail.fromJson(raw.cast<String, dynamic>()) : null,
     );
     if (!env.isSuccess || env.data == null) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data!;
   }
@@ -66,7 +66,7 @@ class SunohApi {
           : null,
     );
     if (!env.isSuccess || env.data == null) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data!;
   }
@@ -91,7 +91,7 @@ class SunohApi {
           : const <HomeSection>[],
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -117,7 +117,7 @@ class SunohApi {
           : const <HomeSection>[],
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -152,7 +152,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -241,7 +241,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -291,7 +291,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -364,7 +364,7 @@ class SunohApi {
           : const <HomeSection>[],
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -384,7 +384,7 @@ class SunohApi {
           : null,
     );
     if (!env.isSuccess || env.data == null) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data!;
   }
@@ -406,7 +406,7 @@ class SunohApi {
           .toList();
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -440,7 +440,7 @@ class SunohApi {
           : const <HomeSection>[],
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -459,7 +459,7 @@ class SunohApi {
           : null,
     );
     if (!env.isSuccess || env.data == null) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data!;
   }
@@ -488,7 +488,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -506,7 +506,7 @@ class SunohApi {
           raw is Map ? FeedItem.fromJson(raw.cast<String, dynamic>()) : null,
     );
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data;
   }
@@ -534,7 +534,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -558,7 +558,7 @@ class SunohApi {
       return const <PodcastCategory>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -592,7 +592,7 @@ class SunohApi {
       return const <FeedItem>[];
     });
     if (!env.isSuccess) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data ?? const [];
   }
@@ -620,7 +620,7 @@ class SunohApi {
           : null,
     );
     if (!env.isSuccess || env.data == null) {
-      throw SunohApiException(env.message, env.error);
+      throw MelodyApiException(env.message, env.error);
     }
     return env.data!;
   }
@@ -642,7 +642,7 @@ class SunohApi {
       }
       return const <HomeSection>[];
     });
-    if (!env.isSuccess) throw SunohApiException(env.message, env.error);
+    if (!env.isSuccess) throw MelodyApiException(env.message, env.error);
     return env.data ?? const [];
   }
 
@@ -662,7 +662,7 @@ class SunohApi {
         return const <AudiobookCategory>[];
       },
     );
-    if (!env.isSuccess) throw SunohApiException(env.message, env.error);
+    if (!env.isSuccess) throw MelodyApiException(env.message, env.error);
     return env.data ?? const [];
   }
 
@@ -690,7 +690,7 @@ class SunohApi {
       }
       return const <FeedItem>[];
     });
-    if (!env.isSuccess) throw SunohApiException(env.message, env.error);
+    if (!env.isSuccess) throw MelodyApiException(env.message, env.error);
     return env.data ?? const [];
   }
 
@@ -715,7 +715,7 @@ class SunohApi {
       }
       return const <FeedItem>[];
     });
-    if (!env.isSuccess) throw SunohApiException(env.message, env.error);
+    if (!env.isSuccess) throw MelodyApiException(env.message, env.error);
     return env.data ?? const [];
   }
 
@@ -744,10 +744,10 @@ class SunohApi {
   }
 }
 
-class SunohApiException implements Exception {
-  SunohApiException(this.message, [this.error]);
+class MelodyApiException implements Exception {
+  MelodyApiException(this.message, [this.error]);
   final String message;
   final Object? error;
   @override
-  String toString() => 'SunohApiException: $message';
+  String toString() => 'MelodyApiException: $message';
 }

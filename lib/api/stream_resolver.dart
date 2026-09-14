@@ -246,7 +246,7 @@ class StreamResolver {
     final provider = song.source;
 
     // YouTube Music — resolved DIRECTLY from the device, not via
-    // sunoh-api. The VPS IP is a datacenter address that YouTube
+    // Melody-api. The VPS IP is a datacenter address that YouTube
     // flags for bot detection (/player returns LOGIN_REQUIRED "Sign
     // in to confirm you're not a bot"). Hitting music.youtube.com
     // from the phone's residential IP avoids the check AND binds

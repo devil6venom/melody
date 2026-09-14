@@ -32,7 +32,7 @@ import 'podcast_categories_screen.dart' show PodcastCategoryCard;
 
 class PodcastsTab extends ConsumerWidget {
   const PodcastsTab({super.key, required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -74,7 +74,7 @@ class PodcastsTab extends ConsumerWidget {
                       const SizedBox(width: 6),
                       Text(
                         'Browse',
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: c.fgDim,
@@ -133,7 +133,7 @@ class PodcastsTab extends ConsumerWidget {
 class _SubscribedStrip extends StatelessWidget {
   const _SubscribedStrip({required this.shows, required this.colors});
   final List<FeedItem> shows;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -163,7 +163,7 @@ class _SubscribedStrip extends StatelessWidget {
                     children: [
                       squircleClip(
                         radius: 10,
-                        child: SunohArt(
+                        child: MelodyArt(
                           id: show.id,
                           imageUrl: show.artwork,
                           size: 108,
@@ -175,7 +175,7 @@ class _SubscribedStrip extends StatelessWidget {
                         show.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: c.fg,
@@ -291,7 +291,7 @@ class _PodcastSection extends StatelessWidget {
     this.featured = false,
   });
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool featured;
   @override
   Widget build(BuildContext context) {
@@ -336,7 +336,7 @@ class _PodcastTile extends StatelessWidget {
     required this.width,
   });
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double width;
   @override
   Widget build(BuildContext context) {
@@ -359,7 +359,7 @@ class _PodcastTile extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    SunohArt(
+                    MelodyArt(
                       id: item.id,
                       imageUrl: item.artwork,
                       size: width,
@@ -398,7 +398,7 @@ class _PodcastTile extends StatelessWidget {
                         item.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -417,7 +417,7 @@ class _PodcastTile extends StatelessWidget {
                 item.subtitle!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
               ),
             ],
           ],
@@ -429,7 +429,7 @@ class _PodcastTile extends StatelessWidget {
 
 class _Skeleton extends StatelessWidget {
   const _Skeleton({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -480,7 +480,7 @@ class _Skeleton extends StatelessWidget {
 
 class _ErrorState extends StatelessWidget {
   const _ErrorState({required this.colors, required this.message});
-  final SunohColors colors;
+  final MelodyColors colors;
   final String message;
   @override
   Widget build(BuildContext context) {
@@ -492,12 +492,12 @@ class _ErrorState extends StatelessWidget {
         children: [
           Text(
             'Couldn’t load podcasts.',
-            style: SunohType.heading(fontSize: 16, color: c.fgDim),
+            style: MelodyType.heading(fontSize: 16, color: c.fgDim),
           ),
           const SizedBox(height: 6),
           Text(
             message,
-            style: SunohType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
+            style: MelodyType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
           ),
         ],
       ),
@@ -507,7 +507,7 @@ class _ErrorState extends StatelessWidget {
 
 class _Empty extends StatelessWidget {
   const _Empty({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -515,7 +515,7 @@ class _Empty extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
       child: Text(
         'Nothing here yet.',
-        style: SunohType.sans(fontSize: 13, color: c.fgMute),
+        style: MelodyType.sans(fontSize: 13, color: c.fgMute),
       ),
     );
   }

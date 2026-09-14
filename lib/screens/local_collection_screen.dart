@@ -82,7 +82,7 @@ class LocalCollectionScreen extends ConsumerWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: id,
                     size: 104,
                     radius: album ? 10 : 999,
@@ -100,7 +100,7 @@ class LocalCollectionScreen extends ConsumerWidget {
                           title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.heading(
+                          style: MelodyType.heading(
                             fontSize: 20,
                             color: c.fg,
                             height: 1.1,
@@ -111,7 +111,7 @@ class LocalCollectionScreen extends ConsumerWidget {
                         Text(
                           '${songs.length} '
                           '${songs.length == 1 ? 'song' : 'songs'} · on this device',
-                          style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                         ),
                       ],
                     ),
@@ -183,7 +183,7 @@ class _Action extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool filled;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -206,7 +206,7 @@ class _Action extends StatelessWidget {
             const SizedBox(width: 7),
             Text(
               label,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: filled ? colors.onAccent : colors.fg,
@@ -221,7 +221,7 @@ class _Action extends StatelessWidget {
 
 class _Missing extends StatelessWidget {
   const _Missing({required this.colors, required this.scanning});
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool scanning;
 
   @override
@@ -243,14 +243,14 @@ class _Missing extends StatelessWidget {
               Text(
                 scanning ? 'Still scanning…' : 'Not on this device any more',
                 textAlign: TextAlign.center,
-                style: SunohType.sans(fontSize: 14, color: colors.fgDim),
+                style: MelodyType.sans(fontSize: 14, color: colors.fgDim),
               ),
               const SizedBox(height: 16),
               GestureDetector(
                 onTap: () => context.pop(),
                 child: Text(
                   'Go back',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: colors.accent,

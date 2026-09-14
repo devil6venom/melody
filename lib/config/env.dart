@@ -17,11 +17,11 @@
 // contributors who have no reason to hold a production endpoint, and it
 // degrades honestly: requests against an empty base fail, and the screens that
 // need them already render their own error state. The on-device library and
-// the YouTube tier keep working, because neither goes through sunoh-api.
+// the YouTube tier keep working, because neither goes through Melody-api.
 class Env {
   const Env._();
 
-  /// sunoh-api: the catalog behind Home, Search and every detail screen.
+  /// Melody-api: the catalog behind Home, Search and every detail screen.
   static const apiBase = String.fromEnvironment('SUNOH_API_BASE');
 
   /// The public website, used to build shareable links.

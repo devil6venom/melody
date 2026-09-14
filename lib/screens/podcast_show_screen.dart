@@ -97,7 +97,7 @@ class _PodcastShowScreenState extends ConsumerState<PodcastShowScreen> {
       _expandError = null;
     });
     try {
-      final api = ref.read(sunohApiProvider);
+      final api = ref.read(melodyApiProvider);
       final list = await api.fetchPodcastEpisodes(
         widget.id,
         max: _kFullFetchMax,
@@ -267,7 +267,7 @@ class _EpisodesFooter extends StatelessWidget {
   final bool expanding;
   final String? error;
   final VoidCallback onRetry;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -281,7 +281,7 @@ class _EpisodesFooter extends StatelessWidget {
             Expanded(
               child: Text(
                 'Couldn’t load more episodes.',
-                style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
               ),
             ),
             GestureDetector(
@@ -294,7 +294,7 @@ class _EpisodesFooter extends StatelessWidget {
                 ),
                 child: Text(
                   'Retry',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500,
                     color: c.fg,
@@ -335,7 +335,7 @@ class _NavBar extends StatelessWidget {
   });
   final String title;
   final String? subtitle;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -361,7 +361,7 @@ class _NavBar extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 16,
                     color: c.fg,
                     letterSpacing: -0.2,
@@ -374,7 +374,7 @@ class _NavBar extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                   ),
                 ],
               ],
@@ -402,7 +402,7 @@ class _Cover extends StatelessWidget {
   const _Cover({required this.show, required this.tint, required this.colors});
   final PodcastShowDetail show;
   final Color tint;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -434,7 +434,7 @@ class _Cover extends StatelessWidget {
             radius: 18,
             child: AspectRatio(
               aspectRatio: 1,
-              child: SunohArt(
+              child: MelodyArt(
                 id: show.id,
                 imageUrl: show.artwork,
                 size: 360,
@@ -459,7 +459,7 @@ class _AboutCard extends ConsumerStatefulWidget {
     required this.accent,
   });
   final PodcastShowDetail show;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   @override
   ConsumerState<_AboutCard> createState() => _AboutCardState();
@@ -493,7 +493,7 @@ class _AboutCardState extends ConsumerState<_AboutCard> {
           children: [
             Text(
               'About this podcast',
-              style: SunohType.heading(
+              style: MelodyType.heading(
                 fontSize: 15,
                 color: c.fg,
                 letterSpacing: -0.2,
@@ -572,7 +572,7 @@ class _AboutCardState extends ConsumerState<_AboutCard> {
                       children: [
                         Text(
                           'Play',
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 13.5,
                             fontWeight: FontWeight.w700,
                             color: isEmpty ? c.fgMute : fgOnAccent,
@@ -627,14 +627,14 @@ class _DescriptionText extends StatelessWidget {
   });
   final String text;
   final bool expanded;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
     if (expanded) {
       return Text(
         text,
-        style: SunohType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
+        style: MelodyType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
       );
     }
     // Inline "see more" — render the truncated body + a single bold
@@ -642,12 +642,12 @@ class _DescriptionText extends StatelessWidget {
     // button row underneath.
     return Text.rich(
       TextSpan(
-        style: SunohType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
+        style: MelodyType.sans(fontSize: 13, color: c.fgDim, height: 1.5),
         children: [
           TextSpan(text: _truncated(text)),
           TextSpan(
             text: '… see more',
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13,
               color: c.fg,
               fontWeight: FontWeight.w600,
@@ -721,7 +721,7 @@ class _EpisodesHeader extends StatelessWidget {
   /// optional so the header doesn't have to fake a "30+" string while
   /// expanding — simpler to just show the live number.
   final int? total;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -732,7 +732,7 @@ class _EpisodesHeader extends StatelessWidget {
         children: [
           Text(
             'Episodes',
-            style: SunohType.heading(
+            style: MelodyType.heading(
               fontSize: 19,
               color: c.fg,
               letterSpacing: -0.2,
@@ -741,7 +741,7 @@ class _EpisodesHeader extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             '$count',
-            style: SunohType.mono(
+            style: MelodyType.mono(
               fontSize: 12,
               color: c.fgMute,
               letterSpacing: 0.4,
@@ -767,7 +767,7 @@ class _EpisodeRow extends ConsumerWidget {
     required this.onTap,
   });
   final FeedItem episode;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -814,7 +814,7 @@ class _EpisodeRow extends ConsumerWidget {
               children: [
                 squircleClip(
                   radius: 10,
-                  child: SunohArt(
+                  child: MelodyArt(
                     id: episode.id,
                     imageUrl: episode.image.isNotEmpty
                         ? episode.image.last.link
@@ -832,7 +832,7 @@ class _EpisodeRow extends ConsumerWidget {
                         episode.title,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: isCurrent ? accent : c.fg,
@@ -846,7 +846,7 @@ class _EpisodeRow extends ConsumerWidget {
                           metaParts.join(' · '),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 11.5,
                             color: c.fgMute,
                             letterSpacing: 0.1,
@@ -996,14 +996,14 @@ class _ActionIcon extends StatelessWidget {
 
 class _NoEpisodes extends StatelessWidget {
   const _NoEpisodes({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
       child: Text(
         'No episodes yet.',
-        style: SunohType.sans(fontSize: 13, color: colors.fgMute),
+        style: MelodyType.sans(fontSize: 13, color: colors.fgMute),
       ),
     );
   }
@@ -1011,7 +1011,7 @@ class _NoEpisodes extends StatelessWidget {
 
 class _CenteredSpinner extends StatelessWidget {
   const _CenteredSpinner({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -1030,7 +1030,7 @@ class _ErrorState extends StatelessWidget {
     required this.message,
     required this.onRetry,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String message;
   final VoidCallback onRetry;
   @override
@@ -1044,13 +1044,13 @@ class _ErrorState extends StatelessWidget {
           children: [
             Text(
               'Couldn’t load this show.',
-              style: SunohType.heading(fontSize: 18, color: c.fgDim),
+              style: MelodyType.heading(fontSize: 18, color: c.fgDim),
             ),
             const SizedBox(height: 8),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: SunohType.sans(fontSize: 12, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12, color: c.fgMute),
             ),
             const SizedBox(height: 14),
             GestureDetector(
@@ -1067,7 +1067,7 @@ class _ErrorState extends StatelessWidget {
                 ),
                 child: Text(
                   'Retry',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),

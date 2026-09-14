@@ -87,7 +87,7 @@ class _LocalFoldersScreenState extends ConsumerState<LocalFoldersScreen> {
             child: Text(
               'Turn a folder off to leave it out. Everything inside it follows '
               'unless you turn one back on.',
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 13,
                 color: c.fgMute,
                 height: 1.45,
@@ -101,7 +101,7 @@ class _LocalFoldersScreenState extends ConsumerState<LocalFoldersScreen> {
                       lib.isScanning
                           ? 'Scanning…'
                           : 'No music folders found on this device.',
-                      style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                     ),
                   )
                 : ListView.builder(
@@ -133,7 +133,7 @@ class _LocalFoldersScreenState extends ConsumerState<LocalFoldersScreen> {
     );
   }
 
-  Widget _rowFor(_Row row, FolderRules staged, SunohColors c) {
+  Widget _rowFor(_Row row, FolderRules staged, MelodyColors c) {
     final path = row.folder.path;
     final on = staged.allows(path);
     return _FolderRow(
@@ -193,7 +193,7 @@ class _Header extends StatelessWidget {
     required this.onReset,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool scanning;
   final bool canReset;
   final VoidCallback onReset;
@@ -220,7 +220,7 @@ class _Header extends StatelessWidget {
           Expanded(
             child: Text(
               'Music folders',
-              style: SunohType.heading(
+              style: MelodyType.heading(
                 fontSize: 24,
                 color: c.fg,
                 letterSpacing: -0.4,
@@ -241,7 +241,7 @@ class _Header extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                 child: Text(
                   'Reset',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: c.accent,
@@ -266,7 +266,7 @@ class _DeviceRow extends StatelessWidget {
     required this.onTap,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool on;
   final int tracks;
   final VoidCallback onTap;
@@ -290,7 +290,7 @@ class _DeviceRow extends StatelessWidget {
                 children: [
                   Text(
                     'All music on this device',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: c.fg,
@@ -301,7 +301,7 @@ class _DeviceRow extends StatelessWidget {
                     on
                         ? 'New folders are included'
                         : 'New folders are left out',
-                    style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
               ),
@@ -309,7 +309,7 @@ class _DeviceRow extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               '$tracks',
-              style: SunohType.mono(fontSize: 12, color: c.fgDim),
+              style: MelodyType.mono(fontSize: 12, color: c.fgDim),
             ),
           ],
         ),
@@ -330,7 +330,7 @@ class _FolderRow extends StatelessWidget {
   final _Row row;
   final bool on;
   final bool explicit;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -362,7 +362,7 @@ class _FolderRow extends StatelessWidget {
                     folder.name.isEmpty ? folder.path : folder.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: on ? c.fg : c.fgMute,
@@ -376,7 +376,7 @@ class _FolderRow extends StatelessWidget {
                     folderLocation(folder.path),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
               ),
@@ -384,7 +384,7 @@ class _FolderRow extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               '${folder.trackCount}',
-              style: SunohType.mono(fontSize: 12, color: c.fgMute),
+              style: MelodyType.mono(fontSize: 12, color: c.fgMute),
             ),
           ],
         ),
@@ -405,7 +405,7 @@ class _Check extends StatelessWidget {
 
   final bool on;
   final bool explicit;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -454,7 +454,7 @@ class _ApplyBar extends StatelessWidget {
     required this.onApply,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool busy;
   final Future<void> Function() onApply;
 
@@ -474,7 +474,7 @@ class _ApplyBar extends StatelessWidget {
           Expanded(
             child: Text(
               'Your library will be rescanned.',
-              style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
             ),
           ),
           GestureDetector(
@@ -485,7 +485,7 @@ class _ApplyBar extends StatelessWidget {
               decoration: squircleDecoration(radius: 999, color: c.accent),
               child: Text(
                 busy ? 'Applying…' : 'Apply',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: c.onAccent,

@@ -45,8 +45,8 @@ class MiniPlayer extends ConsumerWidget {
             child: Row(
               children: [
                 Hero(
-                  tag: 'sunoh-player-art',
-                  child: SunohArt(
+                  tag: 'melody-player-art',
+                  child: MelodyArt(
                     id: track.id,
                     imageUrl: s.currentApiSong?.artwork,
                     size: 44,
@@ -64,7 +64,7 @@ class MiniPlayer extends ConsumerWidget {
                         track.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w500,
                           color: c.fg,
@@ -77,7 +77,7 @@ class MiniPlayer extends ConsumerWidget {
                               track.artist,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: SunohType.sans(
+                              style: MelodyType.sans(
                                 fontSize: 11.5,
                                 color: c.fgMute,
                               ),

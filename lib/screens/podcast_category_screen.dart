@@ -45,7 +45,7 @@ class PodcastCategoryScreen extends ConsumerWidget {
                   const SizedBox(width: 6),
                   Text(
                     name ?? slug,
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 22,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -72,7 +72,7 @@ class PodcastCategoryScreen extends ConsumerWidget {
                     child: Text(
                       'Couldn’t load this category.\n$e',
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                     ),
                   ),
                 ),
@@ -80,7 +80,7 @@ class PodcastCategoryScreen extends ConsumerWidget {
                     ? Center(
                         child: Text(
                           'No podcasts in this category.',
-                          style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                         ),
                       )
                     : GridView.builder(
@@ -108,7 +108,7 @@ class PodcastCategoryScreen extends ConsumerWidget {
 class _ShowTile extends StatelessWidget {
   const _ShowTile({required this.show, required this.colors});
   final FeedItem show;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -123,7 +123,7 @@ class _ShowTile extends StatelessWidget {
             radius: 10,
             child: AspectRatio(
               aspectRatio: 1,
-              child: SunohArt(
+              child: MelodyArt(
                 id: show.id,
                 imageUrl: show.artwork,
                 size: 200,
@@ -136,7 +136,7 @@ class _ShowTile extends StatelessWidget {
             show.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: c.fg,
@@ -149,7 +149,7 @@ class _ShowTile extends StatelessWidget {
               show.subtitle!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
             ),
           ],
         ],

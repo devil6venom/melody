@@ -1,7 +1,7 @@
 // Inbound deep-link dispatch. Handles both:
 //
 //   sunoh://<kind>/<id>[?source=…&q=…]              ← custom scheme
-//   https://sunoh.online/<kind>/<id>[?source=…&q=…] ← App Links
+//   https://melody.online/<kind>/<id>[?source=…&q=…] ← App Links
 //
 // Path schema (kept deliberately small + URL-safe):
 //
@@ -121,7 +121,7 @@ class DeepLinkRouter {
   }
 
   Future<void> _playSong(String id, {String? source}) async {
-    final api = _ref.read(sunohApiProvider);
+    final api = _ref.read(melodyApiProvider);
     final song = await api.fetchSong(id, provider: source);
     if (song == null) {
       _toast('Couldn’t find that song');
@@ -155,7 +155,7 @@ class DeepLinkRouter {
 
   /// Normalises both URI shapes into a path-segment list:
   ///   `sunoh://album/abc?source=x`  → ['album', 'abc']
-  ///   `https://sunoh.online/album/abc?source=x` → ['album', 'abc']
+  ///   `https://melody.online/album/abc?source=x` → ['album', 'abc']
   ///
   /// The custom scheme parses `album` as the URI host (not a path segment),
   /// so we prepend it manually when the scheme is `sunoh`.

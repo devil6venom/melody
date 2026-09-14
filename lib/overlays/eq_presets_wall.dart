@@ -37,7 +37,7 @@ const double _kRowHeight = 78;
 class EqPresetsWall extends ConsumerWidget {
   const EqPresetsWall({super.key, required this.colors, required this.accent});
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -72,7 +72,7 @@ class EqPresetsWall extends ConsumerWidget {
                   ),
                   child: Text(
                     'Reset',
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: c.fgDim,
@@ -94,7 +94,7 @@ class EqPresetsWall extends ConsumerWidget {
               current?.description ?? 'Custom curve — no preset selected.',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 11.5,
                 color: current == null ? c.fgMute : c.fgDim,
                 height: 1.35,
@@ -151,7 +151,7 @@ class _PresetCard extends StatelessWidget {
 
   final EqPreset preset;
   final bool selected;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -189,7 +189,7 @@ class _PresetCard extends StatelessWidget {
               preset.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 11.5,
                 fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
                 color: selected ? c.fg : c.fgDim,

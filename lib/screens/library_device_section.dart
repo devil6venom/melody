@@ -32,7 +32,7 @@ class LibraryDeviceSection extends StatelessWidget {
   });
 
   final LocalLibrary library;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class _AlbumStrip extends StatelessWidget {
   });
   final List<LocalCollection> albums;
   final int total;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +119,7 @@ class _AlbumStrip extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: album.id,
                     size: width,
                     radius: 10,
@@ -130,7 +130,7 @@ class _AlbumStrip extends StatelessWidget {
                     album.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: colors.fg,
@@ -142,7 +142,7 @@ class _AlbumStrip extends StatelessWidget {
                     album.subtitle ?? '${album.songs.length} songs',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 11.5,
                       color: colors.fgDim,
                       height: 1.2,
@@ -162,7 +162,7 @@ class _AlbumStrip extends StatelessWidget {
 class _TrackStrip extends StatelessWidget {
   const _TrackStrip({required this.songs, required this.colors});
   final List songs;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ class _TrackStrip extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: song.id,
                     size: width,
                     radius: 10,
@@ -195,7 +195,7 @@ class _TrackStrip extends StatelessWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: colors.fg,
@@ -221,7 +221,7 @@ class _MoreTile extends StatelessWidget {
   });
   final int remaining;
   final double width;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -253,7 +253,7 @@ class _MoreTile extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     '+$remaining',
-                    style: SunohType.mono(fontSize: 12, color: colors.fgDim),
+                    style: MelodyType.mono(fontSize: 12, color: colors.fgDim),
                   ),
                 ],
               ),
@@ -261,7 +261,7 @@ class _MoreTile extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'See all',
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
                 color: colors.fgDim,
@@ -278,7 +278,7 @@ class _MoreTile extends StatelessWidget {
 class _Prompt extends StatelessWidget {
   const _Prompt({required this.library, required this.colors});
   final LocalLibrary library;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -308,9 +308,9 @@ class _Prompt extends StatelessWidget {
                   library.isScanning
                       ? 'Looking for music on this phone…'
                       : needsAccess
-                      ? 'Let sunoh play music stored on this phone'
+                      ? 'Let Melody play music stored on this phone'
                       : 'No music found on this phone',
-                  style: SunohType.sans(fontSize: 13, color: colors.fgDim),
+                  style: MelodyType.sans(fontSize: 13, color: colors.fgDim),
                 ),
               ),
               if (!library.isScanning)

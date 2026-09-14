@@ -1,12 +1,12 @@
 // Share helpers — all entry points (track menu, hero menu, detail header,
 // player, lyrics) funnel here so the link format stays consistent.
 //
-// We share the `https://sunoh.online/<kind>/<id>?source=…` form rather than
+// We share the `https://melody.online/<kind>/<id>?source=…` form rather than
 // the `sunoh://` custom scheme because:
 //   - it works inside web previews / browsers / messengers that won't preview
 //     custom schemes;
 //   - on a phone with the app installed + assetlinks verified, Android opens
-//     it directly in sunoh. via App Links — no chooser sheet;
+//     it directly in Melody. via App Links — no chooser sheet;
 //   - on any other surface it gracefully degrades to a normal web URL.
 //
 // Path schema mirrors `lib/router/deep_links.dart`:
@@ -22,10 +22,10 @@ const String _kBaseUrl = Env.webBase;
 /// Build the canonical share URL for a piece of content.
 ///
 /// `?source=…` is omitted for saavn (the backend default) so the typical
-/// share URL stays clean — `https://sunoh.online/album/abc` rather than
+/// share URL stays clean — `https://melody.online/album/abc` rather than
 /// `…/album/abc?source=saavn`. Non-default providers (gaana/spotify) still
 /// need the hint, otherwise the API tries saavn with the wrong id.
-String buildSunohShareUrl({
+String buildMelodyShareUrl({
   required String kind,
   required String id,
   String? source,
@@ -40,20 +40,20 @@ String buildSunohShareUrl({
 /// Hand off a link to the OS share sheet. `title` and `subtitle` shape the
 /// body of the share payload; the recipient app decides how to render it
 /// (most show subject + URL).
-Future<void> shareSunohLink({
+Future<void> shareMelodyLink({
   required String kind,
   required String id,
   required String title,
   String? subtitle,
   String? source,
 }) async {
-  final url = buildSunohShareUrl(kind: kind, id: id, source: source);
+  final url = buildMelodyShareUrl(kind: kind, id: id, source: source);
   final label = subtitle == null || subtitle.isEmpty
       ? title
       : '$title — $subtitle';
-  // `Listen on sunoh.` framing keeps the share consistent across kinds and
+  // `Listen on Melody.` framing keeps the share consistent across kinds and
   // gives the recipient a hint about what they're opening before they tap.
-  final text = 'Listen on sunoh.: $label\n$url';
+  final text = 'Listen on Melody.: $label\n$url';
   try {
     await SharePlus.instance.share(ShareParams(text: text, subject: label));
   } catch (e, st) {

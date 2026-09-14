@@ -23,7 +23,7 @@ class RecentSearches extends StatelessWidget {
     required this.onClear,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final List<String> recents;
   final ValueChanged<String> onTap;
   final VoidCallback onClear;
@@ -45,7 +45,7 @@ class RecentSearches extends StatelessWidget {
                 onTap: onClear,
                 child: Text(
                   'Clear',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                     color: c.fgMute,
@@ -85,7 +85,7 @@ class RecentSearches extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           recents[i],
-                          style: SunohType.sans(fontSize: 13, color: c.fg),
+                          style: MelodyType.sans(fontSize: 13, color: c.fg),
                         ),
                       ],
                     ),
@@ -186,7 +186,7 @@ class SearchBrowse extends ConsumerWidget {
     required this.onPickRecent,
   });
 
-  final SunohColors colors;
+  final MelodyColors colors;
   final void Function(String query) onPickRecent;
 
   @override

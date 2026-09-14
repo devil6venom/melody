@@ -1,6 +1,6 @@
 # Architecture
 
-How sunoh. is put together, and why. This describes the app as it is, not as
+How Melody. is put together, and why. This describes the app as it is, not as
 it is planned to be. When you change the shape of something described here,
 update this file in the same commit.
 
@@ -26,7 +26,7 @@ Companion documents:
                         └───────┬───────────────────────┬──────┘
                                 │                       │
           ┌─────────────────────┴─────┐     ┌───────────┴───────────────────┐
-   Domain │ audio/audio_repo.dart     │     │ api/ sunoh_api  ytmusic_api   │
+   Domain │ audio/audio_repo.dart     │     │ api/ Melody_api  ytmusic_api   │
           │ audio/audio_handler.dart  │     │     lyrics/     sponsorblock  │
           └─────────────┬─────────────┘     └───────────┬───────────────────┘
                         │                               │
@@ -68,7 +68,7 @@ which is a shared enum and should eventually move to `data/`.
 optional can block it.**
 
 1. **Blocking, cheap.** Hive init, `MpvAudioKit.ensureInitialized()`,
-   `StreamResolver`, `DownloadManager.init()`, `SunohAudioHandler`, `AudioRepo`.
+   `StreamResolver`, `DownloadManager.init()`, `MelodyAudioHandler`, `AudioRepo`.
    After this line the app can play audio.
 2. **Fire-and-forget.** The Cast SDK and `audio_service` (behind a hard 5 s
    timeout) are launched unawaited. Each is wrapped so a failure degrades one
@@ -79,7 +79,7 @@ optional can block it.**
    PO-token WebView prewarm run from `addPostFrameCallback` so the router has
    built its initial route first.
 
-`SunohAudioServiceBridge` may attach *after* a queue was already restored, so
+`MelodyAudioServiceBridge` may attach *after* a queue was already restored, so
 `attachBridge` re-announces the current queue rather than assuming it is first.
 
 **When you add a startup dependency**, it goes in stage 2 or 3 unless playback
@@ -136,7 +136,7 @@ The expanded player, queue, and lyrics are modal routes on the **root**
 navigator, layered above the shell.
 
 Navigation is typed. Screens call `context.openRef(...)`, `context.openYtArtist(...)`,
-`context.openSection(...)` from the `SunohNav` extension in `router.dart`,
+`context.openSection(...)` from the `MelodyNav` extension in `router.dart`,
 which resolves the active branch prefix. **Do not call `context.push` with a
 hand-built path string from a screen** — add a method to the extension.
 
@@ -161,12 +161,12 @@ therefore never persisted and never resolved early.**
 
 ```
 AudioRepo.playQueue(songs, i)
-   └→ SunohAudioHandler.setQueue        → mpv openAll([sunoh-song://…])
+   └→ MelodyAudioHandler.setQueue        → mpv openAll([sunoh-song://…])
         └→ on_load hook fires per entry → StreamResolver.resolve(song)
              └→ real URL + optional headers → mpv opens the stream
 ```
 
-`SunohAudioHandler` owns mpv and the audio session; `AudioRepo` is the thin
+`MelodyAudioHandler` owns mpv and the audio session; `AudioRepo` is the thin
 layer the UI drives, and is responsible for OS metadata (`MediaItem`),
 SponsorBlock dispatch, and persistence. The queue mirror is rebuilt reactively
 from mpv's playlist stream, never written directly — mpv is the source of

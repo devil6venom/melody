@@ -83,7 +83,7 @@ class _Fetching extends StatefulWidget {
   });
   final SpotifyImportState state;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   State<_Fetching> createState() => _FetchingState();
 }
@@ -133,7 +133,7 @@ class _FetchingState extends State<_Fetching> {
                   'Importing from Spotify',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     color: c.fg,
@@ -146,7 +146,7 @@ class _FetchingState extends State<_Fetching> {
                       : '${_formatElapsed(elapsed)} elapsed — usually 1–2 min',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                  style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                 ),
               ],
             ),
@@ -172,7 +172,7 @@ class _Completed extends ConsumerWidget {
   });
   final SpotifyImportState state;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -214,7 +214,7 @@ class _Completed extends ConsumerWidget {
                     'Imported "$name"',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -225,7 +225,7 @@ class _Completed extends ConsumerWidget {
                     '$tail tracks matched — tap to open',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
               ),
@@ -256,7 +256,7 @@ class _Failed extends ConsumerWidget {
   });
   final SpotifyImportState state;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -291,7 +291,7 @@ class _Failed extends ConsumerWidget {
                   'Spotify import failed',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     color: c.fg,
@@ -302,7 +302,7 @@ class _Failed extends ConsumerWidget {
                   msg,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                  style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                 ),
               ],
             ),
@@ -323,7 +323,7 @@ class _Failed extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 child: Text(
                   'Retry',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500,
                     color: accent,

@@ -74,7 +74,7 @@ class _SyncScreenState extends ConsumerState<SyncScreen> {
                 const SizedBox(width: 4),
                 Text(
                   'Sync',
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 24,
                     color: c.fg,
                     letterSpacing: -0.4,
@@ -87,10 +87,10 @@ class _SyncScreenState extends ConsumerState<SyncScreen> {
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
             child: Text(
               'Keep liked songs, playlists and settings the same on two '
-              'phones. sunoh writes an encrypted file into a folder you '
+              'phones. Melody writes an encrypted file into a folder you '
               'choose. Whatever syncs that folder moves it. There is no '
               'account and nothing is sent to us.',
-              style: SunohType.sans(fontSize: 13, color: c.fgMute, height: 1.5),
+              style: MelodyType.sans(fontSize: 13, color: c.fgMute, height: 1.5),
             ),
           ),
           if (sync.isConfigured)
@@ -130,7 +130,7 @@ class _Setup extends StatelessWidget {
     required this.onSetUp,
     required this.onJoin,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool busy;
   final TextEditingController controller;
   final VoidCallback onSetUp;
@@ -171,10 +171,10 @@ class _Setup extends StatelessWidget {
               controller: controller,
               autocorrect: false,
               enableSuggestions: false,
-              style: SunohType.mono(fontSize: 13, color: c.fg),
+              style: MelodyType.mono(fontSize: 13, color: c.fg),
               decoration: InputDecoration(
                 hintText: 'Recovery code',
-                hintStyle: SunohType.mono(fontSize: 13, color: c.fgMute),
+                hintStyle: MelodyType.mono(fontSize: 13, color: c.fgMute),
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(vertical: 8),
@@ -195,7 +195,7 @@ class _Configured extends StatelessWidget {
     required this.run,
   });
   final SyncService sync;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool busy;
   final Future<void> Function(Future<void> Function()) run;
 
@@ -240,14 +240,14 @@ class _Configured extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 'Stop syncing on this phone',
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ),
           ),
           Text(
             'Your library stays on this phone. Only this device\'s file is '
             'removed from the folder.',
-            style: SunohType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
+            style: MelodyType.sans(fontSize: 12, color: c.fgMute, height: 1.4),
           ),
         ],
       ),
@@ -267,7 +267,7 @@ class _Configured extends StatelessWidget {
 class _RecoveryCode extends StatelessWidget {
   const _RecoveryCode({required this.code, required this.colors});
   final String code;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -288,14 +288,14 @@ class _RecoveryCode extends StatelessWidget {
             const SizedBox(height: 10),
             SelectableText(
               code,
-              style: SunohType.mono(fontSize: 13, color: c.fg, height: 1.5),
+              style: MelodyType.mono(fontSize: 13, color: c.fg, height: 1.5),
             ),
             const SizedBox(height: 12),
             Text(
               'Enter this on your other phone. Keep a copy somewhere safe: it '
               'is the only thing that can read the folder, it is never sent '
               'anywhere, and it cannot be recovered if lost.',
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 12,
                 color: c.fgMute,
                 height: 1.45,
@@ -307,7 +307,7 @@ class _RecoveryCode extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: Text(
                 'Copy code',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: c.accent,
@@ -331,7 +331,7 @@ class _Card extends StatelessWidget {
     this.child,
     this.filled = false,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String title;
   final String body;
   final String action;
@@ -354,7 +354,7 @@ class _Card extends StatelessWidget {
         children: [
           Text(
             title,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: c.fg,
@@ -363,7 +363,7 @@ class _Card extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             body,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 12.5,
               color: c.fgMute,
               height: 1.45,
@@ -383,7 +383,7 @@ class _Card extends StatelessWidget {
               ),
               child: Text(
                 action,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: filled ? c.onAccent : c.fg,

@@ -1,5 +1,5 @@
 Sync your library between two phones - liked songs, playlists, podcasts and
-settings - with no account. sunoh writes an encrypted file into a folder you
+settings - with no account. Melody writes an encrypted file into a folder you
 pick, and whatever already syncs that folder moves it.
 
 Choose which folders on your phone count as music, so ringtones and voice

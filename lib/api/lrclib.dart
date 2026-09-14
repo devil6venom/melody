@@ -37,7 +37,7 @@ class LrcLibClient {
                 // LRCLIB asks integrators to identify themselves so they can
                 // troubleshoot traffic spikes. Polite and they recommend it
                 // in the docs.
-                'User-Agent': 'sunoh/1.0 (${Env.webBase})',
+                'User-Agent': 'Melody/1.1 (${Env.webBase})',
                 'Accept': 'application/json',
               },
               responseType: ResponseType.json,

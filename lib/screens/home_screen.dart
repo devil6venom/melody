@@ -1,4 +1,4 @@
-// Home screen — sunoh wordmark + top tabs (Music / Podcasts / Audiobooks).
+// Home screen — Melody wordmark + top tabs (Music / Podcasts / Audiobooks).
 // The Music tab consumes the live /music/home feed via Riverpod.
 
 import 'package:flutter/material.dart';
@@ -100,7 +100,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 Text(
                   'Melody.',
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 22,
                     color: c.fg,
                     letterSpacing: -0.5,
@@ -119,7 +119,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
         SliverToBoxAdapter(
-          child: SunohTabs(
+          child: MelodyTabs(
             tabs: const ['Music', 'Podcasts', 'Audiobooks'],
             active: s.topTab,
             onChange: s.setTopTab,
@@ -150,7 +150,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 /// failed fetch just leaves the feed as it was.
 class _MoodsRow extends ConsumerWidget {
   const _MoodsRow({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -186,7 +186,7 @@ class _MoodsRow extends ConsumerWidget {
             children: [
               Text(
                 'Moods & genres',
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 19,
                   color: c.fg,
                   letterSpacing: -0.2,
@@ -199,7 +199,7 @@ class _MoodsRow extends ConsumerWidget {
                   children: [
                     Text(
                       'See all',
-                      style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
                     ),
                     const SizedBox(width: 4),
                     Icon(
@@ -272,7 +272,7 @@ class _SongShelf extends ConsumerWidget {
     required this.sectionLabel,
   });
   final List<FeedItem> songs;
-  final SunohColors colors;
+  final MelodyColors colors;
   final String sectionLabel;
 
   static const double _rowHeight = 58;
@@ -338,7 +338,7 @@ class _SongShelfRow extends StatelessWidget {
     required this.onTap,
   });
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool playing;
   final VoidCallback onTap;
 
@@ -355,7 +355,7 @@ class _SongShelfRow extends StatelessWidget {
           children: [
             squircleClip(
               radius: 8,
-              child: SunohArt(
+              child: MelodyArt(
                 id: song.id,
                 imageUrl: song.artwork,
                 size: 48,
@@ -373,7 +373,7 @@ class _SongShelfRow extends StatelessWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w500,
                       // The playing track picks up the accent, matching
@@ -387,7 +387,7 @@ class _SongShelfRow extends StatelessWidget {
                       sub,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],
@@ -399,7 +399,7 @@ class _SongShelfRow extends StatelessWidget {
             else if ((song.duration ?? '').isNotEmpty)
               Text(
                 _fmtDuration(song.duration!),
-                style: SunohType.mono(fontSize: 11, color: c.fgMute),
+                style: MelodyType.mono(fontSize: 11, color: c.fgMute),
               ),
           ],
         ),
@@ -417,7 +417,7 @@ class _SongShelfRow extends StatelessWidget {
 }
 
 /// How many primary-feed sections to show between each interleaved
-/// YouTube Music row. 3 keeps sunoh's own feed dominant while surfacing the
+/// YouTube Music row. 3 keeps Melody's own feed dominant while surfacing the
 /// YouTube rows well before the user hits the bottom.
 const int _kYtInterleaveEvery = 3;
 
@@ -425,7 +425,7 @@ const int _kYtInterleaveEvery = 3;
 /// primary sections. Leftover secondary sections are appended.
 ///
 /// Slot 0 is never taken: the first section gets the featured treatment and
-/// should stay sunoh's own.
+/// should stay Melody's own.
 List<HomeSection> _interleave({
   required List<HomeSection> primary,
   required List<HomeSection> secondary,
@@ -452,7 +452,7 @@ List<HomeSection> _interleave({
 // (preserves the design system — Gilroy, squircles, 40px inter-section gaps).
 class MusicTab extends ConsumerWidget {
   const MusicTab({super.key, required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -494,7 +494,7 @@ class MusicTab extends ConsumerWidget {
 
         // Interleave rather than append. Bolting them on the end buries them
         // below a long feed, and makes the tail read as a separate app. The
-        // first slot is deliberately left to sunoh's own featured section.
+        // first slot is deliberately left to Melody's own featured section.
         final merged = _interleave(
           primary: nonEmpty,
           secondary: ytNonEmpty,
@@ -547,7 +547,7 @@ class _ApiSection extends ConsumerWidget {
     this.featured = false,
   });
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool featured;
 
   @override
@@ -654,7 +654,7 @@ class _ApiSection extends ConsumerWidget {
     final src = item.source ?? sectionSource;
 
     // YouTube items are routed separately: their ids are YouTube browse ids
-    // (VLRDCLAK5uy_…), which sunoh-api's album/playlist endpoints can't
+    // (VLRDCLAK5uy_…), which Melody-api's album/playlist endpoints can't
     // resolve. Songs still fall through to the shared `song` case below —
     // those play via the resolver's native YouTube tier.
     if (src == 'youtube' && item.type != 'song') {
@@ -717,7 +717,7 @@ class _CoverCard extends StatelessWidget {
   });
   final FeedItem item;
   final double width;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool featured;
   @override
   Widget build(BuildContext context) {
@@ -725,7 +725,7 @@ class _CoverCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SunohArt(
+        MelodyArt(
           id: item.id,
           size: width,
           radius: featured ? 12 : 10,
@@ -740,13 +740,13 @@ class _CoverCard extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: featured
-              ? SunohType.heading(
+              ? MelodyType.heading(
                   fontSize: 18,
                   color: c.fg,
                   height: 1.15,
                   letterSpacing: -0.2,
                 )
-              : SunohType.sans(
+              : MelodyType.sans(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w500,
                   color: c.fg,
@@ -759,7 +759,7 @@ class _CoverCard extends StatelessWidget {
             item.displaySubtitle!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: featured ? 12.5 : 11.5,
               color: c.fgDim,
               height: featured ? 1.35 : 1.2,
@@ -779,13 +779,13 @@ class _ArtistCard extends StatelessWidget {
   });
   final FeedItem item;
   final double size;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
     return Column(
       children: [
-        SunohArt(
+        MelodyArt(
           id: item.id,
           size: size - 10,
           radius: 999,
@@ -797,7 +797,7 @@ class _ArtistCard extends StatelessWidget {
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.sans(
+          style: MelodyType.sans(
             fontSize: 12.5,
             fontWeight: FontWeight.w500,
             color: c.fg,
@@ -900,7 +900,7 @@ class _ErrorFeed extends StatelessWidget {
   });
   final String message;
   final String? detail;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onRetry;
   @override
   Widget build(BuildContext context) {
@@ -913,14 +913,14 @@ class _ErrorFeed extends StatelessWidget {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: SunohType.heading(fontSize: 18, color: c.fg),
+            style: MelodyType.heading(fontSize: 18, color: c.fg),
           ),
           if (detail != null) ...[
             const SizedBox(height: 8),
             Text(
               detail!,
               textAlign: TextAlign.center,
-              style: SunohType.sans(fontSize: 12, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12, color: c.fgMute),
             ),
           ],
           const SizedBox(height: 20),
@@ -935,7 +935,7 @@ class _ErrorFeed extends StatelessWidget {
               ),
               child: Text(
                 'Try again',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: c.fg,
@@ -958,7 +958,7 @@ class _ChannelGrid extends StatelessWidget {
     required this.sectionSource,
   });
   final List<FeedItem> items;
-  final SunohColors colors;
+  final MelodyColors colors;
   final String? sectionSource;
 
   // Layout sizing — kept as constants so the SizedBox height matches the
@@ -974,7 +974,7 @@ class _ChannelGrid extends StatelessWidget {
     const totalHeight = _rows * _tileH + (_rows - 1) * _gap;
     return SizedBox(
       height: totalHeight,
-      // No `physics:` override — `SunohScrollBehavior` (app-wide) owns scroll
+      // No `physics:` override — `MelodyScrollBehavior` (app-wide) owns scroll
       // feel. Earlier inline BouncingScrollPhysics ignored the global friction
       // tuning and made this row feel different from the rest of the app.
       child: GridView.builder(
@@ -1011,7 +1011,7 @@ class _ChannelTile extends ConsumerWidget {
     required this.sectionSource,
   });
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   final String? sectionSource;
 
   @override
@@ -1054,7 +1054,7 @@ class _ChannelTile extends ConsumerWidget {
                       item.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 13.5,
                         color: Colors.white,
                         letterSpacing: -0.1,
@@ -1077,7 +1077,7 @@ class _ChannelTile extends ConsumerWidget {
                           ? ColoredBox(
                               color: Colors.white.withValues(alpha: 0.18),
                             )
-                          : SunohArt(
+                          : MelodyArt(
                               id: item.id,
                               imageUrl: url,
                               size: 56,

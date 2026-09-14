@@ -21,7 +21,7 @@ final podcastHomeProvider = FutureProvider.autoDispose
     .family<List<HomeSection>, String?>((ref, country) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchPodcastHome(country: country);
     });
 
@@ -32,7 +32,7 @@ final podcastSearchProvider = FutureProvider.autoDispose
         const Duration(minutes: 5),
       ).then((_) => link.close());
       if (query.trim().isEmpty) return const [];
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchPodcastSearch(query);
     });
 
@@ -42,7 +42,7 @@ final podcastShowProvider = FutureProvider.autoDispose
       Future<void>.delayed(
         const Duration(minutes: 30),
       ).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchPodcastShow(id);
     });
 
@@ -50,7 +50,7 @@ final podcastCategoriesProvider =
     FutureProvider.autoDispose<List<PodcastCategory>>((ref) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 24)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchPodcastCategories();
     });
 
@@ -58,6 +58,6 @@ final podcastsByCategoryProvider = FutureProvider.autoDispose
     .family<List<FeedItem>, String>((ref, slug) async {
       final link = ref.keepAlive();
       Future<void>.delayed(const Duration(hours: 1)).then((_) => link.close());
-      final api = ref.watch(sunohApiProvider);
+      final api = ref.watch(melodyApiProvider);
       return api.fetchPodcastsByCategory(slug);
     });

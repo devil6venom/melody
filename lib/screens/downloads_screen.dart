@@ -46,7 +46,7 @@ class DownloadsScreen extends ConsumerWidget {
                 const SizedBox(width: 4),
                 Text(
                   'Downloads',
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 24,
                     color: c.fg,
                     letterSpacing: -0.4,
@@ -55,7 +55,7 @@ class DownloadsScreen extends ConsumerWidget {
                 const Spacer(),
                 Text(
                   '${entries.length}',
-                  style: SunohType.mono(fontSize: 13, color: c.fgMute),
+                  style: MelodyType.mono(fontSize: 13, color: c.fgMute),
                 ),
               ],
             ),
@@ -78,7 +78,7 @@ class _DownloadRow extends ConsumerWidget {
     required this.accent,
   });
   final DownloadEntry entry;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -110,7 +110,7 @@ class _DownloadRow extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
           children: [
-            SunohArt(id: song.id, imageUrl: song.artwork, size: 46, radius: 6),
+            MelodyArt(id: song.id, imageUrl: song.artwork, size: 46, radius: 6),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -120,7 +120,7 @@ class _DownloadRow extends ConsumerWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14.5,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -132,7 +132,7 @@ class _DownloadRow extends ConsumerWidget {
                       artistsLabel,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                   ],
                   const SizedBox(height: 4),
@@ -162,7 +162,7 @@ class _StateLine extends ConsumerWidget {
     required this.accent,
   });
   final DownloadEntry entry;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -176,14 +176,14 @@ class _StateLine extends ConsumerWidget {
             const SizedBox(width: 5),
             Text(
               'Saved on device',
-              style: SunohType.sans(fontSize: 11, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 11, color: c.fgMute),
             ),
           ],
         );
       case DownloadState.queued:
         return Text(
           'Queued',
-          style: SunohType.sans(fontSize: 11, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 11, color: c.fgMute),
         );
       case DownloadState.downloading:
         // Live percent. Falls back to "Downloading…" while we wait for
@@ -195,19 +195,19 @@ class _StateLine extends ConsumerWidget {
         final pct = p == null ? null : (p.fraction * 100).round();
         return Text(
           pct == null ? 'Downloading…' : 'Downloading… $pct%',
-          style: SunohType.sans(fontSize: 11, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 11, color: c.fgMute),
         );
       case DownloadState.paused:
         return Text(
           'Paused — tap to resume',
-          style: SunohType.sans(fontSize: 11, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 11, color: c.fgMute),
         );
       case DownloadState.failed:
         return Text(
           'Failed — ${entry.error ?? "tap to retry"}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.sans(fontSize: 11, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 11, color: c.fgMute),
         );
     }
   }
@@ -215,7 +215,7 @@ class _StateLine extends ConsumerWidget {
 
 class _Empty extends StatelessWidget {
   const _Empty({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -233,14 +233,14 @@ class _Empty extends StatelessWidget {
             const SizedBox(height: 14),
             Text(
               'No downloads yet',
-              style: SunohType.heading(fontSize: 22, color: c.fgDim),
+              style: MelodyType.heading(fontSize: 22, color: c.fgDim),
             ),
             const SizedBox(height: 8),
             Text(
               'Open a saavn song, album, or playlist and tap '
               'Download to save it for offline listening.',
               textAlign: TextAlign.center,
-              style: SunohType.sans(fontSize: 13, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 13, color: c.fgMute),
             ),
           ],
         ),

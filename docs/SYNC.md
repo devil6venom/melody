@@ -5,7 +5,7 @@ no account, no server of ours, and no cloud SDK in the app.
 
 The app writes an encrypted file into a folder the user picks with the system
 picker. Whatever syncs that folder — Syncthing, Nextcloud, a Drive folder —
-moves it. sunoh never learns where the folder actually lives.
+moves it. Melody never learns where the folder actually lives.
 
 ---
 
@@ -31,7 +31,7 @@ depends on it.
 
 ## One file per device
 
-Each device writes `sunoh-<deviceId>.sync` and reads **every** `.sync` file in
+Each device writes `melody-<deviceId>.sync` and reads **every** `.sync` file in
 the folder.
 
 This is the load-bearing decision. Two devices never write the same file, so

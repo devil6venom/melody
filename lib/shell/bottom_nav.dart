@@ -56,7 +56,7 @@ class _NavItem extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool active;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -74,7 +74,7 @@ class _NavItem extends StatelessWidget {
             const SizedBox(height: 3),
             Text(
               label,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 10,
                 fontWeight: active ? FontWeight.w600 : FontWeight.w500,
                 color: col,

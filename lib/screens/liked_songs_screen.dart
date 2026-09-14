@@ -113,7 +113,7 @@ class _LikedHero extends StatelessWidget {
     required this.count,
     required this.scrollOffset,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final int count;
   final ValueListenable<double> scrollOffset;
@@ -183,7 +183,7 @@ class _LikedHero extends StatelessWidget {
                     Text(
                       'Liked Songs',
                       textAlign: TextAlign.center,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 26,
                         color: c.fg,
                         height: 1.1,
@@ -193,7 +193,7 @@ class _LikedHero extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       '$count ${count == 1 ? 'song' : 'songs'}',
-                      style: SunohType.sans(fontSize: 13, color: c.fgDim),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgDim),
                     ),
                   ],
                 ),
@@ -212,7 +212,7 @@ class _LikedActions extends StatelessWidget {
     required this.accent,
     required this.songs,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final List<FeedItem> songs;
 
@@ -231,7 +231,7 @@ class _LikedActions extends StatelessWidget {
             children: [
               Text(
                 '${songs.length} ${songs.length == 1 ? 'song' : 'songs'}',
-                style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 12, color: c.fgMute),
               ),
               Row(
                 children: [
@@ -313,7 +313,7 @@ class _LikedTrackRow extends ConsumerWidget {
   });
   final int n;
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final VoidCallback onTap;
 
@@ -341,7 +341,7 @@ class _LikedTrackRow extends ConsumerWidget {
               child: Center(
                 child: Text(
                   n.toString().padLeft(2, '0'),
-                  style: SunohType.mono(fontSize: 11, color: c.fgMute),
+                  style: MelodyType.mono(fontSize: 11, color: c.fgMute),
                 ),
               ),
             ),
@@ -359,7 +359,7 @@ class _LikedTrackRow extends ConsumerWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -371,7 +371,7 @@ class _LikedTrackRow extends ConsumerWidget {
                       artistsLabel,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],
@@ -440,7 +440,7 @@ class _StickyLikedHeader extends StatelessWidget {
     required this.scrollOffset,
     required this.onBack,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final ValueListenable<double> scrollOffset;
   final VoidCallback onBack;
 
@@ -489,7 +489,7 @@ class _StickyLikedHeader extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Liked Songs',
-                              style: SunohType.heading(
+                              style: MelodyType.heading(
                                 fontSize: 15,
                                 color: c.fg,
                                 letterSpacing: -0.2,
@@ -564,7 +564,7 @@ class _EmptyState extends StatelessWidget {
     required this.label,
     required this.detail,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String label;
   final String detail;
   @override
@@ -575,12 +575,12 @@ class _EmptyState extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Text(label, style: SunohType.heading(fontSize: 18, color: c.fgDim)),
+            Text(label, style: MelodyType.heading(fontSize: 18, color: c.fgDim)),
             const SizedBox(height: 8),
             Text(
               detail,
               textAlign: TextAlign.center,
-              style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
             ),
           ],
         ),

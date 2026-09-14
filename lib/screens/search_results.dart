@@ -25,7 +25,7 @@ class SectionPills extends StatelessWidget {
     required this.onTap,
   });
   final List<HomeSection> sections;
-  final SunohColors colors;
+  final MelodyColors colors;
   final void Function(String heading) onTap;
 
   @override
@@ -54,7 +54,7 @@ class SectionPills extends StatelessWidget {
               child: Center(
                 child: Text(
                   label,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w500,
                     color: c.fg,
@@ -88,7 +88,7 @@ class ResultsSection extends StatelessWidget {
     required this.onPlay,
   });
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
   final void Function(FeedItem song) onPlay;
 
   @override
@@ -106,7 +106,7 @@ class ResultsSection extends StatelessWidget {
             colors: c,
             item: item,
             onTap: () {
-              // YouTube ids are browse ids that sunoh-api can't resolve —
+              // YouTube ids are browse ids that Melody-api can't resolve —
               // route them to the YouTube screens instead.
               if ((item.source ?? section.source) == 'youtube' &&
                   item.type != 'song') {
@@ -281,7 +281,7 @@ class SearchResults extends ConsumerWidget {
   });
 
   final String query;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// Keyed so the header's jump pills can find a section on screen.
   final GlobalKey Function(String heading) sectionKey;
@@ -340,7 +340,7 @@ class SearchHint extends StatelessWidget {
     required this.label,
     this.detail,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final String label;
   final String? detail;
   @override
@@ -351,13 +351,13 @@ class SearchHint extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Text(label, style: SunohType.heading(fontSize: 22, color: c.fgDim)),
+            Text(label, style: MelodyType.heading(fontSize: 22, color: c.fgDim)),
             if (detail != null) ...[
               const SizedBox(height: 8),
               Text(
                 detail!,
                 textAlign: TextAlign.center,
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ],
           ],

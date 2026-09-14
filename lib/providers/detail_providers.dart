@@ -1,7 +1,7 @@
 // Riverpod providers for the detail screens. Keyed by an (id, source) record
 // so the same id can coexist across providers (a saavn album and a gaana
 // album might share an id) and so we can pass the provider hint through to
-// the API (sunoh-api routes album/playlist by ?provider=…).
+// the API (Melody-api routes album/playlist by ?provider=…).
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +20,7 @@ void _keepAlive(Ref ref, Duration ttl) {
 final albumProvider = FutureProvider.autoDispose.family<AlbumDetail, DetailKey>(
   (ref, key) async {
     _keepAlive(ref, const Duration(minutes: 30));
-    return ref.watch(sunohApiProvider).fetchAlbum(key.id, provider: key.source);
+    return ref.watch(melodyApiProvider).fetchAlbum(key.id, provider: key.source);
   },
 );
 
@@ -28,7 +28,7 @@ final playlistProvider = FutureProvider.autoDispose
     .family<PlaylistDetail, DetailKey>((ref, key) async {
       _keepAlive(ref, const Duration(minutes: 30));
       return ref
-          .watch(sunohApiProvider)
+          .watch(melodyApiProvider)
           .fetchPlaylist(key.id, provider: key.source);
     });
 
@@ -36,6 +36,6 @@ final artistProvider = FutureProvider.autoDispose
     .family<ArtistDetail, DetailKey>((ref, key) async {
       _keepAlive(ref, const Duration(minutes: 30));
       return ref
-          .watch(sunohApiProvider)
+          .watch(melodyApiProvider)
           .fetchArtist(key.id, provider: key.source);
     });

@@ -68,7 +68,7 @@ class _QueueMenuSheet extends ConsumerWidget {
                       children: [
                         Text(
                           'Queue',
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w500,
                             color: c.fg,
@@ -77,7 +77,7 @@ class _QueueMenuSheet extends ConsumerWidget {
                         const SizedBox(height: 3),
                         Text(
                           upNext > 0 ? '$upNext upcoming' : 'Nothing up next',
-                          style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                         ),
                       ],
                     ),
@@ -119,7 +119,7 @@ class _QueueMenuRow extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool enabled;
 
   @override
@@ -139,7 +139,7 @@ class _QueueMenuRow extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(fontSize: 14, color: color),
+                style: MelodyType.sans(fontSize: 14, color: color),
               ),
             ),
           ],

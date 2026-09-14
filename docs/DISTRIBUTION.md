@@ -1,6 +1,6 @@
 # Distribution
 
-Where sunoh can be installed from, what each route needs, and what is blocking
+Where Melody can be installed from, what each route needs, and what is blocking
 the ones that are not done.
 
 The three routes have very different bars. Obtainium needs nothing from us,
@@ -16,7 +16,7 @@ GitHub Releases and checks for updates itself. Nothing needs to be published or
 approved: a user adds the repo URL and Obtainium does the rest.
 
 ```
-https://github.com/afkcodes/sunoh
+https://github.com/devil6venom/melody
 ```
 
 Requirements it places on us, all currently met:
@@ -84,7 +84,7 @@ and stating it in the request is better than having it discovered.
 
 F-Droid's main repository **builds from source on their own infrastructure**
 and does not accept proprietary dependencies at all. That is a harder bar than
-IzzyOnDroid's, and sunoh does not currently clear it.
+IzzyOnDroid's, and Melody does not currently clear it.
 
 ### What is blocking it
 

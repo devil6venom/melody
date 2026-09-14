@@ -45,9 +45,9 @@ import 'url_refresh.dart';
 /// Placeholder scheme — mpv asks us to resolve this in the on_load hook.
 const _placeholderScheme = 'sunoh-song://';
 
-class SunohAudioHandler {
-  SunohAudioHandler({required this.resolver}) {
-    debugPrint('[audio] SunohAudioHandler() constructing Player…');
+class MelodyAudioHandler {
+  MelodyAudioHandler({required this.resolver}) {
+    debugPrint('[audio] MelodyAudioHandler() constructing Player…');
     _player = _buildPlayer();
     _urlRefresh = UrlRefreshScheduler(refresh: _refreshCurrentTrack);
     debugPrint('[audio] Player constructed ✓');

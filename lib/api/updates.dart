@@ -2,7 +2,7 @@
 //
 // Published JSON lives at:
 //
-//   https://sunoh.online/.well-known/sunoh-updates.json
+//   https://sunoh.online/.well-known/melody-updates.json
 //
 // Shape:
 //

@@ -1,6 +1,6 @@
 // 10-band graphic equalizer sheet — opened from the tweaks panel.
 //
-// Gains go to SunohAudioHandler.setEqBands, which builds the mpv filter chain
+// Gains go to MelodyAudioHandler.setEqBands, which builds the mpv filter chain
 // in `audio/eq_filters.dart`. Not mpv's superequalizer, despite what an older
 // comment here claimed — that is explicitly disabled.
 //
@@ -121,7 +121,7 @@ class _EqSheet extends ConsumerWidget {
 /// The grab handle. Purely an affordance — the sheet's own drag does the work.
 class _Handle extends StatelessWidget {
   const _Handle({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class _Handle extends StatelessWidget {
 
 class _Header extends ConsumerWidget {
   const _Header({required this.colors, required this.accent});
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -164,7 +164,7 @@ class _Header extends ConsumerWidget {
               children: [
                 Text(
                   'Equalizer',
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 24,
                     color: on ? c.fg : c.fgDim,
                     letterSpacing: -0.3,
@@ -181,7 +181,7 @@ class _Header extends ConsumerWidget {
                             ? 'Flat — nothing being changed'
                             : '$active ${active == 1 ? 'band' : 'bands'} shaping')
                       : 'Bypassed — audio passes through untouched',
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 11,
                     color: on ? c.fgMute : accent,
                   ),
@@ -211,7 +211,7 @@ class _Header extends ConsumerWidget {
 /// whole point, see the file header.
 class _Rack extends ConsumerWidget {
   const _Rack({required this.colors, required this.accent});
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -284,7 +284,7 @@ class _BandLabel extends StatelessWidget {
 
   final double gain;
   final String label;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -295,7 +295,7 @@ class _BandLabel extends StatelessWidget {
         Text(
           touched ? '${gain > 0 ? '+' : ''}${gain.toStringAsFixed(0)}' : '0',
           textAlign: TextAlign.center,
-          style: SunohType.mono(
+          style: MelodyType.mono(
             fontSize: 9.5,
             color: touched ? accent : colors.fgMute,
           ),
@@ -304,7 +304,7 @@ class _BandLabel extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: SunohType.mono(
+          style: MelodyType.mono(
             fontSize: 9,
             color: colors.fgMute,
             letterSpacing: 0.4,
@@ -322,11 +322,11 @@ class _BandLabel extends StatelessWidget {
 /// from +3.
 class _Scale extends StatelessWidget {
   const _Scale({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
-    TextStyle style(bool strong) => SunohType.mono(
+    TextStyle style(bool strong) => MelodyType.mono(
       fontSize: 8.5,
       color: strong ? colors.fgDim : colors.fgMute,
     );

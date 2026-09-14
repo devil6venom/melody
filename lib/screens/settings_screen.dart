@@ -158,10 +158,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 onTap: () => context.openSync(),
                 colors: c,
               ),
-              _RadioRow<SunohTheme>(
+              _RadioRow<MelodyTheme>(
                 label: 'Theme',
                 value: s.theme,
-                options: {for (final t in SunohTheme.values) t: t.label},
+                options: {for (final t in MelodyTheme.values) t: t.label},
                 onChange: s.setTheme,
                 colors: c,
               ),
@@ -209,7 +209,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   _Link(
                     // Total = Hive (queue + library + settings) + cached
                     // network images. Shown as a single number — the user
-                    // doesn't care about the split, just how much sunoh.
+                    // doesn't care about the split, just how much Melody.
                     // is sitting on.
                     label: 'Storage',
                     trailing: async.isLoading
@@ -306,7 +306,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
 class _Header extends StatelessWidget {
   const _Header({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -323,7 +323,7 @@ class _Header extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             'Settings',
-            style: SunohType.heading(
+            style: MelodyType.heading(
               fontSize: 22,
               color: c.fg,
               letterSpacing: -0.3,
@@ -347,7 +347,7 @@ class _Section extends StatelessWidget {
   });
   final String label;
   final List<Widget> rows;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double scale;
 
   @override
@@ -390,7 +390,7 @@ class _Link extends StatelessWidget {
   /// Optional: the Version row states a fact rather than going anywhere.
   /// It used to open a hidden analytics toggle, which no longer exists.
   final VoidCallback? onTap;
-  final SunohColors colors;
+  final MelodyColors colors;
   final String? trailing;
   @override
   Widget build(BuildContext context) {
@@ -405,13 +405,13 @@ class _Link extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: SunohType.sans(fontSize: 14, color: c.fgDim),
+              style: MelodyType.sans(fontSize: 14, color: c.fgDim),
             ),
           ),
           if (trailing != null) ...[
             Text(
               trailing!,
-              style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
             ),
             const SizedBox(width: 6),
           ],
@@ -433,7 +433,7 @@ class _AccentRow extends StatelessWidget {
     required this.scale,
   });
   final AppState s;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double scale;
   @override
   Widget build(BuildContext context) {
@@ -441,7 +441,7 @@ class _AccentRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Accent', style: SunohType.sans(fontSize: 14, color: c.fgDim)),
+        Text('Accent', style: MelodyType.sans(fontSize: 14, color: c.fgDim)),
         SizedBox(height: 14 * scale),
         Wrap(
           spacing: 14,
@@ -490,7 +490,7 @@ class _SliderRow extends StatelessWidget {
   final int divisions;
   final String suffix;
   final ValueChanged<double> onChange;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -500,10 +500,10 @@ class _SliderRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: SunohType.sans(fontSize: 14, color: c.fgDim)),
+            Text(label, style: MelodyType.sans(fontSize: 14, color: c.fgDim)),
             Text(
               suffix,
-              style: SunohType.mono(
+              style: MelodyType.mono(
                 fontSize: 11,
                 color: c.fgMute,
                 letterSpacing: 0.4,
@@ -545,7 +545,7 @@ class _RadioRow<T> extends StatelessWidget {
   final T value;
   final Map<T, String> options;
   final ValueChanged<T> onChange;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// Past three pills the segmented control no longer fits beside a label on a
   /// phone — the label ellipsises to "Stream q…" and the control runs to the
@@ -570,7 +570,7 @@ class _RadioRow<T> extends StatelessWidget {
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: SunohType.sans(
+          style: MelodyType.sans(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: selected ? colors.bg : colors.fgMute,
@@ -602,7 +602,7 @@ class _RadioRow<T> extends StatelessWidget {
       label,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: SunohType.sans(fontSize: 14, color: colors.fgDim),
+      style: MelodyType.sans(fontSize: 14, color: colors.fgDim),
     );
 
     if (_stacked) {
@@ -636,7 +636,7 @@ class _NavRow extends StatelessWidget {
   final String label;
   final String summary;
   final VoidCallback onTap;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -646,7 +646,7 @@ class _NavRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: SunohType.sans(fontSize: 14, color: c.fgDim)),
+          Text(label, style: MelodyType.sans(fontSize: 14, color: c.fgDim)),
           // A floor under the gap. The summary is Flexible, so without this it
           // shrinks until it touches the label rather than ellipsising, and a
           // long value renders as one run-on string.
@@ -661,7 +661,7 @@ class _NavRow extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.end,
-                    style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                   ),
                 ),
                 const SizedBox(width: 6),
@@ -691,7 +691,7 @@ class _ToggleRow extends StatelessWidget {
   final String? summary;
   final bool value;
   final ValueChanged<bool> onChange;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -703,12 +703,12 @@ class _ToggleRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(label, style: SunohType.sans(fontSize: 14, color: c.fgDim)),
+              Text(label, style: MelodyType.sans(fontSize: 14, color: c.fgDim)),
               if (summary != null) ...[
                 const SizedBox(height: 2),
                 Text(
                   summary!,
-                  style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                  style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                 ),
               ],
             ],

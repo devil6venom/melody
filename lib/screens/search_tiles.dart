@@ -25,7 +25,7 @@ class ResultRow extends StatelessWidget {
     required this.item,
     required this.onTap,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final FeedItem item;
   final VoidCallback onTap;
 
@@ -41,7 +41,7 @@ class ResultRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Row(
           children: [
-            SunohArt(
+            MelodyArt(
               id: item.id,
               imageUrl: item.artwork,
               size: 42,
@@ -56,7 +56,7 @@ class ResultRow extends StatelessWidget {
                     item.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -68,7 +68,7 @@ class ResultRow extends StatelessWidget {
                       _subFor(item),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                     ),
                   ],
                 ],
@@ -121,7 +121,7 @@ class ResultRow extends StatelessWidget {
 class TrendingRow extends ConsumerWidget {
   const TrendingRow({super.key, required this.section, required this.colors});
   final HomeSection section;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -173,7 +173,7 @@ class TrendingRow extends ConsumerWidget {
           builder: (item, w) => isArtistRow
               ? Column(
                   children: [
-                    SunohArt(
+                    MelodyArt(
                       id: item.id,
                       imageUrl: item.artwork,
                       size: w - 10,
@@ -185,7 +185,7 @@ class TrendingRow extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w500,
                         color: c.fg,
@@ -197,7 +197,7 @@ class TrendingRow extends ConsumerWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SunohArt(
+                    MelodyArt(
                       id: item.id,
                       imageUrl: item.artwork,
                       size: w,
@@ -208,7 +208,7 @@ class TrendingRow extends ConsumerWidget {
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                         color: c.fg,
@@ -239,7 +239,7 @@ class TrendingRow extends ConsumerWidget {
 class OccasionTile extends StatelessWidget {
   const OccasionTile({super.key, required this.item, required this.colors});
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +252,7 @@ class OccasionTile extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Image background — falls back to the painted album-art if no URL.
-            SunohArt(id: item.id, imageUrl: url, size: 220, radius: 0),
+            MelodyArt(id: item.id, imageUrl: url, size: 220, radius: 0),
             // Dark gradient (bottom-up) keeps the title legible regardless
             // of the cover's brightness.
             const Positioned.fill(
@@ -279,7 +279,7 @@ class OccasionTile extends StatelessWidget {
                 item.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 15,
                   color: Colors.white,
                   letterSpacing: -0.1,

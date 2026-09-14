@@ -1,4 +1,4 @@
-// Design tokens for sunoh. — colors, accents, typography.
+// Design tokens for Melody. — colors, accents, typography.
 
 import 'dart:math' as math;
 
@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 enum Density { compact, regular, comfy }
 
 /// Which palette to paint. `system` follows the OS setting.
-enum SunohTheme { system, light, dark }
+enum MelodyTheme { system, light, dark }
 
-extension SunohThemeLabel on SunohTheme {
+extension MelodyThemeLabel on MelodyTheme {
   String get label => switch (this) {
-    SunohTheme.system => 'System',
-    SunohTheme.light => 'Light',
-    SunohTheme.dark => 'Dark',
+    MelodyTheme.system => 'System',
+    MelodyTheme.light => 'Light',
+    MelodyTheme.dark => 'Dark',
   };
 }
 
@@ -132,8 +132,8 @@ const Color _lightInk = Color(0xFF17171A);
 
 /// Resolved palette. Dark was the only mode until light was added; both are
 /// built here so a screen never has to ask which one it is in.
-class SunohColors {
-  const SunohColors({
+class MelodyColors {
+  const MelodyColors({
     required this.bg,
     required this.bgSoft,
     required this.surface,
@@ -163,22 +163,22 @@ class SunohColors {
 
   /// Build the dark palette from the accent, optionally tinting the background
   /// toward an artwork accent (the "Tint from artwork" tweak).
-  factory SunohColors.resolve({
+  factory MelodyColors.resolve({
     required Color accent,
     Color? tintAccent,
     Brightness brightness = Brightness.dark,
   }) => brightness == Brightness.light
-      ? SunohColors._light(accent: accent, tintAccent: tintAccent)
-      : SunohColors._dark(accent: accent, tintAccent: tintAccent);
+      ? MelodyColors._light(accent: accent, tintAccent: tintAccent)
+      : MelodyColors._dark(accent: accent, tintAccent: tintAccent);
 
-  factory SunohColors._dark({required Color accent, Color? tintAccent}) {
+  factory MelodyColors._dark({required Color accent, Color? tintAccent}) {
     var bg = _darkBg;
     var bgSoft = const Color(0xFF101013);
     if (tintAccent != null) {
       bg = Color.lerp(_darkBg, tintAccent, 0.06)!;
       bgSoft = Color.lerp(_darkBg, tintAccent, 0.08)!;
     }
-    return SunohColors(
+    return MelodyColors(
       bg: bg,
       bgSoft: bgSoft,
       surface: Colors.white.withValues(alpha: 0.045),
@@ -195,7 +195,7 @@ class SunohColors {
     );
   }
 
-  factory SunohColors._light({required Color accent, Color? tintAccent}) {
+  factory MelodyColors._light({required Color accent, Color? tintAccent}) {
     var bg = _lightBg;
     var bgSoft = const Color(0xFFEDEAE3);
     if (tintAccent != null) {
@@ -204,7 +204,7 @@ class SunohColors {
       bg = Color.lerp(_lightBg, tintAccent, 0.03)!;
       bgSoft = Color.lerp(_lightBg, tintAccent, 0.05)!;
     }
-    return SunohColors(
+    return MelodyColors(
       bg: bg,
       bgSoft: bgSoft,
       surface: _lightInk.withValues(alpha: 0.04),
@@ -233,7 +233,7 @@ class SunohColors {
 ///   - [heading]: titles / large display text (heavier weights, no italic)
 ///   - [sans]:    UI / body text
 ///   - [mono]:    small data labels, eyebrows, timestamps
-class SunohFonts {
+class MelodyFonts {
   static const String heading = 'Gilroy';
   static const String sans = 'Gilroy';
   // Small tracked/uppercase data labels — also Gilroy now (no separate mono).
@@ -242,8 +242,8 @@ class SunohFonts {
 
 /// Typography helpers — Gilroy throughout. `mono` keeps its name for small
 /// tracked label styles (eyebrows, timestamps) but renders in Gilroy too.
-class SunohType {
-  const SunohType._();
+class MelodyType {
+  const MelodyType._();
 
   /// Display / heading text — clean grotesque, semibold by default.
   static TextStyle heading({
@@ -253,7 +253,7 @@ class SunohType {
     double? height,
     double? letterSpacing,
   }) => TextStyle(
-    fontFamily: SunohFonts.heading,
+    fontFamily: MelodyFonts.heading,
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
@@ -268,7 +268,7 @@ class SunohType {
     double? height,
     double? letterSpacing,
   }) => TextStyle(
-    fontFamily: SunohFonts.sans,
+    fontFamily: MelodyFonts.sans,
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
@@ -283,7 +283,7 @@ class SunohType {
     double? height,
     double? letterSpacing,
   }) => TextStyle(
-    fontFamily: SunohFonts.mono,
+    fontFamily: MelodyFonts.mono,
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,

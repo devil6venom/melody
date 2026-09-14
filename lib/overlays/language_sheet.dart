@@ -65,7 +65,7 @@ class _LanguageSheet extends ConsumerWidget {
                 children: [
                   Text(
                     'Music Languages',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 18,
                       color: c.fg,
                       letterSpacing: -0.2,
@@ -74,7 +74,7 @@ class _LanguageSheet extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Pick what shows up on Home and feeds back into radios + recommendations.',
-                    style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                   ),
                 ],
               ),
@@ -99,7 +99,7 @@ class _LanguageSheet extends ConsumerWidget {
                   ),
                   child: Text(
                     'Couldn’t load languages.\n$e',
-                    style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                   ),
                 ),
                 data: (langs) {
@@ -108,7 +108,7 @@ class _LanguageSheet extends ConsumerWidget {
                       padding: const EdgeInsets.all(24),
                       child: Text(
                         'No languages available.',
-                        style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                       ),
                     );
                   }
@@ -135,7 +135,7 @@ class _LanguageSheet extends ConsumerWidget {
                               Expanded(
                                 child: Text(
                                   lang.name,
-                                  style: SunohType.sans(
+                                  style: MelodyType.sans(
                                     fontSize: 14,
                                     fontWeight: selected
                                         ? FontWeight.w600

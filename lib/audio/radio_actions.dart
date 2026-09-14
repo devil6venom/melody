@@ -30,7 +30,7 @@ Future<void> startRadioStation(
   String? kind,
 }) async {
   final s = ref.read(appStateProvider);
-  final api = ref.read(sunohApiProvider);
+  final api = ref.read(melodyApiProvider);
   final resolvedProvider = provider ?? item.source ?? 'saavn';
   // Priority for the radio-session `type` param:
   //   explicit override (e.g. 'artist' on artist tiles) →

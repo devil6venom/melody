@@ -15,7 +15,7 @@ class _SongList extends StatelessWidget {
   });
   final List<FeedItem> songs;
   final AppState state;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _CollectionList extends StatelessWidget {
   });
   final List<LocalCollection> collections;
   final bool album;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _CollectionList extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 6, 20, 6),
             child: Row(
               children: [
-                SunohArt(
+                MelodyArt(
                   id: col.id,
                   size: 48,
                   // Artists read as circles throughout the app; albums square.
@@ -76,7 +76,7 @@ class _CollectionList extends StatelessWidget {
                         col.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: colors.fg,
@@ -87,7 +87,7 @@ class _CollectionList extends StatelessWidget {
                         col.subtitle ?? '${col.songs.length} songs',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12,
                           color: colors.fgMute,
                         ),
@@ -108,20 +108,20 @@ class _CollectionList extends StatelessWidget {
 class _EmptyState extends StatelessWidget {
   const _EmptyState({required this.library, required this.colors});
   final LocalLibrary library;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
     final (title, body, action, onTap) = switch (library.status) {
       LocalLibraryStatus.denied => (
         'Access needed',
-        'sunoh needs permission to read audio files on this device.',
+        'Melody needs permission to read audio files on this device.',
         'Grant access',
         () => library.load(force: true),
       ),
       LocalLibraryStatus.permanentlyDenied => (
         'Access blocked',
-        'Audio access was turned off for sunoh. Enable it in system '
+        'Audio access was turned off for Melody. Enable it in system '
             'settings to see music stored on this device.',
         'Open settings',
         library.openSettings,
@@ -149,13 +149,13 @@ class _EmptyState extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: SunohType.heading(fontSize: 18, color: colors.fg),
+            style: MelodyType.heading(fontSize: 18, color: colors.fg),
           ),
           const SizedBox(height: 8),
           Text(
             body,
             textAlign: TextAlign.center,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13,
               color: colors.fgMute,
               height: 1.5,
@@ -176,7 +176,7 @@ class _EmptyState extends StatelessWidget {
                 ),
                 child: Text(
                   action,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: colors.onAccent,
@@ -200,7 +200,7 @@ class _SearchField extends StatelessWidget {
   });
 
   final TextEditingController controller;
-  final SunohColors colors;
+  final MelodyColors colors;
   final ValueChanged<String> onChanged;
 
   @override
@@ -224,10 +224,10 @@ class _SearchField extends StatelessWidget {
                 controller: controller,
                 autofocus: true,
                 onChanged: onChanged,
-                style: SunohType.sans(fontSize: 14, color: c.fg),
+                style: MelodyType.sans(fontSize: 14, color: c.fg),
                 decoration: InputDecoration(
                   hintText: 'Search this device',
-                  hintStyle: SunohType.sans(fontSize: 14, color: c.fgMute),
+                  hintStyle: MelodyType.sans(fontSize: 14, color: c.fgMute),
                   border: InputBorder.none,
                   isDense: true,
                   contentPadding: const EdgeInsets.symmetric(vertical: 12),

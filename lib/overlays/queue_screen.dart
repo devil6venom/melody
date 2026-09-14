@@ -104,7 +104,7 @@ class _ApiQueueBody extends StatelessWidget {
     required this.ref,
   });
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final WidgetRef ref;
 
   @override
@@ -142,7 +142,7 @@ class _ApiQueueBody extends StatelessWidget {
                             onTap: s.apiClearUpNext,
                             child: Text(
                               'Clear',
-                              style: SunohType.sans(
+                              style: MelodyType.sans(
                                 fontSize: 11,
                                 color: c.fgMute,
                                 fontWeight: FontWeight.w500,
@@ -161,7 +161,7 @@ class _ApiQueueBody extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'Nothing else queued.',
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 12.5,
                             color: c.fgMute,
                           ),
@@ -222,7 +222,7 @@ class _ApiNowPlayingRow extends StatelessWidget {
   });
   final FeedItem song;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +236,7 @@ class _ApiNowPlayingRow extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 6, 20, 14),
       child: Row(
         children: [
-          SunohArt(id: song.id, imageUrl: song.artwork, size: 56, radius: 6),
+          MelodyArt(id: song.id, imageUrl: song.artwork, size: 56, radius: 6),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -246,7 +246,7 @@ class _ApiNowPlayingRow extends StatelessWidget {
                   song.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: accent,
@@ -257,7 +257,7 @@ class _ApiNowPlayingRow extends StatelessWidget {
                   artist.isEmpty ? '—' : artist,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+                  style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
                 ),
               ],
             ),
@@ -280,7 +280,7 @@ class _ApiQueueRow extends StatelessWidget {
   });
   final int index;
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
   final VoidCallback onRemove;
 
@@ -314,7 +314,7 @@ class _ApiQueueRow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            SunohArt(id: song.id, imageUrl: song.artwork, size: 42, radius: 4),
+            MelodyArt(id: song.id, imageUrl: song.artwork, size: 42, radius: 4),
             const SizedBox(width: 12),
             Expanded(
               child: GestureDetector(
@@ -327,7 +327,7 @@ class _ApiQueueRow extends StatelessWidget {
                       song.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(
+                      style: MelodyType.sans(
                         fontSize: 13.5,
                         fontWeight: FontWeight.w500,
                         color: c.fg,
@@ -339,7 +339,7 @@ class _ApiQueueRow extends StatelessWidget {
                         artist,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                       ),
                     ],
                   ],
@@ -348,7 +348,7 @@ class _ApiQueueRow extends StatelessWidget {
             ),
             if (dur != null) ...[
               const SizedBox(width: 8),
-              Text(dur, style: SunohType.mono(fontSize: 10, color: c.fgMute)),
+              Text(dur, style: MelodyType.mono(fontSize: 10, color: c.fgMute)),
             ],
             IconBtn(
               icon: SolarIconsOutline.closeCircle,
@@ -368,7 +368,7 @@ class _ApiQueueRow extends StatelessWidget {
 class _ApiHistoryRow extends StatelessWidget {
   const _ApiHistoryRow({required this.song, required this.colors});
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -382,7 +382,7 @@ class _ApiHistoryRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Row(
         children: [
-          SunohArt(id: song.id, imageUrl: song.artwork, size: 36, radius: 4),
+          MelodyArt(id: song.id, imageUrl: song.artwork, size: 36, radius: 4),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -392,7 +392,7 @@ class _ApiHistoryRow extends StatelessWidget {
                   song.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SunohType.sans(fontSize: 13, color: c.fgDim),
+                  style: MelodyType.sans(fontSize: 13, color: c.fgDim),
                 ),
                 if (artist.isNotEmpty) ...[
                   const SizedBox(height: 1),
@@ -400,7 +400,7 @@ class _ApiHistoryRow extends StatelessWidget {
                     artist,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(fontSize: 11, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11, color: c.fgMute),
                   ),
                 ],
               ],
@@ -431,7 +431,7 @@ class _DummyQueueBody extends StatelessWidget {
   });
   final dynamic s;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -450,7 +450,7 @@ class _DummyQueueBody extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 6, 20, 14),
                 child: Row(
                   children: [
-                    SunohArt(id: s.current.id, size: 56, radius: 6),
+                    MelodyArt(id: s.current.id, size: 56, radius: 6),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
@@ -458,7 +458,7 @@ class _DummyQueueBody extends StatelessWidget {
                         children: [
                           Text(
                             s.current.title,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: accent,
@@ -467,7 +467,7 @@ class _DummyQueueBody extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             s.current.artist,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 12.5,
                               color: c.fgMute,
                             ),
@@ -489,7 +489,7 @@ class _DummyQueueBody extends StatelessWidget {
                     eyebrow('NEXT UP · ${s.queue.length} TRACKS', c.fgMute),
                     Text(
                       'Clear',
-                      style: SunohType.sans(fontSize: 11, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11, color: c.fgMute),
                     ),
                   ],
                 ),
@@ -517,7 +517,7 @@ class _DummyQueueBody extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  SunohArt(id: t.id, size: 42, radius: 4),
+                  MelodyArt(id: t.id, size: 42, radius: 4),
                   const SizedBox(width: 12),
                   Expanded(
                     child: GestureDetector(
@@ -530,7 +530,7 @@ class _DummyQueueBody extends StatelessWidget {
                             t.title,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 13.5,
                               fontWeight: FontWeight.w500,
                               color: c.fg,
@@ -541,7 +541,7 @@ class _DummyQueueBody extends StatelessWidget {
                             t.artist,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 11.5,
                               color: c.fgMute,
                             ),
@@ -553,7 +553,7 @@ class _DummyQueueBody extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     fmt(t.duration),
-                    style: SunohType.mono(fontSize: 10, color: c.fgMute),
+                    style: MelodyType.mono(fontSize: 10, color: c.fgMute),
                   ),
                   IconBtn(
                     icon: SolarIconsOutline.closeCircle,
@@ -587,7 +587,7 @@ class _DummyQueueBody extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          SunohArt(id: t.id, size: 36, radius: 4),
+                          MelodyArt(id: t.id, size: 36, radius: 4),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
@@ -597,7 +597,7 @@ class _DummyQueueBody extends StatelessWidget {
                                   t.title,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: SunohType.sans(
+                                  style: MelodyType.sans(
                                     fontSize: 13,
                                     color: c.fgDim,
                                   ),
@@ -605,7 +605,7 @@ class _DummyQueueBody extends StatelessWidget {
                                 const SizedBox(height: 1),
                                 Text(
                                   t.artist,
-                                  style: SunohType.sans(
+                                  style: MelodyType.sans(
                                     fontSize: 11,
                                     color: c.fgMute,
                                   ),

@@ -19,7 +19,7 @@ import '../theme/tokens.dart';
 import 'sheet.dart';
 
 Future<void> showLocalSortSheet(BuildContext context) =>
-    showSunohSheet<void>(context, builder: (_) => const _LocalSortSheet());
+    showMelodySheet<void>(context, builder: (_) => const _LocalSortSheet());
 
 class _LocalSortSheet extends ConsumerWidget {
   const _LocalSortSheet();
@@ -29,7 +29,7 @@ class _LocalSortSheet extends ConsumerWidget {
     final c = ref.watch(appStateProvider).colors;
     final lib = ref.watch(localLibraryProvider);
 
-    return SunohSheet(
+    return MelodySheet(
       icon: SolarIconsOutline.sort,
       title: 'Sort songs',
       subtitle: 'Albums always play in track order',
@@ -47,7 +47,7 @@ class _LocalSortSheet extends ConsumerWidget {
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
             child: Text(
               'ORDER',
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 11,
                 color: c.fgMute,
                 letterSpacing: 1.4,
@@ -82,7 +82,7 @@ class _Row extends StatelessWidget {
 
   final String label;
   final bool selected;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -98,7 +98,7 @@ class _Row extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 14,
                   fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
                   color: selected ? c.fg : c.fgDim,

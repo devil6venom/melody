@@ -65,7 +65,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
             children: [
               Text(
                 'Library',
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 28,
                   color: c.fg,
                   letterSpacing: -0.4,
@@ -136,7 +136,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
                       ),
                       child: Text(
                         f.label,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: f == filter ? c.bg : c.fgDim,
@@ -369,7 +369,7 @@ class _ListRow extends StatelessWidget {
     required this.onTap,
   });
   final FeedItem item;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
 
   @override
@@ -385,7 +385,7 @@ class _ListRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Row(
           children: [
-            SunohArt(
+            MelodyArt(
               id: item.id,
               imageUrl: item.artwork,
               size: 50,
@@ -400,7 +400,7 @@ class _ListRow extends StatelessWidget {
                     item.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14.5,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -412,7 +412,7 @@ class _ListRow extends StatelessWidget {
                       sub,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],
@@ -432,7 +432,7 @@ class _GridList extends StatelessWidget {
     required this.onTap,
   });
   final List<FeedItem> items;
-  final SunohColors colors;
+  final MelodyColors colors;
   final void Function(FeedItem) onTap;
   @override
   Widget build(BuildContext context) {
@@ -455,7 +455,7 @@ class _GridList extends StatelessWidget {
                 children: [
                   AspectRatio(
                     aspectRatio: 1,
-                    child: SunohArt(
+                    child: MelodyArt(
                       id: it.id,
                       imageUrl: it.artwork,
                       width: double.infinity,
@@ -467,7 +467,7 @@ class _GridList extends StatelessWidget {
                     it.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -513,7 +513,7 @@ String _subFor(FeedItem item) {
 class _EmptyState extends StatelessWidget {
   const _EmptyState({required this.filter, required this.colors});
   final _LibFilter filter;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -533,7 +533,7 @@ class _EmptyState extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
       child: Text(
         message,
-        style: SunohType.sans(fontSize: 12.5, color: c.fgMute, height: 1.5),
+        style: MelodyType.sans(fontSize: 12.5, color: c.fgMute, height: 1.5),
       ),
     );
   }
@@ -581,7 +581,7 @@ class _PinnedTile extends StatelessWidget {
                     title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -612,7 +612,7 @@ class _PinnedTile extends StatelessWidget {
 class _SubscribedShowsStrip extends StatelessWidget {
   const _SubscribedShowsStrip({required this.shows, required this.colors});
   final List<FeedItem> shows;
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -644,7 +644,7 @@ class _SubscribedShowsStrip extends StatelessWidget {
                     children: [
                       squircleClip(
                         radius: 10,
-                        child: SunohArt(
+                        child: MelodyArt(
                           id: show.id,
                           imageUrl: show.artwork,
                           size: 116,
@@ -656,7 +656,7 @@ class _SubscribedShowsStrip extends StatelessWidget {
                         show.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: c.fg,
@@ -668,7 +668,7 @@ class _SubscribedShowsStrip extends StatelessWidget {
                           show.subtitle!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(fontSize: 11, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 11, color: c.fgMute),
                         ),
                       ],
                     ],

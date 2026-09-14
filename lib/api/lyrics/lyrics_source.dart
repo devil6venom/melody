@@ -36,7 +36,7 @@ enum LyricsSource {
   /// them are rate-limited, out of credit or gone at any given moment.
   lyricsPlus('LyricsPlus', wordSynced: true),
 
-  /// Whole lines only, and always up. sunoh's original and only source until
+  /// Whole lines only, and always up. Melody's original and only source until
   /// this list existed.
   lrcLib('LRCLIB', wordSynced: false),
 

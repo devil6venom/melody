@@ -64,7 +64,7 @@ void main() {
   AutoFeeds feedsFor(List<Map<String, Object?>> sections) {
     final dio = Dio(BaseOptions(baseUrl: 'https://stub'))
       ..httpClientAdapter = _StubAdapter({'/music/home': sections});
-    return AutoFeeds(api: SunohApi(dio), catalog: AutoCatalog());
+    return AutoFeeds(api: MelodyApi(dio), catalog: AutoCatalog());
   }
 
   test('a section of songs becomes one playable queue', () async {
@@ -240,7 +240,7 @@ void main() {
     () async {
       final dio = Dio(BaseOptions(baseUrl: 'https://stub'))
         ..httpClientAdapter = _StubAdapter(const {});
-      final feeds = AutoFeeds(api: SunohApi(dio), catalog: AutoCatalog());
+      final feeds = AutoFeeds(api: MelodyApi(dio), catalog: AutoCatalog());
       expect(await feeds.sections('sunoh:f:music'), isEmpty);
     },
   );

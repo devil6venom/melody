@@ -32,7 +32,7 @@ import javax.crypto.spec.SecretKeySpec
  * ## What it does not do
  *
  * No network, no account, no Google API. The app writes an encrypted file into
- * a folder the user picked; whatever syncs that folder does the moving. sunoh
+ * a folder the user picked; whatever syncs that folder does the moving. Melody
  * never learns where the folder actually lives.
  */
 object SyncBridge {
@@ -44,7 +44,7 @@ object SyncBridge {
     private const val IV_BYTES = 12
 
     /** Marks our files so a shared folder can hold other things safely. */
-    const val FILE_PREFIX = "sunoh-"
+    const val FILE_PREFIX = "melody-"
     const val FILE_SUFFIX = ".sync"
 
     private const val MIME = "application/octet-stream"

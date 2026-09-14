@@ -169,7 +169,7 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
         if (app.showCast != null) showCastButton = app.showCast!;
         final savedTheme = app.theme;
         if (savedTheme != null) {
-          for (final t in SunohTheme.values) {
+          for (final t in MelodyTheme.values) {
             if (t.name == savedTheme) {
               theme = t;
               break;
@@ -286,7 +286,7 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
 
   /// Backend API for endless-autoplay's radio prime. Optional so tests
   /// can construct an AppState without the network layer.
-  final SunohApi? api;
+  final MelodyApi? api;
 
   final List<StreamSubscription<dynamic>> _audioSubs = [];
 
@@ -333,7 +333,7 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
   /// Which palette to paint. Defaults to dark rather than system: the app
   /// shipped dark-only, so an existing user updating into light mode would
   /// otherwise find their app had changed colour on its own.
-  SunohTheme theme = SunohTheme.dark;
+  MelodyTheme theme = MelodyTheme.dark;
 
   /// The OS brightness, mirrored here so `colors` can resolve `system`
   /// without a BuildContext. Kept current by [didChangePlatformBrightness].
@@ -342,9 +342,9 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
 
   /// The brightness actually being painted.
   Brightness get brightness => switch (theme) {
-    SunohTheme.light => Brightness.light,
-    SunohTheme.dark => Brightness.dark,
-    SunohTheme.system => _platformBrightness,
+    MelodyTheme.light => Brightness.light,
+    MelodyTheme.dark => Brightness.dark,
+    MelodyTheme.system => _platformBrightness,
   };
 
   bool get isLight => brightness == Brightness.light;
@@ -368,10 +368,10 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
     if (next == _platformBrightness) return;
     _platformBrightness = next;
     // Only repaints when we are actually following the system.
-    if (theme == SunohTheme.system) notifyListeners();
+    if (theme == MelodyTheme.system) notifyListeners();
   }
 
-  void setTheme(SunohTheme value) {
+  void setTheme(MelodyTheme value) {
     if (value == theme) return;
     theme = value;
     notifyListeners();
@@ -1109,9 +1109,9 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
 
   bool get likedCurrent => liked[current.id] ?? false;
 
-  SunohColors get colors {
+  MelodyColors get colors {
     final tint = tintFromArt ? resolvedAccent : null;
-    return SunohColors.resolve(
+    return MelodyColors.resolve(
       accent: resolvedAccent,
       tintAccent: tint,
       brightness: brightness,
@@ -2414,7 +2414,7 @@ class AppState extends ChangeNotifier with WidgetsBindingObserver {
 
   Future<void> _runAutoplayPrime(
     FeedItem seed,
-    SunohApi apiClient,
+    MelodyApi apiClient,
     AudioRepo repo,
   ) async {
     // Backed by `/music/recommend` — a single call that internally hits

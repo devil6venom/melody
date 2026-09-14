@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 import '../theme/tokens.dart';
 
-class SunohTabs extends StatelessWidget {
-  const SunohTabs({
+class MelodyTabs extends StatelessWidget {
+  const MelodyTabs({
     super.key,
     required this.tabs,
     required this.active,
@@ -23,7 +23,7 @@ class SunohTabs extends StatelessWidget {
   final List<String> tabs;
   final String active;
   final ValueChanged<String> onChange;
-  final SunohColors colors;
+  final MelodyColors colors;
   final EdgeInsets padding;
 
   /// The hairline under the strip. Home sits it against the feed; a screen
@@ -48,7 +48,7 @@ class SunohTabs extends StatelessWidget {
               padding: const EdgeInsets.only(right: 22),
               child: GestureDetector(
                 onTap: () => onChange(t),
-                child: SunohTabLabel(
+                child: MelodyTabLabel(
                   label: t,
                   active: t == active,
                   colors: colors,
@@ -61,8 +61,8 @@ class SunohTabs extends StatelessWidget {
   }
 }
 
-class SunohTabLabel extends StatelessWidget {
-  const SunohTabLabel({
+class MelodyTabLabel extends StatelessWidget {
+  const MelodyTabLabel({
     super.key,
     required this.label,
     required this.active,
@@ -70,7 +70,7 @@ class SunohTabLabel extends StatelessWidget {
   });
   final String label;
   final bool active;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +80,12 @@ class SunohTabLabel extends StatelessWidget {
         Text(
           label,
           style: active
-              ? SunohType.heading(
+              ? MelodyType.heading(
                   fontSize: 22,
                   color: colors.fg,
                   letterSpacing: -0.2,
                 )
-              : SunohType.sans(
+              : MelodyType.sans(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: colors.fgMute,

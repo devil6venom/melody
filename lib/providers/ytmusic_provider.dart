@@ -14,7 +14,7 @@ import 'yt_auth_provider.dart';
 
 /// A Dio dedicated to music.youtube.com.
 ///
-/// Deliberately NOT the shared sunoh-api client: that one carries our base
+/// Deliberately NOT the shared Melody-api client: that one carries our base
 /// URL and API-specific headers, and none of those belong on a request to
 /// Google. Timeouts are generous — InnerTube browse responses run to several
 /// hundred KB.

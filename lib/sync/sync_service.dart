@@ -61,7 +61,7 @@ class SyncService extends ChangeNotifier {
 
   /// This device's file name. Derived from the device id so two devices never
   /// write the same file, which is what removes the need for locking.
-  String get fileName => 'sunoh-${_deviceId ?? 'unknown'}.sync';
+  String get fileName => 'melody-${_deviceId ?? 'unknown'}.sync';
 
   /// Load saved configuration. Safe to call repeatedly.
   Future<void> restore() async {

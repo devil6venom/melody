@@ -79,7 +79,7 @@ class AutoBrowseTree {
   }
 
   final LibraryStore library;
-  final SunohApi api;
+  final MelodyApi api;
   final DownloadManager? downloads;
   final AutoCatalog catalog;
   late final AutoFeeds _feeds;
@@ -316,7 +316,7 @@ class AutoBrowseTree {
     }
   }
 
-  /// Voice search — "Hey Google, play `<something>` on sunoh".
+  /// Voice search — "Hey Google, play `<something>` on Melody".
   ///
   /// An empty query is the assistant's way of saying "just play something",
   /// which Android Auto's certification explicitly exercises. Answering it

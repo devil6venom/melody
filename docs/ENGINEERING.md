@@ -14,7 +14,7 @@ amended in the same PR.
 
 ## 1. Performance first
 
-sunoh. targets budget and mid-range Android hardware, much of it on tile-based
+Melody. targets budget and mid-range Android hardware, much of it on tile-based
 (Mali/Adreno) GPUs. Performance is a design constraint, not a later pass.
 
 ### 1.1 The frame budget is 16 ms
@@ -160,13 +160,13 @@ are the models here.
 
 ### 3.4 Navigation is typed
 
-Screens call methods on the `SunohNav` extension. No hand-built path strings
+Screens call methods on the `MelodyNav` extension. No hand-built path strings
 in a screen; no `context.push('/home/album/$id')`. Add a method to the
 extension instead, so the branch prefix stays correct.
 
 ### 3.5 Design tokens are the only source of colour and type
 
-Every colour comes from `SunohColors`, every text style from `SunohType`, every
+Every colour comes from `MelodyColors`, every text style from `MelodyType`, every
 rounded corner from `squircleBorder` / `squircleDecoration` / `squircleClip`.
 
 A raw `Color(0xFF…)` outside `theme/tokens.dart` or `widgets/album_art.dart`
@@ -188,7 +188,7 @@ Two rules follow from that:
 
 - **Never draw a raw accent.** An accent picked against near-black fails on
   white — eleven of the twelve did, and ivory measured 1.00:1. Colours reaching
-  the screen go through `SunohColors.accent` or `AppState.themedAccent`, which
+  the screen go through `MelodyColors.accent` or `AppState.themedAccent`, which
   darken for light mode. Artwork-derived accents included; they are the common
   case when "tint from artwork" is on.
 - **Text on an accent is `onAccent`**, never a literal `Colors.black` or

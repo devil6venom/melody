@@ -2,7 +2,7 @@
 // genres chip index, and one mood/genre category.
 //
 // These exist because YouTube browse ids can't go through the normal detail
-// screens — those resolve against sunoh-api, which knows nothing about a
+// screens — those resolve against Melody-api, which knows nothing about a
 // `VLRDCLAK5uy_…` id.
 
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _YtScaffold extends StatelessWidget {
     required this.children,
   });
   final String title;
-  final SunohColors colors;
+  final MelodyColors colors;
   final List<Widget> children;
 
   @override
@@ -58,7 +58,7 @@ class _YtScaffold extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
             child: Text(
               title,
-              style: SunohType.heading(
+              style: MelodyType.heading(
                 fontSize: 30,
                 color: c.fg,
                 height: 1.05,
@@ -73,7 +73,7 @@ class _YtScaffold extends StatelessWidget {
   }
 }
 
-Widget _loading(SunohColors c) => Padding(
+Widget _loading(MelodyColors c) => Padding(
   padding: const EdgeInsets.symmetric(vertical: 60),
   child: Center(
     child: SizedBox(
@@ -84,9 +84,9 @@ Widget _loading(SunohColors c) => Padding(
   ),
 );
 
-Widget _error(SunohColors c, String message) => Padding(
+Widget _error(MelodyColors c, String message) => Padding(
   padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
-  child: Text(message, style: SunohType.sans(fontSize: 13, color: c.fgMute)),
+  child: Text(message, style: MelodyType.sans(fontSize: 13, color: c.fgMute)),
 );
 
 // ── Playlist / album ───────────────────────────────────────────────────────
@@ -298,7 +298,7 @@ class YtCategoryChipTile extends StatelessWidget {
     this.width,
   });
   final YtCategoryChip chip;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   /// Fixed width, used by the home grid so columns line up. Null lets the
   /// tile size to its label (the wrapped index screen).
@@ -349,7 +349,7 @@ class YtCategoryChipTile extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: c.fg,
@@ -409,7 +409,7 @@ class YtCategoryScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
               child: Text(
                 section.heading,
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 19,
                   color: c.fg,
                   letterSpacing: -0.2,
@@ -435,7 +435,7 @@ class YtCategoryScreen extends ConsumerWidget {
                         children: [
                           squircleClip(
                             radius: 14,
-                            child: SunohArt(
+                            child: MelodyArt(
                               id: item.id,
                               imageUrl: item.artwork,
                               size: 140,
@@ -447,7 +447,7 @@ class YtCategoryScreen extends ConsumerWidget {
                             item.title,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: SunohType.sans(
+                            style: MelodyType.sans(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w600,
                               color: c.fg,
@@ -459,7 +459,7 @@ class YtCategoryScreen extends ConsumerWidget {
                               item.subtitle!,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: SunohType.sans(
+                              style: MelodyType.sans(
                                 fontSize: 11,
                                 color: c.fgMute,
                               ),

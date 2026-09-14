@@ -32,7 +32,7 @@ class SavedAppearance {
   final String? density; // 'compact' / 'regular' / 'comfy'
   final bool? tintFromArt;
   final double? tintIntensity; // 0.0..1.0
-  /// `SunohTheme.name` — 'system' / 'light' / 'dark'. Null on saves that
+  /// `MelodyTheme.name` — 'system' / 'light' / 'dark'. Null on saves that
   /// predate light mode, which resolve to dark: the app shipped dark-only, so
   /// that is what an existing user already has on screen.
   final String? theme;
@@ -246,7 +246,7 @@ class SettingsStore {
     Object? density, // accept any enum (caller passes .name)
     bool? tintFromArt,
     double? tintIntensity,
-    Object? theme, // SunohTheme; caller passes the enum
+    Object? theme, // MelodyTheme; caller passes the enum
     bool? showCast,
   }) async {
     final box = await _box();

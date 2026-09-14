@@ -28,7 +28,7 @@ class DownloadGlyph extends ConsumerWidget {
   });
 
   final String songId;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double size;
 
   @override
@@ -80,7 +80,7 @@ class _ProgressRing extends ConsumerWidget {
   });
 
   final String songId;
-  final SunohColors colors;
+  final MelodyColors colors;
   final double size;
 
   @override

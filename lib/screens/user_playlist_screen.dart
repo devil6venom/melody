@@ -176,25 +176,25 @@ class _UserPlaylistScreenState extends ConsumerState<UserPlaylistScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(
           'Delete “$name”?',
-          style: SunohType.heading(fontSize: 17, color: c.fg),
+          style: MelodyType.heading(fontSize: 17, color: c.fg),
         ),
         content: Text(
           'The playlist is removed from your library. Songs stay where they are.',
-          style: SunohType.sans(fontSize: 13, color: c.fgMute),
+          style: MelodyType.sans(fontSize: 13, color: c.fgMute),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: Text(
               'Cancel',
-              style: SunohType.sans(fontSize: 13.5, color: c.fgDim),
+              style: MelodyType.sans(fontSize: 13.5, color: c.fgDim),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: Text(
               'Delete',
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 13.5,
                 color: const Color(0xFFE05656),
                 fontWeight: FontWeight.w600,
@@ -242,7 +242,7 @@ class _OverflowSheet extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(22, 6, 22, 10),
               child: Text(
                 name,
-                style: SunohType.heading(
+                style: MelodyType.heading(
                   fontSize: 16,
                   color: c.fg,
                   letterSpacing: -0.2,
@@ -284,7 +284,7 @@ class _SheetRow extends StatelessWidget {
   });
   final IconData icon;
   final String label;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
   final bool destructive;
   @override
@@ -302,7 +302,7 @@ class _SheetRow extends StatelessWidget {
             const SizedBox(width: 14),
             Text(
               label,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: tint,
@@ -324,7 +324,7 @@ class _PlaylistHero extends StatelessWidget {
     required this.playlist,
     required this.scrollOffset,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final UserPlaylist playlist;
   final ValueListenable<double> scrollOffset;
@@ -411,7 +411,7 @@ class _PlaylistHero extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 26,
                         color: c.fg,
                         height: 1.1,
@@ -422,7 +422,7 @@ class _PlaylistHero extends StatelessWidget {
                     Text(
                       '${playlist.songs.length} '
                       '${playlist.songs.length == 1 ? 'song' : 'songs'}',
-                      style: SunohType.sans(fontSize: 13, color: c.fgDim),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgDim),
                     ),
                   ],
                 ),
@@ -449,7 +449,7 @@ class _PlaylistActions extends ConsumerWidget {
     required this.accent,
     required this.playlist,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final UserPlaylist playlist;
 
@@ -466,7 +466,7 @@ class _PlaylistActions extends ConsumerWidget {
         children: [
           Text(
             '${songs.length} ${songs.length == 1 ? 'song' : 'songs'}',
-            style: SunohType.sans(fontSize: 12, color: c.fgMute),
+            style: MelodyType.sans(fontSize: 12, color: c.fgMute),
           ),
           Row(
             children: [
@@ -549,7 +549,7 @@ class _PlaylistTrackRow extends ConsumerWidget {
   /// on the correct slot.
   final int index;
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   final String playlistId;
   final String sourceLabel;
@@ -596,7 +596,7 @@ class _PlaylistTrackRow extends ConsumerWidget {
               child: Center(
                 child: Text(
                   n.toString().padLeft(2, '0'),
-                  style: SunohType.mono(fontSize: 11, color: c.fgMute),
+                  style: MelodyType.mono(fontSize: 11, color: c.fgMute),
                 ),
               ),
             ),
@@ -635,7 +635,7 @@ class _PlaylistTrackRow extends ConsumerWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -647,7 +647,7 @@ class _PlaylistTrackRow extends ConsumerWidget {
                       artistsLabel,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                     ),
                   ],
                 ],
@@ -682,7 +682,7 @@ class _StickyHeader extends StatelessWidget {
     required this.onBack,
     required this.onMenu,
   });
-  final SunohColors colors;
+  final MelodyColors colors;
   final ValueListenable<double> scrollOffset;
   final String title;
   final VoidCallback onBack;
@@ -732,7 +732,7 @@ class _StickyHeader extends StatelessWidget {
                               title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: SunohType.heading(
+                              style: MelodyType.heading(
                                 fontSize: 15,
                                 color: c.fg,
                                 letterSpacing: -0.2,
@@ -778,7 +778,7 @@ class _StickyHeader extends StatelessWidget {
 
 class _EmptyPlaylist extends StatelessWidget {
   const _EmptyPlaylist({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
   @override
   Widget build(BuildContext context) {
     final c = colors;
@@ -789,13 +789,13 @@ class _EmptyPlaylist extends StatelessWidget {
           children: [
             Text(
               'No songs yet',
-              style: SunohType.heading(fontSize: 18, color: c.fgDim),
+              style: MelodyType.heading(fontSize: 18, color: c.fgDim),
             ),
             const SizedBox(height: 8),
             Text(
               'Open any song\'s menu and pick "Add to playlist" to drop it here.',
               textAlign: TextAlign.center,
-              style: SunohType.sans(fontSize: 12.5, color: c.fgMute),
+              style: MelodyType.sans(fontSize: 12.5, color: c.fgMute),
             ),
           ],
         ),
@@ -819,16 +819,16 @@ Future<String?> promptForPlaylistName(BuildContext context, {String? initial}) {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       title: Text(
         initial == null ? 'New playlist' : 'Rename playlist',
-        style: SunohType.heading(fontSize: 17, color: c.fg),
+        style: MelodyType.heading(fontSize: 17, color: c.fg),
       ),
       content: TextField(
         controller: controller,
         autofocus: true,
         cursorColor: accent,
-        style: SunohType.sans(fontSize: 15, color: c.fg),
+        style: MelodyType.sans(fontSize: 15, color: c.fg),
         decoration: InputDecoration(
           hintText: 'Playlist name',
-          hintStyle: SunohType.sans(fontSize: 14, color: c.fgMute),
+          hintStyle: MelodyType.sans(fontSize: 14, color: c.fgMute),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: c.line, width: 0.5),
           ),
@@ -844,14 +844,14 @@ Future<String?> promptForPlaylistName(BuildContext context, {String? initial}) {
           onPressed: () => Navigator.of(ctx).pop(null),
           child: Text(
             'Cancel',
-            style: SunohType.sans(fontSize: 13.5, color: c.fgDim),
+            style: MelodyType.sans(fontSize: 13.5, color: c.fgDim),
           ),
         ),
         TextButton(
           onPressed: () => Navigator.of(ctx).pop(controller.text.trim()),
           child: Text(
             initial == null ? 'Create' : 'Save',
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13.5,
               color: accent,
               fontWeight: FontWeight.w600,

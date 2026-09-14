@@ -19,7 +19,7 @@ class LocalTrackRow extends StatelessWidget {
   });
 
   final FeedItem song;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
   final Widget? trailing;
 
@@ -33,10 +33,10 @@ class LocalTrackRow extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 6, 20, 6),
         child: Row(
           children: [
-            // `imageUrl` is a cached JPEG path for local tracks; SunohArt
+            // `imageUrl` is a cached JPEG path for local tracks; MelodyArt
             // renders a path with Image.file and falls back to its generated
             // cover when the album had no art.
-            SunohArt(
+            MelodyArt(
               id: song.id,
               size: 44,
               radius: 6,
@@ -53,7 +53,7 @@ class LocalTrackRow extends StatelessWidget {
                     song.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: colors.fg,
@@ -65,7 +65,7 @@ class LocalTrackRow extends StatelessWidget {
                       subtitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.sans(fontSize: 12, color: colors.fgMute),
+                      style: MelodyType.sans(fontSize: 12, color: colors.fgMute),
                     ),
                   ],
                 ],
@@ -75,7 +75,7 @@ class LocalTrackRow extends StatelessWidget {
             if (trailing == null && song.duration != null)
               Text(
                 _mmss(song.duration!),
-                style: SunohType.mono(fontSize: 11, color: colors.fgMute),
+                style: MelodyType.mono(fontSize: 11, color: colors.fgMute),
               ),
           ],
         ),

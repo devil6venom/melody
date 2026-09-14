@@ -61,7 +61,7 @@ class AudiobookCategoriesScreen extends ConsumerWidget {
                   const SizedBox(width: 6),
                   Text(
                     'Genres',
-                    style: SunohType.heading(
+                    style: MelodyType.heading(
                       fontSize: 24,
                       color: c.fg,
                       letterSpacing: -0.3,
@@ -74,7 +74,7 @@ class AudiobookCategoriesScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 18),
               child: Text(
                 'Pick a genre to discover audiobooks in it.',
-                style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                style: MelodyType.sans(fontSize: 13, color: c.fgMute),
               ),
             ),
             Expanded(
@@ -95,7 +95,7 @@ class AudiobookCategoriesScreen extends ConsumerWidget {
                     child: Text(
                       'Couldn’t load genres.\n$e',
                       textAlign: TextAlign.center,
-                      style: SunohType.sans(fontSize: 13, color: c.fgMute),
+                      style: MelodyType.sans(fontSize: 13, color: c.fgMute),
                     ),
                   ),
                 ),
@@ -130,7 +130,7 @@ class AudiobookCategoryCard extends StatelessWidget {
     required this.colors,
   });
   final AudiobookCategory category;
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +165,7 @@ class AudiobookCategoryCard extends StatelessWidget {
                       category.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: SunohType.heading(
+                      style: MelodyType.heading(
                         fontSize: 13.5,
                         color: Colors.white,
                         letterSpacing: -0.1,

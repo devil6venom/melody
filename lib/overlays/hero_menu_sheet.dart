@@ -103,7 +103,7 @@ class _HeroMenuSheet extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(18, 6, 18, 12),
               child: Row(
                 children: [
-                  SunohArt(
+                  MelodyArt(
                     id: entity.id,
                     imageUrl: entity.artwork,
                     size: 52,
@@ -118,7 +118,7 @@ class _HeroMenuSheet extends ConsumerWidget {
                           entity.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(
+                          style: MelodyType.sans(
                             fontSize: 14.5,
                             fontWeight: FontWeight.w500,
                             color: c.fg,
@@ -131,7 +131,7 @@ class _HeroMenuSheet extends ConsumerWidget {
                               entity.type.substring(1),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.sans(fontSize: 12, color: c.fgMute),
+                          style: MelodyType.sans(fontSize: 12, color: c.fgMute),
                         ),
                       ],
                     ),
@@ -191,7 +191,7 @@ class _HeroMenuSheet extends ConsumerWidget {
               label: 'Share',
               onTap: () {
                 Navigator.of(context).pop();
-                shareSunohLink(
+                shareMelodyLink(
                   kind: entity.type,
                   id: entity.id,
                   title: entity.title,
@@ -219,7 +219,7 @@ class _HeroMenuRow extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color? iconColor;
 
   @override
@@ -238,7 +238,7 @@ class _HeroMenuRow extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: SunohType.sans(fontSize: 14, color: c.fg),
+                style: MelodyType.sans(fontSize: 14, color: c.fg),
               ),
             ),
           ],

@@ -21,7 +21,7 @@ class UserPlaylistsStrip extends StatelessWidget {
     required this.accent,
   });
   final List<UserPlaylist> playlists;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class UserPlaylistsStrip extends StatelessWidget {
                         p.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: c.fg,
@@ -105,7 +105,7 @@ class UserPlaylistsStrip extends StatelessWidget {
                       Text(
                         '${p.songs.length} '
                         '${p.songs.length == 1 ? 'song' : 'songs'}',
-                        style: SunohType.sans(fontSize: 11, color: c.fgMute),
+                        style: MelodyType.sans(fontSize: 11, color: c.fgMute),
                       ),
                     ],
                   ),
@@ -139,7 +139,7 @@ class UserPlaylistsList extends StatelessWidget {
     required this.accent,
   });
   final List<UserPlaylist> playlists;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -177,7 +177,7 @@ class UserPlaylistRow extends StatelessWidget {
     required this.accent,
   });
   final UserPlaylist playlist;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -239,7 +239,7 @@ class UserPlaylistRow extends StatelessWidget {
                     playlist.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14.5,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -248,7 +248,7 @@ class UserPlaylistRow extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     '$n ${n == 1 ? 'song' : 'songs'}',
-                    style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
               ),

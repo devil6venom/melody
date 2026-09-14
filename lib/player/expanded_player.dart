@@ -175,7 +175,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
   Widget _header(
     BuildContext context,
     AppState s,
-    SunohColors c,
+    MelodyColors c,
     Track track,
     String? sourceLabel,
   ) {
@@ -218,7 +218,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: SunohType.sans(
+                  style: MelodyType.sans(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: c.fg,
@@ -259,7 +259,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
   Widget _classic({
     required BuildContext context,
     required AppState s,
-    required SunohColors c,
+    required MelodyColors c,
     required dynamic track,
     required Color accent,
     required Color tint,
@@ -316,7 +316,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
                                 track.title,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: SunohType.heading(
+                                style: MelodyType.heading(
                                   fontSize: 26,
                                   color: c.fg,
                                   height: 1.1,
@@ -328,7 +328,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
                                 track.artist,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: SunohType.sans(
+                                style: MelodyType.sans(
                                   fontSize: 13.5,
                                   color: c.fgDim,
                                 ),
@@ -488,8 +488,8 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
     );
   }
 
-  Widget _times(SunohColors c, String left, String right) {
-    final style = SunohType.mono(
+  Widget _times(MelodyColors c, String left, String right) {
+    final style = MelodyType.mono(
       fontSize: 11,
       color: c.fgMute,
       letterSpacing: 0.4,
@@ -503,7 +503,7 @@ class _ExpandedPlayerState extends ConsumerState<ExpandedPlayer>
     );
   }
 
-  Widget _bottomBar(BuildContext context, SunohColors c) {
+  Widget _bottomBar(BuildContext context, MelodyColors c) {
     Widget iconBtn(IconData icon, VoidCallback onTap, {Color? color}) =>
         GestureDetector(
           onTap: onTap,
@@ -648,7 +648,7 @@ class _LyricsTeaser extends StatelessWidget {
               line,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: SunohType.sans(
+              style: MelodyType.sans(
                 fontSize: 13,
                 color: accent.withValues(alpha: 0.85),
                 fontWeight: FontWeight.w500,
@@ -662,7 +662,7 @@ class _LyricsTeaser extends StatelessWidget {
   }
 }
 
-/// Static centered cover. The drop shadow from SunohArt provides the visual
+/// Static centered cover. The drop shadow from MelodyArt provides the visual
 /// lift — no separate palette halo (tried it, looked weird while playing).
 /// `playing ? 1.0 : 0.92` scale is the play/paused cue.
 class _StaticCover extends StatelessWidget {
@@ -733,12 +733,12 @@ class _StaticCover extends StatelessWidget {
       width: coverSize,
       height: coverSize,
       child: Hero(
-        tag: 'sunoh-player-art',
+        tag: 'melody-player-art',
         child: AnimatedScale(
           scale: playing ? 1.0 : 0.92,
           duration: const Duration(milliseconds: 340),
           curve: Curves.easeOutCubic,
-          child: SunohArt(id: id, imageUrl: url, size: coverSize, radius: 16),
+          child: MelodyArt(id: id, imageUrl: url, size: coverSize, radius: 16),
         ),
       ),
     );

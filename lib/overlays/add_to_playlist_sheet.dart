@@ -102,7 +102,7 @@ class _AddToPlaylistSheet extends ConsumerWidget {
                           song.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: SunohType.heading(
+                          style: MelodyType.heading(
                             fontSize: 18,
                             color: c.fg,
                             letterSpacing: -0.3,
@@ -145,7 +145,7 @@ class _AddToPlaylistSheet extends ConsumerWidget {
                       padding: const EdgeInsets.fromLTRB(22, 18, 22, 16),
                       child: Text(
                         'No playlists yet. Tap "New playlist" above to start one.',
-                        style: SunohType.sans(
+                        style: MelodyType.sans(
                           fontSize: 12.5,
                           color: c.fgMute,
                           height: 1.4,
@@ -195,7 +195,7 @@ class _NewPlaylistRow extends StatelessWidget {
     required this.onTap,
   });
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
@@ -210,7 +210,7 @@ class _NewPlaylistRow extends StatelessWidget {
             Expanded(
               child: Text(
                 'New playlist',
-                style: SunohType.sans(
+                style: MelodyType.sans(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: accent,
@@ -237,7 +237,7 @@ class _PlaylistRow extends StatelessWidget {
   });
   final UserPlaylist playlist;
   final Color accent;
-  final SunohColors colors;
+  final MelodyColors colors;
   final bool already;
   final VoidCallback onTap;
   @override
@@ -275,7 +275,7 @@ class _PlaylistRow extends StatelessWidget {
                     playlist.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: c.fg,
@@ -285,7 +285,7 @@ class _PlaylistRow extends StatelessWidget {
                   Text(
                     '${playlist.songs.length} '
                     '${playlist.songs.length == 1 ? 'song' : 'songs'}',
-                    style: SunohType.sans(fontSize: 11.5, color: c.fgMute),
+                    style: MelodyType.sans(fontSize: 11.5, color: c.fgMute),
                   ),
                 ],
               ),

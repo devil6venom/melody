@@ -24,7 +24,7 @@ import '../widgets/ui.dart';
 ///
 /// [dismissible] false is for a sheet mid-operation — a download in flight has
 /// nothing useful to do with a stray backdrop tap.
-Future<T?> showSunohSheet<T>(
+Future<T?> showMelodySheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
   bool dismissible = true,
@@ -45,8 +45,8 @@ Future<T?> showSunohSheet<T>(
 }
 
 /// The sheet shell: handle, optional header, body, optional actions.
-class SunohSheet extends ConsumerWidget {
-  const SunohSheet({
+class MelodySheet extends ConsumerWidget {
+  const MelodySheet({
     super.key,
     required this.child,
     this.title,
@@ -123,7 +123,7 @@ class SunohSheet extends ConsumerWidget {
 
 class _Handle extends StatelessWidget {
   const _Handle({required this.colors});
-  final SunohColors colors;
+  final MelodyColors colors;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -153,7 +153,7 @@ class _Header extends StatelessWidget {
   final String? subtitle;
   final IconData? icon;
   final Widget? trailing;
-  final SunohColors colors;
+  final MelodyColors colors;
   final Color accent;
 
   @override
@@ -184,7 +184,7 @@ class _Header extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: SunohType.heading(
+                  style: MelodyType.heading(
                     fontSize: 18,
                     color: c.fg,
                     letterSpacing: -0.3,
@@ -194,7 +194,7 @@ class _Header extends StatelessWidget {
                   const SizedBox(height: 3),
                   Text(
                     subtitle!,
-                    style: SunohType.sans(
+                    style: MelodyType.sans(
                       fontSize: 12.5,
                       color: c.fgMute,
                       height: 1.4,
@@ -204,7 +204,7 @@ class _Header extends StatelessWidget {
               ],
             ),
           ),
-          ?trailing,
+          if (trailing != null) trailing,
         ],
       ),
     );
@@ -268,7 +268,7 @@ class SheetButton extends ConsumerWidget {
           ),
           child: Text(
             label,
-            style: SunohType.sans(
+            style: MelodyType.sans(
               fontSize: 13.5,
               fontWeight: FontWeight.w600,
               color: filled ? c.onAccent : c.fg,

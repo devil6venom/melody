@@ -1,4 +1,4 @@
-// Domain models for the sunoh. catalog.
+// Domain models for the Melody. catalog.
 // Ported from the design prototype's data.jsx — fictional placeholder content.
 
 // LyricLine moved out to carry word-level timing and grew too big to sit in a
@@ -129,7 +129,7 @@ class DetailRef {
   final String id;
 
   /// Which backend provider this entity belongs to ('saavn' | 'gaana' |
-  /// 'spotify'). Required by sunoh-api for album/playlist/song endpoints —
+  /// 'spotify'). Required by Melody-api for album/playlist/song endpoints —
   /// the server defaults to saavn when missing, which 404s for gaana ids.
   final String? source;
 

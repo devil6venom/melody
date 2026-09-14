@@ -11,7 +11,7 @@ plugins {
 
 // Release signing credentials. Lives in android/key.properties (gitignored
 // via android/.gitignore). The keystore file itself is also gitignored
-// (**/*.keystore). Brought over from the user's RN Sunoh app so a release
+// (**/*.keystore). Brought over from the user's RN Melody app so a release
 // build of this Flutter app signs with the SAME stable key — without
 // this, release was falling back to ~/.android/debug.keystore which
 // rotates per-machine and triggered Android's "different signer" data
@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 // Absent, it falls back to a host that resolves nothing. An unconfigured build
 // must not register itself as a handler for links it cannot serve — that would
 // put a stranger's build in the "open with" sheet for someone else's domain.
-val sunohWebHost: String = run {
+val melodyWebHost: String = run {
     val envFile = rootProject.file("../env.json")
     if (!envFile.exists()) return@run "invalid.localhost"
     val raw = groovy.json.JsonSlurper().parse(envFile) as? Map<*, *>
@@ -40,7 +40,7 @@ val sunohWebHost: String = run {
 }
 
 android {
-    // Same applicationId as the RN sunoh app — same keystore (see
+    // Same applicationId as the RN Melody app — same keystore (see
     // [[sunoh-android-signing]]) means installing this Flutter build over
     // the RN one is treated as an upgrade by Android, not a fresh install.
     namespace = "codes.afk.sunoh"
@@ -57,7 +57,7 @@ android {
 
     defaultConfig {
         applicationId = "io.melody.rexx"
-        manifestPlaceholders["sunohWebHost"] = sunohWebHost
+        manifestPlaceholders["melodyWebHost"] = melodyWebHost
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         // Bumped from flutter default (21) to 24 — mpv_audio_kit (libmpv)
@@ -130,7 +130,7 @@ dependencies {
     // InnerTube extraction (client ladder, cipher/n-transform, format
     // selection, self-healing remote player configs) from the Metrolist
     // project. GPL-3.0 — see LICENSE at the repo root; linking this is
-    // why sunoh is GPL-3.0.
+    // why Melody is GPL-3.0.
     //
     // The catalog of playback clients is re-benchmarked upstream as Google
     // rotates its bot checks, and player configs are fetched at RUNTIME,

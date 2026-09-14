@@ -6,7 +6,7 @@ is the short version and the trap list.
 
 ## What this is
 
-`sunoh.` — a Flutter/Dart Android music app fronting YouTube Music, Gaana and
+`Melody.` — a Flutter/Dart Android music app fronting YouTube Music, Gaana and
 Saavn behind one interface, plus the music already on the phone, podcasts and
 audiobooks. No accounts, no ads, no analytics of any kind. GPL-3.0 (it links
 MetrolistGroup's `innertubex`).
@@ -30,7 +30,7 @@ flutter build apk --split-per-abi --release --dart-define-from-file=env.json
 Endpoints are **not** hardcoded: they come from `env.json` at compile time
 (`lib/config/env.dart`), and `env.json` is gitignored so a public repo carries
 no private base URL. A build without it still runs — the on-device library and
-the YouTube tier need nothing from sunoh-api — but the catalog screens render
+the YouTube tier need nothing from Melody-api — but the catalog screens render
 their error state. `scripts/release.sh` refuses to build without it.
 
 `flutter test` runs 217 tests: the Android Auto surface (`auto_browse`,
@@ -55,14 +55,14 @@ conventions (`reorder`). The rest of the app is uncovered — see
   are not required to fix them, but **leave every file smaller than you found
   it** — if your change adds more than ~40 lines to an over-limit file, extract
   something first. Split along conceptual seams, never by line count.
-- **Design tokens only.** Every colour from `SunohColors`, every text style
-  from `SunohType`, every corner from `squircleBorder`/`squircleDecoration`/
+- **Design tokens only.** Every colour from `MelodyColors`, every text style
+  from `MelodyType`, every corner from `squircleBorder`/`squircleDecoration`/
   `squircleClip`. A raw `Color(0xFF…)` or bare `TextStyle` outside
   `lib/theme/tokens.dart` is a bug. Icons are Solar, except transport controls
   which are Phosphor Fill.
 - **Dependencies point downward.** `api/` never imports `state/` or UI.
   `audio/` never imports a screen. `providers/` is wiring only.
-- **Navigation is typed.** Use the `SunohNav` extension in `router/router.dart`.
+- **Navigation is typed.** Use the `MelodyNav` extension in `router/router.dart`.
   Never hand-build a path string in a screen.
 - **Comments record why, including rejected alternatives.** This codebase's
   comments are its best feature. Match the density. A load-bearing comment is

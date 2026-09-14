@@ -1,5 +1,5 @@
-// sunoh. — a quiet, editorial music streaming app.
-// Flutter implementation of the Claude Design prototype (sunoh.html).
+// Melody. — a quiet, editorial music streaming app.
+// Flutter implementation of the Claude Design prototype (melody.html).
 
 import 'dart:async';
 import 'dart:math' as math;
@@ -48,8 +48,8 @@ import 'router/router.dart';
 ///
 /// Uses [_LooseClampingScrollPhysics] so flings glide further than stock
 /// Android physics — closer to iOS feel without the iOS bounce at edges.
-class SunohScrollBehavior extends MaterialScrollBehavior {
-  const SunohScrollBehavior();
+class MelodyScrollBehavior extends MaterialScrollBehavior {
+  const MelodyScrollBehavior();
 
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) =>
@@ -163,7 +163,7 @@ Future<void> main() async {
   // Past the limit Flutter evicts, so opening an album and coming back found
   // the feed's bitmaps gone and re-decoded every one of them from disk. That
   // is the "all the images re-render when I go back" symptom: not widget
-  // churn — SunohArt already handles that — but a cache too small to hold one
+  // churn — MelodyArt already handles that — but a cache too small to hold one
   // screen's worth of art.
   //
   // Flutter's default is 100 MiB, which was marginal here for a reason worth
@@ -215,10 +215,10 @@ Future<void> main() async {
   print('[audio] MpvAudioKit ready');
 
   // Phase 1: synchronous mpv setup. Playback works after this line.
-  // One Dio for both: the lossless lookup talks to the same sunoh-api host and
+  // One Dio for both: the lossless lookup talks to the same Melody-api host and
   // benefits from the same base URL, interceptors and timeouts.
-  final sunohDio = buildSunohDio();
-  final resolver = StreamResolver(sunohDio)..lossless = LosslessApi(sunohDio);
+  final melodyDio = buildMelodyDio();
+  final resolver = StreamResolver(melodyDio)..lossless = LosslessApi(melodyDio);
   // Downloads — wire the offline tier before the handler is built so any
   // restored playback queue benefits from the local file lookup on the
   // very first resolve. Failures here MUST be swallowed: the manager
@@ -248,14 +248,14 @@ Future<void> main() async {
   // a single log line, instead of blocking app boot. Every call site
   // checks `_ready` before touching the SDK so it's safe to call before
   // this future resolves.
-  final handler = SunohAudioHandler(resolver: resolver);
+  final handler = MelodyAudioHandler(resolver: resolver);
   final repo = AudioRepo(
     handler: handler,
     resolver: resolver,
     store: PlaybackStateStore(),
     settings: SettingsStore(),
     library: LibraryStore(),
-    // Its own Dio: buildSunohDio carries our base URL and sunoh-api
+    // Its own Dio: buildMelodyDio carries our base URL and Melody-api
     // headers, none of which belong on a request to sponsor.ajay.app.
     sponsorBlock: SponsorBlockSkipper(
       client: SponsorBlockClient(
@@ -291,7 +291,7 @@ Future<void> main() async {
   );
   final autoBrowse = AutoBrowseTree(
     library: repo.library,
-    api: SunohApi(buildSunohDio()),
+    api: MelodyApi(buildMelodyDio()),
     downloads: downloadManager,
     playQueue: repo.playQueue,
     languages: () => autoLanguages,
@@ -325,8 +325,8 @@ Future<void> main() async {
   );
 }
 
-Future<SunohAudioServiceBridge?> _tryWireAudioService(
-  SunohAudioHandler handler,
+Future<MelodyAudioServiceBridge?> _tryWireAudioService(
+  MelodyAudioHandler handler,
   AutoBrowseTree autoBrowse,
 ) async {
   // Request POST_NOTIFICATIONS first. On Android 13+ this triggers the
@@ -346,7 +346,7 @@ Future<SunohAudioServiceBridge?> _tryWireAudioService(
   print('[audio-svc] AudioService.init starting…');
   try {
     final bridge = await AudioService.init(
-      builder: () => SunohAudioServiceBridge(handler, browse: autoBrowse),
+      builder: () => MelodyAudioServiceBridge(handler, browse: autoBrowse),
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'io.melody.rexx.audio',
         androidNotificationChannelName: 'Melody Playback',
@@ -459,10 +459,10 @@ class _RootState extends ConsumerState<_Root> {
     return MaterialApp.router(
       title: 'Melody.',
       debugShowCheckedModeBanner: false,
-      scrollBehavior: const SunohScrollBehavior(),
+      scrollBehavior: const MelodyScrollBehavior(),
       routerConfig: _router,
       // Brightness tracks the app's own theme so descendants can ask
-      // `Theme.of(context).brightness` — which is how SunohArt decides how
+      // `Theme.of(context).brightness` — which is how MelodyArt decides how
       // heavy a shadow to cast — without every one of them threading the
       // palette down.
       theme: ThemeData(
