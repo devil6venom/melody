@@ -565,7 +565,7 @@ class _ConnectedView extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Play something from sunoh. and it’ll come out of your speaker.',
+                    'Play something from Melody. and it’ll come out of your speaker.',
                     style: SunohType.sans(
                       fontSize: 13,
                       color: c.fgMute,

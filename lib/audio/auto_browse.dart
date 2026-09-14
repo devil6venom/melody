@@ -330,7 +330,7 @@ class AutoBrowseTree {
         await library.loadHistory(),
       ]) {
         if (songs.isNotEmpty) {
-          await playQueue(songs, 0, sourceLabel: 'sunoh.');
+          await playQueue(songs, 0, sourceLabel: 'Melody.');
           return;
         }
       }

@@ -348,8 +348,8 @@ Future<SunohAudioServiceBridge?> _tryWireAudioService(
     final bridge = await AudioService.init(
       builder: () => SunohAudioServiceBridge(handler, browse: autoBrowse),
       config: const AudioServiceConfig(
-        androidNotificationChannelId: 'com.sunoh.sunoh.audio',
-        androidNotificationChannelName: 'sunoh playback',
+        androidNotificationChannelId: 'io.melody.rexx.audio',
+        androidNotificationChannelName: 'Melody Playback',
         // Keep the foreground service alive even when paused. The
         // audio_service default (`true`) ends the FG service on pause —
         // which lets the OS kill the app aggressively when backgrounded,
@@ -457,7 +457,7 @@ class _RootState extends ConsumerState<_Root> {
     // palette. All that is needed here is the brightness for ThemeData.
     final brightness = ref.watch(appStateProvider).brightness;
     return MaterialApp.router(
-      title: 'sunoh.',
+      title: 'Melody.',
       debugShowCheckedModeBanner: false,
       scrollBehavior: const SunohScrollBehavior(),
       routerConfig: _router,

@@ -36,6 +36,8 @@ cozyaudiobooks_api_endpoints.md
 .pub/
 /build/
 /coverage/
+REXX.JKS
+key.properties
 
 # Symbolication related
 app.*.symbols

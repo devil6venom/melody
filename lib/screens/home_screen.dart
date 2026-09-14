@@ -99,7 +99,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'sunoh.',
+                  'Melody.',
                   style: SunohType.heading(
                     fontSize: 22,
                     color: c.fg,
