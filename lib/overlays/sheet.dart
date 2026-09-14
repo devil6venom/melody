@@ -159,6 +159,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = colors;
+    final trailing = this.trailing;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 12, 14),
       child: Row(

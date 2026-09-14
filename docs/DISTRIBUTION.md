@@ -55,7 +55,7 @@ with:
 | Field | Value |
 |---|---|
 | Package id | `codes.afk.sunoh` |
-| Repository | `https://github.com/afkcodes/sunoh` |
+| Repository | `https://github.com/devil6venom/melody` |
 | Licence | GPL-3.0 |
 | Release format | GitHub Releases, tag `vX.Y.Z`, universal `app-release.apk` |
 | Signing cert SHA-256 | `2cfa78b2819415529f21b4ef07193769ee8527af20001b5f7729d1f43c8df6e8` |
